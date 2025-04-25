@@ -16,6 +16,7 @@ import { useCart } from './cart-context';
 import { DeleteItemButton } from './delete-item-button';
 import { EditItemQuantityButton } from './edit-item-quantity-button';
 import OpenCart from './open-cart';
+import { useRouter } from 'next/navigation';
 
 type MerchandiseSearchParams = {
   [key: string]: string;
@@ -25,7 +26,10 @@ export default function CartModal() {
   const { cart, updateCartItem } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
-  const openCart = () => setIsOpen(true);
+  const router = useRouter();
+  const openCart = () => {
+    router.push('/cart');
+  };
   const closeCart = () => setIsOpen(false);
 
   useEffect(() => {

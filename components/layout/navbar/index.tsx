@@ -6,17 +6,32 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
+import NavbarMenu from './navbarMenu';
 
 const { SITE_NAME } = process.env;
 
 export async function Navbar() {
-  const menu = await getMenu('next-js-frontend-header-menu');
+  const menu = await getMenu('main-menu');
 
+  const cleanedMenu = menu.map(item => ({
+    ...item,
+    path: item.path.replace(/^pages\//, '/'),
+    children: item?.children?.map((child: any) => ({
+      ...child,
+      path: child.path.replace(/^pages\//, '/'),
+      children: child?.children?.map((subChild: any) => ({
+        ...subChild,
+        path: subChild.path.replace(/^pages\//, '/')
+      }))
+    }))
+  }));
+  
+  
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-6">
       <div className="block flex-none md:hidden">
         <Suspense fallback={null}>
-          <MobileMenu menu={menu} />
+          <MobileMenu menu={cleanedMenu} />
         </Suspense>
       </div>
       <div className="flex w-full items-center">
@@ -31,20 +46,8 @@ export async function Navbar() {
               {SITE_NAME}
             </div>
           </Link>
-          {menu.length ? (
-            <ul className="hidden gap-6 text-sm md:flex md:items-center">
-              {menu.map((item: Menu) => (
-                <li key={item.title}>
-                  <Link
-                    href={item.path}
-                    prefetch={true}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {cleanedMenu.length ? (
+            <NavbarMenu menu={cleanedMenu} />
           ) : null}
         </div>
         <div className="hidden justify-center md:flex md:w-1/3">

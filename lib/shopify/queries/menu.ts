@@ -4,6 +4,22 @@ export const getMenuQuery = /* GraphQL */ `
       items {
         title
         url
+        items {
+          title
+          url
+          items {
+            title
+            url
+          }
+        }
+        items {
+          title
+          url
+          items {
+            title
+            url
+          }
+        }
       }
     }
   }

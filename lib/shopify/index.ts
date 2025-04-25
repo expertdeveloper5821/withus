@@ -370,21 +370,27 @@ export async function getMenu(handle: string): Promise<Menu[]> {
 
   const res = await shopifyFetch<ShopifyMenuOperation>({
     query: getMenuQuery,
-    variables: {
-      handle
-    }
+    variables: { handle }
   });
 
-  return (
-    res.body?.data?.menu?.items.map((item: { title: string; url: string }) => ({
+  function transformMenuItems(
+    items: { title: string; url: string; items?: any[] }[]
+  ): Menu[] {
+    return items.map((item) => ({
       title: item.title,
       path: item.url
-        .replace(domain, '')
-        .replace('/collections', '/search')
-        .replace('/pages', '')
-    })) || []
-  );
+        .replace(domain, '')            // remove domain
+        .replace(/^\/collections/, '/search') // convert collections to /search
+        .replace(/^\/pages/, ''),       // remove /pages
+      children: item.items ? transformMenuItems(item.items) : []
+    }));
+  }
+
+  return res.body?.data?.menu?.items
+    ? transformMenuItems(res.body.data.menu.items)
+    : [];
 }
+
 
 export async function getPage(handle: string): Promise<Page> {
   const res = await shopifyFetch<ShopifyPageOperation>({

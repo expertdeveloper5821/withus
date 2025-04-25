@@ -48,6 +48,7 @@ export type Image = {
 };
 
 export type Menu = {
+  [x: string]: any;
   title: string;
   path: string;
 };
