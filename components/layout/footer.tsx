@@ -1,69 +1,101 @@
-import Link from 'next/link';
+import React from 'react';
+import FooterSection from './footer-section';
 
-import FooterMenu from 'components/layout/footer-menu';
-import LogoSquare from 'components/logo-square';
-import { getMenu } from 'lib/shopify';
-import { Suspense } from 'react';
-
-const { COMPANY_NAME, SITE_NAME } = process.env;
-
-export default async function Footer() {
-  const currentYear = new Date().getFullYear();
-  const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
-  const skeleton = 'w-full h-6 animate-pulse rounded-sm bg-neutral-200 dark:bg-neutral-700';
-  const menu = await getMenu('next-js-frontend-footer-menu');
-  const copyrightName = COMPANY_NAME || SITE_NAME || '';
-
+export default function Footer() {
   return (
-    <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
+    <footer className="bg-black text-white py-10">
+      <div className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"> {/* Responsive grid */}
+        {/* Company Info Section */}
+        <FooterSection
+          title="Company Info"
+          items={[
+            'About BiBi Shop',
+            'BiBi - Shop Like a Billionaire',
+            'Affiliate & Influencer: Earn Com...',
+            'Contact us',
+            'Careers',
+            'Press',
+            'BiBi Shop Tree Planting Program',
+          ]}
+        />
+
+        {/* Policies Section */}
+        <FooterSection
+          title="Policies"
+          items={[
+            'Return and refund policy',
+            'Intellectual property policy',
+            'Shipping info',
+            'Your Recalls and Product Safety Alerts',
+            'Report suspicious activity',
+          ]}
+        />
+
+        {/* Help Section */}
+        <FooterSection
+          title="Help"
+          items={[
+            'Support center & FAQ',
+            'Safety center',
+            'BiBi purchase protection',
+            'Sitemap',
+            'Partner with BiBi',
+          ]}
+        />
+
+        {/* App Download Section */}
         <div>
-          <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
-            <LogoSquare size="sm" />
-            <span className="uppercase">{SITE_NAME}</span>
-          </Link>
-        </div>
-        <Suspense
-          fallback={
-            <div className="flex h-[188px] w-[200px] flex-col gap-2">
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
+          <h3 className="font-bold mb-4">Download Our App</h3>
+          <ul className="space-y-2 text-sm">
+            <li>Exclusive offers</li>
+            <li>Faster & more secure checkout</li>
+            <li>Price-drop alerts</li>
+            <li>Track orders any time</li>
+            <li>Low stock items alerts</li>
+          </ul>
+          <div className="flex gap-4 mt-4">
+            <div className="border border-gray-300 rounded-lg p-2"> {/* Added border */}
+              <img
+                src="/images/app-store.png" // Ensure this image is in the public/images folder
+                alt="Download on the App Store"
+                className="h-10"
+              />
             </div>
-          }
-        >
-          <FooterMenu menu={menu} />
-        </Suspense>
-        <div className="md:ml-auto">
-          <a
-            className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
-            aria-label="Deploy on Vercel"
-            href="https://vercel.com/templates/next.js/nextjs-commerce"
-          >
-            <span className="px-3">▲</span>
-            <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-            <span className="px-3">Deploy</span>
-          </a>
+            <div className="border border-gray-300 rounded-lg p-2">
+            <img
+              src="/images/google-play.png" // Ensure this image is in the public/images folder
+              alt="Download on Google Play"
+              className="h-10"
+            />
+            </div>
+          </div>
         </div>
       </div>
-      <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
-          <p>
-            &copy; {copyrightDate} {copyrightName}
-            {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
-          </p>
-          <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
-          <p>
-            <a href="https://github.com/vercel/commerce">View the source</a>
-          </p>
-          <p className="md:ml-auto">
-            <a href="https://vercel.com" className="text-black dark:text-white">
-              Created by ▲ Vercel
-            </a>
-          </p>
+
+      {/* Security and Payment Section */}
+      <div className="container mx-auto px-6 mt-10">
+        <div className="border-t border-gray-700 pt-6 grid grid-cols-2 gap-8">
+          <div>
+            <h3 className="font-bold mb-4">Security certification</h3>
+            <div className="flex gap-4">
+              {/* {securityImages.map((image, index) => (
+                <img key={index} src={image.src} alt={image.alt} className="h-8" />
+              ))} */}
+            </div>
+          </div>
+          <div>
+            <h3 className="font-bold mb-4">We accept</h3>
+            <div className="flex gap-4 flex-wrap">
+              <img src="/images/payment1.png" alt="Payment 1" className="h-8" />
+              <img src="/images/payment2.png" alt="Payment 2" className="h-8" />
+              <img src="/images/payment3.png" alt="Payment 3" className="h-8" />
+              <img src="/images/payment4.png" alt="Payment 4" className="h-8" />
+              <img src="/images/payment5.png" alt="Payment 5" className="h-8" />
+            </div>
+          </div>
+        </div>
+        <div className="text-center text-sm text-gray-400 mt-6">
+          © 2022—2025 WhaleCo Inc. Terms of use | Privacy policy | Your privacy choices | Ad Choices
         </div>
       </div>
     </footer>

@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 import './globals.css';
 import { baseUrl } from 'lib/utils';
+import TopBanner from 'components/layout/top-banner';
 
 const { SITE_NAME } = process.env;
 
@@ -34,6 +35,7 @@ export default async function RootLayout({
     <html lang="en" className={GeistSans.variable}>
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         <CartProvider cartPromise={cart}>
+        <TopBanner />
           <Navbar />
           <main>
             {children}
