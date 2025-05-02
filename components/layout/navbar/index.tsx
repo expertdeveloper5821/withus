@@ -1,12 +1,13 @@
 import CartModal from 'components/cart/modal';
 import LogoSquare from 'components/logo-square';
-import { getMenu } from 'lib/shopify';
-import { Menu } from 'lib/shopify/types';
+import {  getMenu } from 'lib/shopify';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
 import NavbarMenu from './navbarMenu';
+import Image from 'next/image';
+import { allIconList } from 'config/security-config';
 
 const { SITE_NAME } = process.env;
 
@@ -26,7 +27,7 @@ export async function Navbar() {
     }))
   }));
   
-  
+
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-6 bg-white ">
       <div className="block flex-none md:hidden ">
@@ -34,7 +35,7 @@ export async function Navbar() {
           <MobileMenu menu={cleanedMenu} />
         </Suspense>
       </div>
-      <div className="flex w-full items-center ">
+      <div className="flex w-full items-center justify-between ">
         <div className="flex w-full md:w-1/3">
           <Link
             href="/"
@@ -55,7 +56,38 @@ export async function Navbar() {
             <Search />
           </Suspense>
         </div>
-        <div className="flex justify-end md:w-1/3">
+          <div className="flex items-center space-x-6">
+
+    <div className="flex items-center space-x-6">
+      <div className="flex items-center space-x-2">
+        <Image
+          src={allIconList.ManIcon}
+          alt="User Icon"
+          width={24}
+          height={24}
+          className="rounded-full"
+        />
+        <span className="text-sm font-medium text-gray-800">Orders & Account</span>
+      </div>
+
+      <div className="flex items-center space-x-2">
+        <Image
+          src={allIconList.Support}
+          alt="Support Icon"
+          width={24}
+          height={24}
+        />
+        <span className="text-sm font-medium text-gray-800">Support</span>
+      </div>
+
+      <div className="flex items-center space-x-2">
+        <span className="text-sm font-medium text-gray-800">EN</span>
+      </div>
+    </div>
+  </div>
+   
+        <div className="flex justify-end space-x-4">
+
           <CartModal />
         </div>
       </div>

@@ -1,57 +1,70 @@
-import React from 'react';
-import Image from 'next/image';
-import { allIconList } from 'config/security-config';
-import { getCollectionProducts } from 'lib/shopify';
+import React from "react";
+import Image from "next/image";
+import { allIconList } from "config/security-config";
+import { getCollectionProducts } from "lib/shopify";
 
 export default async function LightningDeals() {
   const homepageItems = await getCollectionProducts({
-      collection: 'Kitchen',
-   });
-    
-    const litingProducts = homepageItems.map((item: any, index: number) => ({
+    collection: "Kitchen",
+  });
+
+  const litingProducts = homepageItems
+    .slice(0, 7)
+    .map((item: any, index: number) => ({
       id: index + 1,
       price: parseFloat(item.priceRange.maxVariantPrice.amount),
-      image: item.featuredImage?.url || '',
-    }))
-   
+      image: item.featuredImage?.url || "",
+    }));
+
   return (
-    <div className="text-white py-6">
-      <div className="flex items-center justify-between px-6 bg-red-500 py-4 rounded-lg">
+    <div className=" text-white pb-4  pt-[39px]">
+      <div
+        className="flex items-center justify-between px-3 py-2 "
+        style={{ backgroundColor: "#D91E37" }}
+      >
         <Image
           src={allIconList.Lightning}
           alt="Lightning Icon"
-          width={24}
-          height={24}
-          className="h-6"
+          width={66}
+          height={66}
+          className="h-12"
         />
         <div className="flex items-center">
-          <span className="text-2xl font-bold">⚡</span>
-          <h2 className="text-lg font-semibold ml-2">Lightning Deals</h2>
-          <span className="ml-4 text-sm">Limited time offer</span>
+          <Image
+            src={allIconList.Light}
+            alt="Lightning Icon"
+            width={36}
+            height={36}
+            className="h-6"
+          />
+          <h2 className="text-[24px]  font-extrabold ml-4">
+            Lightning Deals
+          </h2>
+          <span className=" text-[18px]  font-normal ml-4 ">Limited time offer</span>
         </div>
         <Image
-         src={allIconList.Lightning}
+          src={allIconList.Lightning}
           alt="Lightning Icon"
-          width={24}
-          height={24}
-          className="h-6"
+          width={66}
+          height={66}
+          className="h-12"
         />
       </div>
-      <div className="flex gap-3 overflow-x-auto scrollbar-hide px-6 py-6">
+      <div className="flex gap-10 overflow-x-auto scrollbar-hide  pb-8 pt-10">
         {litingProducts.map((product) => (
           <div
             key={product.id}
-            className="min-w-[180px] bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform"
+            className="min-w-[120px] overflow-hidden hover:scale-105 transition-transform"
           >
             <Image
-              src={product.image} // Ensure product images are in the public/images folder
+              src={product.image}
               alt={`Product ${product.id}`}
-              width={180}
-              height={160}
+              width={60}
+              height={60}
               className="w-full h-40 object-cover"
             />
-            <div className="p-4">
-              <div className="text-center text-red-500 font-bold text-lg">
+            <div className="pt-1">
+              <div className="text-center line-clamp-1 text-red-500 text-lg text-[25px] font-bold leading-[150%] li">
                 {product.price} Uzs
               </div>
             </div>

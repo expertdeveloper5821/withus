@@ -2,10 +2,9 @@ import Footer from 'components/layout/footer';
 import ProductGrid from 'components/grid/product-grid';
 import LightningDeals from 'components/lightning-deals';
 import GreenBanner from 'components/layout/green-banner'; 
-import { getCollectionProducts } from 'lib/shopify';
+import { getCollection, getCollectionProducts } from 'lib/shopify';
 import { allIconList } from 'config/security-config';
-
-
+import Image from 'next/image';
 
 export const metadata = {
   description:
@@ -14,80 +13,97 @@ export const metadata = {
     type: 'website'
   }
 };
-const products = [
-  {
-    id: '1',
-    image: '/images/product1.jpg',
-    title: 'Boys Brown T-Shirt Full Shirt',
-    price: 28,
-    discountPrice: 199,
-    description: 'Best Selling Item in Men’s Shirts',
-    ratings: 4,
-    reviews: 2560,
-  },
-]
+
 
 export default async function HomePage() {
   const homepageItems = await getCollectionProducts({
     collection: '5stars',
 
   });
-  
+ 
   const formattedProducts = homepageItems.map((item: any, index: number) => ({
     id: index + 1,
     title: item.title,
+    handle: item.handle,
     discountPrice: parseFloat(item.priceRange.minVariantPrice.amount),
     price: parseFloat(item.priceRange.maxVariantPrice.amount),
     image: item.featuredImage?.url || '',
     tag: item.tags.includes("Mother's Day") ? "Mother's Day" : undefined,
     badge: item.tags.includes("Local") ? "Local" : undefined,
-    rating: 4.5,
+    ratings: 5,
     reviews: Math.floor(Math.random() * 200),
-    //category: item.tags[0] || 'Uncategorized'
   }))
  
   return (
     <>
       
       <div
-        className="hero-banner h-[300px] sm:h-[200px]" 
+        className="hero-banner h-[300px] sm:h-[249px] " 
         style={{
           backgroundImage: "url('/bannerimg.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       ></div>
-      <div className="px-4 sm:px-6 md:px-[69px] bg-gray-50 py-2"> 
-        <GreenBanner
+      <div className=" bg-gray-50 pt-9"> 
+        <div className='px-4 sm:px-6 md:px-[69px]'>
+        <GreenBanner 
           title="Why choose BiBi Shop"
           items={[
             { icon: allIconList.LockIcon, text: 'Secure privacy' },
-            { icon: 'credit_card', text: 'Safe payments' },
-            { icon: 'local_shipping', text: 'Delivery guarantee' },
+            { icon: allIconList.Safe, text: 'Safe payments' },
+            { icon:  allIconList.DeliveryIcon, text: 'Delivery guarantee' },
           ]}
-          reminder="Security reminder: Please be wary of scam messages and links. BiBi Shop won't ask for extra fees via SMS or email."
+
+          reminder=" Please be wary of scam messages and links. BiBi Shop won't ask for extra fees via SMS or email."
           linkText="View All"
         />
         <LightningDeals />
-        <header className="text-center py-4 bg-gray-100">
-          <h1 className="text-xl font-bold text-red-500">
-            ⭐ MEGA HOLIDAY SALE ⭐
+        </div>
+
+        <header className="text-center py-4 ">
+       
+          <h1 className="text-xl font-bold text-red-500   text-[24px]">
+          <div className="flex justify-center items-center">
+             <Image
+                     src={allIconList.Star}
+                      alt="Lightning Icon"
+                      width={26}
+                      height={26}
+                      className="h-12 mr-2"
+                    /> MEGA HOLIDAY SALE <Image
+                    src={allIconList.Star}
+                     alt="Lightning Icon"
+                     width={26}
+                     height={26}
+                     className="h-12 ml-2"
+                   />
+                    </div>
           </h1>
-          <h2 className="text-lg font-semibold text-black">EXPLORE YOUR INTERESTS</h2>
+         
+          <h2 className=" text-black text-[28px] font-extrabold ">EXPLORE YOUR INTERESTS</h2>
         </header>
-        <div className="flex items-center bg-white py-4">
-          <nav className="flex gap-4 overflow-x-auto scrollbar-hide px-8">
+         <div className='pl-4 md:pl-[69px] '>
+        <div className="flex items-center  pt-6  pb-16">
+          <nav className="flex gap-5 overflow-x-auto scrollbar-hide pr-8">
             {['Recommended', 'Beauty & Health', 'Women’s Clothing', 'Home & Kitchen', 'Men’s Clothing', 'Women’s Clothing'].map((category, index) => (
               <button
                 key={`${category}-${index}`}
-                className="px-4 py-2 border rounded-full text-sm font-medium hover:bg-gray-100 whitespace-nowrap text-black"
+                className="px-[35px] py-[14px] font-normal text-[18px] leading-[1.5]  whitespace-nowrap text-black"
+                style={{border:'1px solid #00000080', borderRadius:'40px'}}
               >
                 {category}
               </button>
             ))}
           </nav>
+          <div className="hidden sm:flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-[0px_4px_24px_0px_#00000026]">
+      <Image src={allIconList.ArrowIcon} alt="Filter Icon" width={24} height={24} className="h-6 w-6" />
+      </div>
         </div>
-        <ProductGrid products={formattedProducts} />
+        </div>
+        <div className='px-4 sm:px-6 md:px-[69px]'>
+        <ProductGrid products={formattedProducts}  />
+        </div>
       </div>
       <Footer />
     </>

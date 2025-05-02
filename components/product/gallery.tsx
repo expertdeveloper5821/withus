@@ -18,7 +18,37 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
 
   return (
     <form>
-      <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden">
+  
+      <div className="flex w-full items-center justify-center gap-2 overflow-auto py-1 lg:mb-0">
+      {images.length > 1 ? (
+        <ul className="items-center  py-1 lg:mb-0">
+          {images.map((image, index) => {
+            const isActive = index === imageIndex;
+
+            return (
+              <li key={image.src} className="h-20 w-20 mb-2">
+                <button
+                  formAction={() => {
+                    const newState = updateImage(index.toString());
+                    updateURL(newState);
+                  }}
+                  aria-label="Select product image"
+                  className="h-full w-full mb-2"
+                >
+                  <GridTileImage
+                    alt={image.altText}
+                    src={image.src}
+                    width={80}
+                    height={80}
+                    active={isActive}
+                  />
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+       <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden">
         {images[imageIndex] && (
           <Image
             className="h-full w-full object-contain"
@@ -59,34 +89,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
         ) : null}
       </div>
 
-      {images.length > 1 ? (
-        <ul className="my-12 flex items-center flex-wrap justify-center gap-2 overflow-auto py-1 lg:mb-0">
-          {images.map((image, index) => {
-            const isActive = index === imageIndex;
-
-            return (
-              <li key={image.src} className="h-20 w-20">
-                <button
-                  formAction={() => {
-                    const newState = updateImage(index.toString());
-                    updateURL(newState);
-                  }}
-                  aria-label="Select product image"
-                  className="h-full w-full"
-                >
-                  <GridTileImage
-                    alt={image.altText}
-                    src={image.src}
-                    width={80}
-                    height={80}
-                    active={isActive}
-                  />
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
+      </div>
     </form>
   );
 }

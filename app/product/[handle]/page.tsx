@@ -79,9 +79,9 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
           __html: JSON.stringify(productJsonLd)
         }}
       />
-      <div className="mx-auto max-w-(--breakpoint-2xl) px-4">
-        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
-          <div className="h-full w-full basis-full lg:basis-4/6">
+      <div className="mx-auto max-w-(--breakpoint-2xl) bg-white">
+        <div className="flex flex-col   bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800" style={{ backgroundColor: '#E5E5E5' }}>
+          <div className="h-full w-full basis-full lg:basis-4/6">   
             <Suspense
               fallback={
                 <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden" />

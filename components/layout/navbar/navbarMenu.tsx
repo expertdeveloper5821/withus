@@ -1,6 +1,8 @@
 'use client';
 
+import { allIconList } from 'config/security-config';
 import { Menu } from 'lib/shopify/types';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -28,16 +30,29 @@ function DropdownMenuItem({ item }: { item: Menu }) {
         className="flex items-center cursor-pointer text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
         onMouseEnter={() => hasChildren && setIsOpen(true)}
       >
-        <Link href={item.path} prefetch={true}>
-          {item.title}
-        </Link>
+              
+              <Link
+        href={item.path}
+        prefetch={true}
+        className="flex items-center text-black"
+        style={{
+          fontWeight: 400,
+          fontSize: '13.81px',
+          lineHeight: '1.5',
+        }}
+      >
+        {(item.title === 'Best-Selling Item' || item.title === '5-Star Rated') && (
+          <Image src={item.title === 'Best-Selling Item' ? allIconList.BestIcon : allIconList.StarIcon} alt={item.title} className="h-4 w-4 mr-2" />
+        )}
+        {item.title}
+      </Link>
         {hasChildren && (
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            className="h-4 w-4 ml-1" 
+            className="h-3 w-3 ml-1" 
             fill="none" 
             viewBox="0 0 24 24" 
-            stroke="currentColor"
+            stroke="black"
           >
             <path 
               strokeLinecap="round" 
@@ -99,7 +114,7 @@ function DropdownMenuItem({ item }: { item: Menu }) {
             </div>
             
             {activeChild && activeChild.children && activeChild.children.length > 0 && (
-              <div className="flex-1 p-6 bg-white">
+              <div className="flex-1 p-6 bg-white text-black">
                 <div className="grid grid-cols-5 gap-6">
                   {activeChild.children.map((subItem: Menu) => (
                     <Link 
