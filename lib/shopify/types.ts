@@ -10,6 +10,7 @@ export type Edge<T> = {
 
 export type Cart = Omit<ShopifyCart, 'lines'> & {
   lines: CartItem[];
+  lan?: string;
 };
 
 export type CartProduct = {

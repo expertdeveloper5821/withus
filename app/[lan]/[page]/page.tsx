@@ -24,9 +24,9 @@ export async function generateMetadata(props: {
   };
 }
 
-export default async function Page(props: { params: Promise<{ page: string }> }) {
+export default async function Page(props: { params: Promise<{ page: string, lan: string }> }) {
   const params = await props.params;
-  const page = await getPage(params.page);
+  const page = await getPage(params.page, params.lan);
 
   if (!page) return notFound();
 

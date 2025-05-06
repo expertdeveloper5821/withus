@@ -10,11 +10,12 @@ export const metadata = {
   }
 };
 
-export default function HomePage() {
+export default function HomePage({params}: { params: { lan: string } }) {
+  const { lan } = params;
   return (
     <>
-      <ThreeItemGrid />
-      <Carousel />
+      <ThreeItemGrid lan={lan} />
+      <Carousel lan={lan} />
       <Footer />
     </>
   );
