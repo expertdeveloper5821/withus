@@ -29,14 +29,14 @@ export async function Navbar() {
   
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6 bg-white ">
+    <nav className="relative flex items-center justify-between p-4 lg:px-12 bg-white ">
       <div className="block flex-none md:hidden ">
         <Suspense fallback={null}>
           <MobileMenu menu={cleanedMenu} />
         </Suspense>
       </div>
       <div className="flex w-full items-center justify-between ">
-        <div className="flex w-full md:w-1/3">
+        <div className="flex ">
           <Link
             href="/"
             prefetch={true}
@@ -87,7 +87,6 @@ export async function Navbar() {
   </div>
    
         <div className="flex justify-end space-x-4">
-
           <CartModal />
         </div>
       </div>

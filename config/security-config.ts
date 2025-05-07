@@ -37,6 +37,9 @@ import banklogo3 from '../assets/images/R-3.svg';
 import blankIcon2 from '../assets/images/blankIcon2.svg';
 import bankIcon4 from '../assets/images/bankIcon4.svg';
 import bankIcon5 from '../assets/images/bankIcon5.svg';
+import greenArrow from '../assets/images/greenArrow.svg';
+import profileIcon from '../assets/images/profileIcon.svg';
+import orderIcon from '../assets/images/orderIcon.svg';
 
 
 
@@ -80,4 +83,8 @@ export const allIconList = {
   BankIcon2:blankIcon2,
   BankIcon4:bankIcon4,
   BankIcon5:bankIcon5,
+  OrderIcon:orderIcon,
+  GroupIcon:groupIcon,
+  GreenArrow:greenArrow,
+  ProfileIcon:profileIcon
 };

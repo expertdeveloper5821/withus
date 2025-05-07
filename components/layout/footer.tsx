@@ -123,7 +123,7 @@ export default function Footer() {
         </div>
   
       <div className="container mx-auto px-6 mt-10">
-        <div className=" pt-6 grid grid-cols-2 gap-8">
+        <div className=" pt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
         {/* <div className="border-t border-gray-700 pt-6 grid grid-cols-2 gap-8"> */}
           <div>
             <h3 className="font-bold mb-4">Security certification</h3>

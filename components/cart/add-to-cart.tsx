@@ -48,8 +48,9 @@ function SubmitButton({
       className={clsx(buttonClasses, {
         'hover:opacity-90': true
       })}
+      style={{ backgroundColor: '#D91E37' }}
     >
-      <div className="absolute left-0 ml-4">
+      <div className="absolute left-0 ml-4 bg-[#D91E37]" >
         <PlusIcon className="h-5" />
       </div>
       Add To Cart
@@ -86,7 +87,7 @@ export function AddToCart({ product }: { product: Product }) {
         availableForSale={availableForSale}
         selectedVariantId={selectedVariantId}
       />
-      <p aria-live="polite" className="sr-only" role="status">
+      <p aria-live="polite" className="sr-only" role="status" >
         {message}
       </p>
     </form>

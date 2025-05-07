@@ -74,6 +74,45 @@ export const products = [
   }
 ];
 
+
+export const reviews = [
+  {
+    user: "alexd",
+    date: "Apr 10, 2023",
+    rating: 5,
+    comment: "The material is great. If you’re planning to order, consider going a size up.",
+    // avatar: "/images/avatar1.png"
+  },
+  {
+    user: "jaredt",
+    date: "Mar 26, 2023",
+    rating: 5,
+    comment: "Fits perfectly and super soft. Highly recommend!",
+   
+  },
+  {
+    user: "natalie",
+    date: "Feb 15, 2023",
+    rating: 4,
+    comment: "Color is nice, but slightly tighter than expected. Still comfy.",
+   
+  },
+  {
+    user: "mikep",
+    date: "Jan 30, 2023",
+    rating: 5,
+    comment: "Love this shirt! Fabric feels premium and delivery was fast.",
+  
+  },
+  {
+    user: "lisaw",
+    date: "Jan 10, 2023",
+    rating: 4,
+    comment: "Good quality overall. Fit is true to size for me.",
+    
+  }
+];
+
 export const HIDDEN_PRODUCT_TAG = 'nextjs-frontend-hidden';
 export const DEFAULT_OPTION = 'Default Title';
 export const SHOPIFY_GRAPHQL_API_ENDPOINT = '/api/2023-01/graphql.json';

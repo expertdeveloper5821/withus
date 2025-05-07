@@ -7,6 +7,7 @@ import { ProductOption, ProductVariant } from 'lib/shopify/types';
 type Combination = {
   id: string;
   availableForSale: boolean;
+  imageUrl: string;
   [key: string]: string | boolean;
 };
 
@@ -18,11 +19,9 @@ export function VariantSelector({
   variants: ProductVariant[];
 }) {
   const { state, updateOption } = useProduct();
-
   const updateURL = useUpdateURL();
   const hasNoOptionsOrJustOneOption =
     !options.length || (options.length === 1 && options[0]?.values.length === 1);
-    console.log('combinations',  options);
   if (hasNoOptionsOrJustOneOption) {
     return null;
   }
@@ -30,6 +29,7 @@ export function VariantSelector({
   const combinations: Combination[] = variants.map((variant) => ({
     id: variant.id,
     availableForSale: variant.availableForSale,
+    imageUrl: variant.image?.url || '', 
     ...variant.selectedOptions.reduce(
       (accumulator, option) => ({ ...accumulator, [option.name.toLowerCase()]: option.value }),
       {}
@@ -39,7 +39,7 @@ export function VariantSelector({
   return options.map((option) => (
     <form key={option.id}>
       <dl className="mb-8">
-        <dt className="mb-4 text-sm uppercase tracking-wide text-black">{option.name}</dt>
+        <dt className="mb-4 text-sm uppercase tracking-wide text-black">{option.name}:<span className="font-medium normal-case">{state[option.name.toLowerCase()]}</span></dt>
         <dd className="flex flex-wrap gap-3">
           {option.values.map((value) => {
             const optionNameLowerCase = option.name.toLowerCase();
@@ -58,8 +58,14 @@ export function VariantSelector({
                 ([key, value]) => combination[key] === value && combination.availableForSale
               )
             );
+            const matchingCombination = combinations.find((combination) =>
+              filtered.every(
+                ([key, value]) =>
+                  combination[key] === value && combination.availableForSale
+              )
+            );
 
-            // The option is active if it's in the selected options.
+            const imageUrl = matchingCombination?.imageUrl;
             const isActive = state[optionNameLowerCase] === value;
 
             return (
@@ -73,17 +79,24 @@ export function VariantSelector({
                 disabled={!isAvailableForSale}
                 title={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
                 className={clsx(
-                  'flex min-w-[48px] items-center justify-center rounded-full border px-2 py-1 text-sm bg-white border-[#D91E37] text-black',
+                  'flex flex-col items-center w-30 h-40 justify-between rounded-lg border border-gray-300 bg-white text-black shadow-sm',
                   {
-                    'cursor-default ring-2 ring-blue-600': isActive,
-                    'ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-blue-600':
+                    'ring-1 ring-red-600 border-red-600': isActive,
+                    'ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-red-600 border-#00000033-600':
                       !isActive && isAvailableForSale,
-                    'relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 dark:before:bg-neutral-700':
+                    'cursor-not-allowed bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300':
                       !isAvailableForSale
                   }
                 )}
               >
-                {value}
+                {imageUrl && (
+                  <img
+                    src={imageUrl}
+                    alt={value}
+                    className="h-138 w-full object-cover rounded-t-md"
+                  />
+                )}
+                <span className="text-sm font-medium text-center my-3">{value}</span>
               </button>
             );
           })}

@@ -7,7 +7,7 @@ export default function Search() {
   const searchParams = useSearchParams();
 
   return (
-    <form action="/search" className="relative w-full max-w-[350px]">
+    <form action="/search" className="relative w-full ">
       <input
         key={searchParams?.get('q')}
         type="text"
@@ -15,7 +15,7 @@ export default function Search() {
         placeholder="Search Bibi Shop"
         autoComplete="off"
         defaultValue={searchParams?.get('q') || ''}
-        className="w-full rounded-full bg-gray-200 px-4 py-3 text-sm text-black placeholder:text-neutral-500 focus:outline-none"
+        className="w-full rounded-full bg-gray-200 px-4 py-3 text-black placeholder:text-neutral-600 placeholder:text-[14px] placeholder:font-medium text-[12px] focus:outline-none"
       />
       <button
         type="submit"

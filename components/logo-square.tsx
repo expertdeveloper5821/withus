@@ -14,7 +14,7 @@ export default function LogoSquare({ size }: { size?: 'sm' | undefined }) {
       //   }
       // )}
     >
-      <Image src={allIconList.Bibishop} alt="Logo" className='h-6 w-6' width={50} height={50} />
+      <Image src={allIconList.Bibishop} alt="Logo"  width={70} height={70} />
       {/* <LogoIcon
         className={clsx({
           'h-[16px] w-[16px]': !size,
