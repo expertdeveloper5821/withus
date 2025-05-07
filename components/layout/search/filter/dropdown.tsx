@@ -10,7 +10,7 @@ import { FilterItem } from './item';
 export default function FilterItemDropdown({ list }: { list: ListItem[] }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState(' Relevance'); // Default active text
   const [openSelect, setOpenSelect] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -42,20 +42,22 @@ export default function FilterItemDropdown({ list }: { list: ListItem[] }) {
         onClick={() => {
           setOpenSelect(!openSelect);
         }}
-        className="flex w-full items-center justify-between rounded-sm border border-black/30 px-4 py-2 text-sm dark:border-white/30"
+        className="flex w-full items-center justify-between rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm text-[#00000099] shadow-sm cursor-pointer"
       >
-        <div>{active}</div>
-        <ChevronDownIcon className="h-4" />
+        <div>Sort by:{active}</div>
+        <ChevronDownIcon className="h-4 text-[#00000099]" />
       </div>
       {openSelect && (
         <div
           onClick={() => {
             setOpenSelect(false);
           }}
-          className="absolute z-40 w-full rounded-b-md bg-white p-4 shadow-md dark:bg-black"
-        >
+          className="absolute z-40 w-full rounded-md bg-white p-2 shadow-md border border-gray-200"
+        > 
           {list.map((item: ListItem, i) => (
-            <FilterItem key={i} item={item} />
+            <>
+           <FilterItem key={i} item={item} />
+          </>
           ))}
         </div>
       )}

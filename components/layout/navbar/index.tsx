@@ -1,13 +1,13 @@
 import CartModal from 'components/cart/modal';
 import LogoSquare from 'components/logo-square';
-import {  getMenu } from 'lib/shopify';
+import { allIconList } from 'config/security-config';
+import { getMenu } from 'lib/shopify';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
-import Search, { SearchSkeleton } from './search';
 import NavbarMenu from './navbarMenu';
-import Image from 'next/image';
-import { allIconList } from 'config/security-config';
+import Search, { SearchSkeleton } from './search';
 
 const { SITE_NAME } = process.env;
 
@@ -30,11 +30,7 @@ export async function Navbar() {
 
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-12 bg-white ">
-      <div className="block flex-none md:hidden ">
-        <Suspense fallback={null}>
-          <MobileMenu menu={cleanedMenu} />
-        </Suspense>
-      </div>
+      
       <div className="flex w-full items-center justify-between ">
         <div className="flex ">
           <Link
@@ -56,6 +52,11 @@ export async function Navbar() {
             <Search />
           </Suspense>
         </div>
+        <div className="block flex-none md:hidden ">
+        <Suspense fallback={null}>
+          <MobileMenu menu={cleanedMenu} />
+        </Suspense>
+      </div>
           <div className="flex items-center space-x-6">
 
     <div className="flex items-center space-x-6">
@@ -67,10 +68,10 @@ export async function Navbar() {
           height={24}
           className="rounded-full"
         />
-        <span className="text-sm font-medium text-gray-800">Orders & Account</span>
+        <span className="text-sm font-medium text-gray-800 hidden md:block">Orders & Account</span>
       </div>
 
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2 hidden md:block">
         <Image
           src={allIconList.Support}
           alt="Support Icon"

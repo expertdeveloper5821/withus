@@ -1,5 +1,5 @@
 import Grid from 'components/grid';
-import ProductGridItems from 'components/layout/product-grid-items';
+import ProductGrid from 'components/grid/product-grid';
 import { defaultSort, sorting } from 'lib/constants';
 import { getProducts } from 'lib/shopify';
 
@@ -17,20 +17,35 @@ export default async function SearchPage(props: {
 
   const products = await getProducts({ sortKey, reverse, query: searchValue });
   const resultsText = products.length > 1 ? 'results' : 'result';
+  console.log(' products', products);
+   
+  const formattedProducts = products.map((item: any, index: number) => ({
+    id: index + 1,
+    title: item.title,
+    handle: item.handle,
+    discountPrice: parseFloat(item.priceRange.minVariantPrice.amount),
+    price: parseFloat(item.priceRange.maxVariantPrice.amount),
+    image: item.featuredImage?.url || '',
+    tag: item.tags.includes("Mother's Day") ? "Mother's Day" : undefined,
+    badge: item.tags.includes("Local") ? "Local" : undefined,
+    ratings: 5,
+    reviews: Math.floor(Math.random() * 200),
+  }))
+  console.log('formattedProducts', formattedProducts);
 
   return (
     <>
       {searchValue ? (
-        <p className="mb-4">
+        <p className="mb-4 text-black">
           {products.length === 0
             ? 'There are no products that match '
-            : `Showing ${products.length} ${resultsText} for `}
-          <span className="font-bold">&quot;{searchValue}&quot;</span>
+            : `Showing results for  ${searchValue}  `}
+          <span className="font-bold">{`Search instead for `}{searchValue}&quot;</span>
         </p>
       ) : null}
       {products.length > 0 ? (
-        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          <ProductGridItems products={products} />
+        <Grid className="">
+          <ProductGrid products={formattedProducts} />
         </Grid>
       ) : null}
     </>

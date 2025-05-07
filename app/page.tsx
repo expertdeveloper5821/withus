@@ -1,3 +1,4 @@
+import FeatureScroller from 'components/FeatureScroller';
 import ProductGrid from 'components/grid/product-grid';
 import Footer from 'components/layout/footer';
 import GreenBanner from 'components/layout/green-banner';
@@ -13,7 +14,14 @@ export const metadata = {
     type: 'website'
   }
 };
-
+const guarantees = [
+ "Recommended",
+                "Beauty & Health",
+                "Women’s Clothing",
+                "Home & Kitchen",
+                "Men’s Clothing",
+                "Women’s Clothing",
+];
 
 export default async function HomePage() {
   const homepageItems = await getCollectionProducts({
@@ -90,7 +98,7 @@ export default async function HomePage() {
                 width={26}
                 height={26}
                 className="h-12 mr-2"
-              />{" "}
+              />
               MEGA HOLIDAY SALE
               <Image
                 src={allIconList.Star}
@@ -108,7 +116,10 @@ export default async function HomePage() {
         </header>
         <div className="pl-4 md:pl-[69px] ">
           <div className="flex items-center pt-3 pt-6 pb-12 sm:pb-16">
-            <nav className="flex gap-5 overflow-x-auto scrollbar-hide pr-8">
+
+          <FeatureScroller  items={guarantees}   itemClassName="border border-[#00000080] rounded-[40px]  px-[15px] sm:px-[35px] py-[8px] sm:py-[14px] font-normal text-[18px] leading-[1.5]  whitespace-nowrap text-black"/>
+
+            {/* <nav className="flex gap-5 overflow-x-auto scrollbar-hide pr-8">
               {[
                 "Recommended",
                 "Beauty & Health",
@@ -137,7 +148,7 @@ export default async function HomePage() {
                 height={24}
                 className="h-6 w-6"
               />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="px-4 sm:px-6 md:px-[69px]">
