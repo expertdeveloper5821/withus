@@ -12,7 +12,7 @@ export default function SearchLayout({
   return (
     <>
       <div className="mx-auto  max-w-(--breakpoint-2xl) bg-white flex-col gap-8 px-4 pb-4 text-black md:flex-row dark:text-white">
-      <div className="order-none flex md:order-last gap-8">
+      <div className="order-none flex md:order-last gap-8 pb-4 pl-2 pt-4">
       <button className="flex items-center gap-1 rounded-full bg-gray-200 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-300 transition">
         {/* <FunnelIcon className="h-4 w-4" /> */}
         Filters

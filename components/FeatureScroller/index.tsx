@@ -6,7 +6,7 @@ import React, { useRef } from "react";
 interface GuaranteeScrollerProps {
   title?: string;
   items: string[];
-  itemClassName?: string; // Add a prop for custom item styles
+  itemClassName?: string; 
 }
 
 const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
@@ -18,12 +18,12 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
 
   const handleScroll = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({  behavior: "smooth" });
+      scrollRef.current.scrollBy({ left: 100, behavior: "smooth" });
     }
   };
 
   return (
-    <div className="p-4 rounded-md w-full max-w-xl mt-4">
+    <div className="p-4 rounded-md w-full mt-4">
       <div className="flex items-center gap-2 text-green-600 font-semibold text-sm mb-2">
         <div className="flex text-[22px] font-medium">
           {title}
