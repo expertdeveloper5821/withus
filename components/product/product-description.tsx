@@ -1,7 +1,6 @@
 
 import { AddToCart } from 'components/cart/add-to-cart';
 import Price from 'components/price';
-import Prose from 'components/prose';
 import { Product } from 'lib/shopify/types';
 import { VariantSelector } from './variant-selector';
 
@@ -19,9 +18,12 @@ export function ProductDescription({ product }: { product: Product }) {
   ];
   return (
     <>
-      <div className="mb-6 flex flex-col pb-6 dark:border-neutral-700 text-black">
+      {/* <div className="mb-6 flex flex-col pb-6 dark:border-neutral-700 text-black">
         <h1 className="mb-2 text-[28px] font-normal leading-[40px] " >{product.title}</h1>
-        <div className="mr-auto w-auto  p-2 text-[34px] font-extrabold text-black">
+        <div className="mr-auto w-auto  p-2 text-[34px] font-extrabold text-black"> */}
+        <div className="mb-6 flex flex-col pb-6 dark:border-neutral-700 text-black w-full text-center">
+        <h1 className="mb-2 text-[28px] font-normal leading-[40px] w-full text-center">{product.title}</h1>
+        <div className="mr-auto w-full p-2 text-[34px] font-extrabold text-black text-center">
           <Price
             amount={product.priceRange.maxVariantPrice.amount}
             currencyCode={product.priceRange.maxVariantPrice.currencyCode}

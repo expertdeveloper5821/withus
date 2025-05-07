@@ -77,6 +77,7 @@ export const products = [
 
 export const reviews = [
   {
+    id: 1,
     user: "alexd",
     date: "Apr 10, 2023",
     rating: 5,
@@ -84,6 +85,7 @@ export const reviews = [
     // avatar: "/images/avatar1.png"
   },
   {
+    id: 2,
     user: "jaredt",
     date: "Mar 26, 2023",
     rating: 5,
@@ -91,6 +93,7 @@ export const reviews = [
    
   },
   {
+    id: 3,
     user: "natalie",
     date: "Feb 15, 2023",
     rating: 4,
@@ -98,6 +101,7 @@ export const reviews = [
    
   },
   {
+    id: 4,
     user: "mikep",
     date: "Jan 30, 2023",
     rating: 5,
@@ -105,6 +109,7 @@ export const reviews = [
   
   },
   {
+    id: 5,
     user: "lisaw",
     date: "Jan 10, 2023",
     rating: 4,

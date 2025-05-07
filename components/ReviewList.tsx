@@ -1,10 +1,12 @@
 'use client';
-import Image from "next/image";
 import { StarIcon } from "@heroicons/react/20/solid";
-import React, { useState } from "react";
 import { allIconList } from "config/security-config";
+import Image from "next/image";
+import React, { useState } from "react";
+
 
 interface Review {
+  id: number;
   user: string;
   date: string;
   rating: number;
@@ -17,6 +19,17 @@ interface ReviewListProps {
 }
 
 const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
+  const StarHalfIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg
+      {...props}
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      className="w-4 h-4 text-yellow-500"
+    >
+      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2" />
+      <path d="M12 2v15.27L5.82 21l1.64-7.03L2 9.24l7.19-.61L12 2z" fill="#e5e7eb" />
+    </svg>
+  );
   const [showAll, setShowAll] = useState(false);
   const visibleReviews = showAll ? reviews : reviews.slice(0, 3);
 
@@ -98,8 +111,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
   ))}
 </div>
   </div>
-    <div className="space-y-6 mt-6">
-
+    {/* <div className="space-y-6 mt-6">
       {visibleReviews.map((review, i) => (
         <div key={i} className="flex items-start space-x-4 text-black">
           <Image
@@ -130,7 +142,52 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
           {showAll ? "Show less" : "Show more reviews"}
         </button>
       )}
+        
+    </div> */}
+    <div className="space-y-6 mt-6">
+  {visibleReviews.map((review) => (
+    <div key={review.id} className="flex items-start space-x-4 border-b pb-4">
+      <Image
+        src={allIconList.ProfileIcon}
+        alt={review.user}
+        width={40}
+        height={40}
+        className="rounded-full"
+      />
+      <div className="flex-1">
+        <p className="font-medium text-sm text-black">
+          {review.user} <span className="text-gray-500">on {review.date}</span>
+        </p>
+        <div className="flex items-center mt-1 text-yellow-500">
+          {[...Array(5)].map((_, index) => {
+            const filled = review.rating >= index + 1;
+            const half = review.rating >= index + 0.5 && review.rating < index + 1;
+            return filled ? (
+              <StarIcon key={index} className="w-4 h-4" />
+            ) : half ? (
+              <StarHalfIcon key={index} className="w-4 h-4" />
+            ) : (
+              <></>
+              // <StarOutlineIcon key={index} className="w-4 h-4 text-gray-300" />
+            );
+          })}
+        </div>
+        <p className="text-sm text-gray-700 mt-2">{review.comment}</p>
+      </div>
     </div>
+  ))}
+
+  {reviews.length > 3 && (
+    <div className="pt-4 text-center">
+      <button
+        onClick={toggleShow}
+        className="px-4 py-2 text-[20px] font-normal border border-gray-300 rounded-full hover:bg-gray-100 transition text-black"
+      >
+        {showAll ? "Show less" : "See all reviews"}
+      </button>
+    </div>
+  )}
+</div>
     </>
   );
 };

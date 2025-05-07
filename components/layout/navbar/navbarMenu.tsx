@@ -66,10 +66,10 @@ function DropdownMenuItem({ item }: { item: Menu }) {
       
       {hasChildren && (
         <div 
-          className={`absolute left-0 top-full mt-4 p-2 z-50 bg-white shadow-lg rounded-md transition-opacity duration-200 ${
+          className={`absolute left-0 top-full mt-4 p-2 z-50 w-30 bg-white shadow-lg rounded-md transition-opacity duration-200 ${
             isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
           }`}
-          style={{ width: '1000px', minHeight:"224px" }}
+          style={{ width: '600px', minHeight:"224px" }}
           onMouseLeave={() => setIsOpen(false)}
         >
           <div className="flex">
@@ -88,7 +88,7 @@ function DropdownMenuItem({ item }: { item: Menu }) {
                       onMouseEnter={() => setActiveCategory(child.title)}
                     >
                       <Link href={child.path} prefetch={true} className="block text-sm">
-                        {child.title}
+                        {child.title} 
                       </Link>
                       
                       {hasSubChildren && (

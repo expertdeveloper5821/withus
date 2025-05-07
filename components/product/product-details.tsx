@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Gallery } from './gallery';
 import Image from 'next/image';
+import { useState } from 'react';
 
 
 interface ImageType {
@@ -18,8 +17,18 @@ const ExpandableGallery = ({ images }: ExpandableGalleryProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="relative max-w-xl mx-auto">
-      <div className={`overflow-hidden transition-all duration-300 ${expanded ? '' : 'h-[400px]'}`}>
+    // <div className="relative max-w-xl mx-auto">
+        <div
+      className={`relative mx-auto transition-all duration-500 ${
+        expanded ? 'max-w-3xl' : 'max-w-xs'
+      }`}
+    >
+      <div
+        className={`overflow-hidden transition-all duration-500 ${
+          expanded ? 'max-h-[200px]' : 'max-h-[300px]'
+        }`}
+      >
+      {/* <div className={`overflow-hidden transition-all duration-300 ${expanded ? '' : 'h-[400px]'}`}> */}
       {images.map((image, index) => (
           <div key={index} className="relative w-full aspect-[3/4]">
             <Image

@@ -13,7 +13,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps>  = ({ title = "Order gua
 
   const handleScroll = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 150, behavior: 'smooth' });
+     // scrollRef.current.scrollBy({ left: 150, behavior: 'smooth' });
     }
   };
 

@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import ProductGrid from 'components/grid/product-grid';
 import { GridTileImage } from 'components/grid/tile';
 import Footer from 'components/layout/footer';
 import { Gallery } from 'components/product/gallery';
 import { ProductProvider } from 'components/product/product-context';
 import { ProductDescription } from 'components/product/product-description';
+import ProductDetails from 'components/product/product-details';
+import ReviewList from 'components/ReviewList';
 import { HIDDEN_PRODUCT_TAG, reviews } from 'lib/constants';
 import { getCollectionProducts, getProduct, getProductRecommendations } from 'lib/shopify';
 import { Image } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import ProductGrid from 'components/grid/product-grid';
-import ReviewList from 'components/ReviewList';
-import ProductDetails from 'components/product/product-details';
 
 
 export async function generateMetadata(props: {
@@ -52,11 +52,9 @@ export async function generateMetadata(props: {
       : null
   };
 }
-
 export default async function ProductPage(props: { params: Promise<{ handle: string }> }) {
   const params = await props.params;
   const product = await getProduct(params.handle);
-  console.log('product', product);
   if (!product) return notFound();
 
   const productJsonLd = {
@@ -72,42 +70,45 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
         : 'https://schema.org/OutOfStock',
       priceCurrency: product.priceRange.minVariantPrice.currencyCode,
       highPrice: product.priceRange.maxVariantPrice.amount,
-      lowPrice: product.priceRange.minVariantPrice.amount
-    }
+      lowPrice: product.priceRange.minVariantPrice.amount,
+    },
   };
+
   const homepage = await getCollectionProducts({
     collection: 'best-sellers',
-  
-    });
+  });
 
-    const formattedProducts = homepage.slice(0, 20).map((item: any, index: number) => ({
-      id: index + 1,
-      title: item.title,
-      handle: item.handle,
-      discountPrice: parseFloat(item.priceRange.minVariantPrice.amount),
-      price: parseFloat(item.priceRange.maxVariantPrice.amount),
-      image: item.featuredImage?.url || '',
-      tag: item.tags.includes("Mother's Day") ? "Mother's Day" : undefined,
-      badge: item.tags.includes("Local") ? "Local" : undefined,
-      ratings: 5,
-      reviews: Math.floor(Math.random() * 200),
-    }))
+  const formattedProducts = homepage.slice(0, 20).map((item: any, index: number) => ({
+    id: index + 1,
+    title: item.title,
+    handle: item.handle,
+    discountPrice: parseFloat(item.priceRange.minVariantPrice.amount),
+    price: parseFloat(item.priceRange.maxVariantPrice.amount),
+    image: item.featuredImage?.url || '',
+    tag: item.tags.includes("Mother's Day") ? "Mother's Day" : undefined,
+    badge: item.tags.includes("Local") ? "Local" : undefined,
+    ratings: 5,
+    reviews: Math.floor(Math.random() * 200),
+  }));
 
-    const images = product.images.slice(0, 5).map((image: any) => ({
-      src: image.url,
-      altText: image.altText || 'Product image'
-    }));
+  const images = product.images.slice(0, 5).map((image: any) => ({
+    src: image.url,
+    altText: image.altText || 'Product image',
+  }));
+
   return (
     <ProductProvider>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd)
+          __html: JSON.stringify(productJsonLd),
         }}
       />
-      <div className="mx-auto max-w-(--breakpoint-2xl) bg-white">
-        <div className="flex flex-col   bg-white p-8 md:p-18 lg:flex-row lg:gap-14 dark:border-neutral-800" style={{ backgroundColor: '#f5f5f5' }}>
-          <div className="h-full w-full basis-full lg:basis-2/6">   
+      <div className="mx-auto max-w-screen-2xl bg-white">
+        {/* Main Product Section */}
+        <div className="flex flex-col bg-white p-4 md:p-8 lg:flex-row lg:gap-8 dark:border-neutral-800">
+          {/* Image Gallery */}
+          <div className="w-full lg:w-1/2">
             <Suspense
               fallback={
                 <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden" />
@@ -116,24 +117,26 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
               <Gallery
                 images={product.images.slice(0, 5).map((image: Image) => ({
                   src: image.url,
-                  altText: image.altText
+                  altText: image.altText,
                 }))}
               />
             </Suspense>
             <ReviewList reviews={reviews} />
+            <ProductDetails images={images} />
           </div>
-          
-          <div className="basis-full lg:basis-3/6">
+
+          {/* Product Details */}
+          <div className="w-full lg:w-1/2">
             <Suspense fallback={null}>
               <ProductDescription product={product} />
             </Suspense>
-            <ProductDetails images={images} />
           </div>
         </div>
-        <div className='p-8 md:p-12 lg:p-12'>
-<ProductGrid products={formattedProducts}  />
-</div>
-        {/* <RelatedProducts id={product.id} /> */}
+
+        {/* Related Products Section */}
+        <div className="p-4 md:p-8 lg:p-12">
+          <ProductGrid products={formattedProducts} />
+        </div>
       </div>
       <Footer />
     </ProductProvider>

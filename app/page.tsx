@@ -1,9 +1,9 @@
-import Footer from 'components/layout/footer';
 import ProductGrid from 'components/grid/product-grid';
+import Footer from 'components/layout/footer';
+import GreenBanner from 'components/layout/green-banner';
 import LightningDeals from 'components/lightning-deals';
-import GreenBanner from 'components/layout/green-banner'; 
-import { getCollection, getCollectionProducts } from 'lib/shopify';
 import { allIconList } from 'config/security-config';
+import { getCollectionProducts } from 'lib/shopify';
 import Image from 'next/image';
 
 export const metadata = {
