@@ -1,7 +1,6 @@
-import React from "react";
-import Image from "next/image";
 import { allIconList } from "config/security-config";
 import { getCollectionProducts } from "lib/shopify";
+import Image from "next/image";
 
 export default async function LightningDeals() {
   const homepageItems = await getCollectionProducts({
@@ -41,7 +40,7 @@ export default async function LightningDeals() {
           <h2 className="text-[16px] sm:text-[24px]  font-medium sm:font-extrabold ml-4 text-[#D91E37] sm:text-white">
             Lightning Deals
           </h2>
-          <span className=" text-[18px]  font-normal ml-4 text-black sm:text-white">Limited time offer</span>
+          <span className=" text-[18px]  font-normal ml-2 text-black sm:text-white">Limited time offer</span>
           </div>
         </div>
         <Image

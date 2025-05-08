@@ -39,7 +39,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
     <>
     <div className="mx-auto p-4 text-black">
     {/* Model Info */}
-    <div className="flex items-start space-x-4">
+    <div className="flex items-start space-x-4 ">
       <Image
         src={allIconList.ProfileIcon} // Place the image in public/model.png
         alt="Model"
@@ -60,16 +60,16 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
 
     {/* Rating & Reviews */}
     <div>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2 p-4">
         <p className="font-semibold text-lg">3,346 reviews</p>
         <div className="flex items-center text-yellow-500">
-          {/* {[...Array(5)].map((_, i) => (
-            <Star key={i} size={16} fill="currentColor" />
-          ))} */}
+          {[...Array(5)].map((_, i) => (
+             <StarIcon key={i} className="w-4 h-4" />
+          ))}
         </div>
         <span className="text-sm text-gray-600">4.5/5</span>
       </div>
-      <p className="mt-2 text-sm bg-green-100 text-green-800 px-3 py-1 rounded-full inline-block mb-4">
+      <p className="mt-2 text-sm bg-[#09800D4D] text-black px-6 py-2 rounded-full inline-block mb-4">
         All reviews are from verified purchases
       </p>
     </div>
@@ -144,7 +144,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
       )}
         
     </div> */}
-    <div className="space-y-6 mt-6">
+    <div className="space-y-6 mt-6 p-4">
   {visibleReviews.map((review) => (
     <div key={review.id} className="flex items-start space-x-4 border-b pb-4">
       <Image

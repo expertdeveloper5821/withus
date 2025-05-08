@@ -20,10 +20,10 @@ export default function Search() {
       />
       <button
         type="submit"
-        className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full bg-black p-2"
+        className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full bg-white md:bg-black p-2"
         aria-label="Search"
       >
-        <MagnifyingGlassIcon className="h-4 w-4 text-white" />
+        <MagnifyingGlassIcon className="h-4 w-4 text-black md:text-white" />
       </button>
     </form>
   );

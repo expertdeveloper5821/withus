@@ -106,7 +106,8 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
       />
       <div className="mx-auto max-w-screen-2xl bg-white">
         {/* Main Product Section */}
-        <div className="flex flex-col bg-white p-4 md:p-8 lg:flex-row lg:gap-8 dark:border-neutral-800">
+        <div>
+        <div className="flex flex-col bg-white p-0 md:p-8 lg:flex-row lg:gap-8 dark:border-neutral-800">
           {/* Image Gallery */}
           <div className="w-full lg:w-1/2">
             <Suspense
@@ -121,8 +122,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
                 }))}
               />
             </Suspense>
-            <ReviewList reviews={reviews} />
-            <ProductDetails images={images} />
+           
           </div>
 
           {/* Product Details */}
@@ -132,7 +132,13 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
             </Suspense>
           </div>
         </div>
+        </div>
+<div className='w-[100%] md:w-[50%]'>
 
+<ReviewList reviews={reviews} />
+<ProductDetails images={images} />
+</div>
+        
         {/* Related Products Section */}
         <div className="p-4 md:p-8 lg:p-12">
           <ProductGrid products={formattedProducts} />

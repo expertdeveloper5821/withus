@@ -1,8 +1,6 @@
-import { AddToCart } from 'components/cart/add-to-cart';
 import { allIconList } from 'config/security-config';
-import Link from 'next/link';
-import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Product {
   id: string | number;
@@ -32,11 +30,11 @@ export default function ProductGrid({ products}: { products: Product[] | any }) 
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-60 object-cover cursor-pointer rounded-[20px] border border-gray-200"
+                className="w-full sm:h-30 md:h-60 object-cover cursor-pointer rounded-[4px] md:rounded-[20px] border border-gray-200"
               />
             </Link>
           </div>
-          <div className='px-3 py-2'>
+          <div className='px-3 pt-2'>
                 <div className="flex items-center justify-between">
         <span className="bg-[#D91E37] text-[9px] leading-[97%] font-semibold text-white  px-2 pt-[2px] pb-[2px] pl-[8px] pr-[8px] text-center mr-2 rounded">
           MEGA SALE
@@ -48,9 +46,9 @@ export default function ProductGrid({ products}: { products: Product[] | any }) 
           <div className="flex items-center justify-between mt-2">
           <div className="text-red-500 font-bold font-medium text-[14px] leading-[120%]">
             {product.discountPrice} <span className="text-xs">Uzs</span>
-            <span className="line-through text-gray-500 text-sm ml-2">
+            {/* <span className="line-through text-gray-500 text-sm ml-2">
               {product.price}
-            </span>
+            </span> */}
           </div>
           <button className="px-3 py-1 border border-gray-500 rounded-full text-sm font-medium hover:bg-gray-300 flex items-center justify-center">
            <Image

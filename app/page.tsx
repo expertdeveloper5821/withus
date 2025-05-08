@@ -115,9 +115,9 @@ export default async function HomePage() {
           </h2>
         </header>
         <div className="pl-4 md:pl-[69px] ">
-          <div className="flex items-center pt-3 pt-6 pb-12 sm:pb-16">
+          <div className="flex items-center pt-3 pt-6 pb-8 sm:pb-13">
 
-          <FeatureScroller  items={guarantees}   itemClassName="border border-[#00000080] rounded-[40px]  px-[15px] sm:px-[35px] py-[8px] sm:py-[14px] font-normal text-[18px] leading-[1.5]  whitespace-nowrap text-black"/>
+          <FeatureScroller  items={guarantees} showArrow={false} itemClassName="border border-[#00000080] rounded-[40px]  px-[15px] sm:px-[35px] py-[8px] sm:py-[14px] font-normal text-[18px] leading-[1.5]  whitespace-nowrap text-black"/>
 
             {/* <nav className="flex gap-5 overflow-x-auto scrollbar-hide pr-8">
               {[

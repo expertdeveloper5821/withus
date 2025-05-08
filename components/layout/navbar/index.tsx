@@ -31,8 +31,8 @@ export async function Navbar() {
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-12 bg-white ">
       
-      <div className="flex w-full items-center justify-between ">
-        <div className="flex ">
+      <div className="flex w-full gap-2 items-center justify-between ">
+        <div className="flex  gap-2">
           <Link
             href="/"
             prefetch={true}
@@ -47,7 +47,7 @@ export async function Navbar() {
             <NavbarMenu menu={cleanedMenu} />
           ) : null}
         </div>
-        <div className="hidden justify-center md:flex md:w-1/3">
+        <div className=" justify-center md:flex md:w-1/3">
           <Suspense fallback={<SearchSkeleton />}>
             <Search />
           </Suspense>
@@ -60,7 +60,7 @@ export async function Navbar() {
           <div className="flex items-center space-x-6">
 
     <div className="flex items-center space-x-6">
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-1 md:space-x-2">
         <Image
           src={allIconList.ManIcon}
           alt="User Icon"
@@ -71,7 +71,7 @@ export async function Navbar() {
         <span className="text-sm font-medium text-gray-800 hidden md:block">Orders & Account</span>
       </div>
 
-      <div className="flex items-center space-x-2 hidden md:block">
+      <div className="flex items-center space-x-2 hidden ">
         <Image
           src={allIconList.Support}
           alt="Support Icon"
@@ -81,7 +81,7 @@ export async function Navbar() {
         <span className="text-sm font-medium text-gray-800">Support</span>
       </div>
 
-      <div className="flex items-center space-x-2">
+      <div className="hidden md:flex items-center space-x-2">
         <span className="text-sm font-medium text-gray-800">EN</span>
       </div>
     </div>

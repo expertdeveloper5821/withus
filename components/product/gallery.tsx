@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { GridTileImage } from 'components/grid/tile';
 import { useProduct, useUpdateURL } from 'components/product/product-context';
 import Image from 'next/image';
@@ -62,7 +62,6 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
         )}
 {images.length > 1 && (
   <>
-    {/* Left Arrow - top-left (only visible on mobile) */}
     <div className="absolute top-4 left-4 z-10 block md:hidden lg:hidden">
       <button
         formAction={() => {
@@ -76,9 +75,9 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
       </button>
     </div>
 
-    {/* Right Arrow - top-right (only visible on mobile) */}
+
     <div className="absolute top-4 right-4 z-10 block md:hidden lg:hidden">
-      <button
+      {/* <button
         formAction={() => {
           const newState = updateImage(nextImageIndex.toString());
           updateURL(newState);
@@ -87,7 +86,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
         className="rounded-full p-2 bg-white/80 dark:bg-black/60 border border-gray-300 dark:border-gray-700 backdrop-blur-md"
       >
         <ArrowRightIcon className="h-5 w-5 text-black dark:text-white" />
-      </button>
+      </button> */}
     </div>
 
     {/* Image Count - bottom-right (only visible on mobile) */}

@@ -40,6 +40,8 @@ import bankIcon5 from '../assets/images/bankIcon5.svg';
 import greenArrow from '../assets/images/greenArrow.svg';
 import profileIcon from '../assets/images/profileIcon.svg';
 import orderIcon from '../assets/images/orderIcon.svg';
+import greyLight from '../assets/images/greyLight.svg';
+import filterIcon from '../assets/images/filterIcon.svg';
 
 
 
@@ -86,5 +88,7 @@ export const allIconList = {
   OrderIcon:orderIcon,
   GroupIcon:groupIcon,
   GreenArrow:greenArrow,
-  ProfileIcon:profileIcon
+  ProfileIcon:profileIcon,
+  GreyLight:greyLight,
+  FilterIcon:filterIcon,
 };

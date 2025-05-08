@@ -52,7 +52,7 @@ export default function FilterItemDropdown({ list }: { list: ListItem[] }) {
           onClick={() => {
             setOpenSelect(false);
           }}
-          className="absolute z-40 w-full rounded-md bg-white p-2 shadow-md border border-gray-200"
+          className="absolute z-40 w-full text-black rounded-md bg-white p-2 shadow-md border border-gray-200"
         > 
           {list.map((item: ListItem, i) => (
             <>

@@ -6,13 +6,15 @@ import React, { useRef } from "react";
 interface GuaranteeScrollerProps {
   title?: string;
   items: string[];
-  itemClassName?: string; 
+  itemClassName?: string;
+  showArrow?: boolean; // Add a prop to control the visibility of the image
 }
 
 const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
   title,
   items = [],
   itemClassName = "bg-green-600 text-white text-sm px-4 py-2 rounded-md whitespace-nowrap", // Default styles
+  showArrow = true, 
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -23,17 +25,19 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
   };
 
   return (
-    <div className="p-4 rounded-md w-full mt-4">
+    <div className="p-4 rounded-md w-full mt-2">
       <div className="flex items-center gap-2 text-green-600 font-semibold text-sm mb-2">
         <div className="flex text-[22px] font-medium">
           {title}
-          <Image
-            src={allIconList.GreenArrow}
-            alt={""}
-            width={8}
-            height={8}
-            className="mt-1 ml-1"
-          />
+          {showArrow && (
+            <Image
+              src={allIconList.GreenArrow}
+              alt="Arrow Icon"
+              width={8}
+              height={8}
+              className="mt-1 ml-1"
+            />
+          )}
         </div>
       </div>
 
@@ -49,18 +53,20 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
             </span>
           ))}
         </div>
-        <button
-          className="absolute right-0 -mr-4 bg-white shadow-md w-8 h-8 rounded-full flex items-center justify-center"
-          onClick={handleScroll}
-        >
-          <Image
-            src={allIconList.ArrowIcon}
-            alt="Filter Icon"
-            width={24}
-            height={24}
-            className="h-6 w-6"
-          />
-        </button>
+       
+          <button
+            className="absolute right-0 -mr-4 bg-white shadow-md w-8 h-8 rounded-full flex items-center justify-center"
+            onClick={handleScroll}
+          >
+            <Image
+              src={allIconList.ArrowIcon}
+              alt="Filter Icon"
+              width={24}
+              height={24}
+              className="h-6 w-6"
+            />
+          </button>
+      
       </div>
     </div>
   );
