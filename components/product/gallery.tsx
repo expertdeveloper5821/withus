@@ -49,7 +49,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
           })}
         </ul>
       ) : null}
-       <div className="relative aspect-square  max-h-[550px] w-[550px] overflow-hidden  rounded-[20px] md:rounded-none" >
+       <div className="relative aspect-square  max-h-[550px] w-[550px] overflow-hidden  md:rounded-[20px] rounded-none" >
         {images[imageIndex] && (
           <Image
             className=" object-contain "

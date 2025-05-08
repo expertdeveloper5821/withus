@@ -55,7 +55,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
         </div>
        
           <button
-            className="hidden md:absolute right-0 -mr-4 bg-white shadow-md w-8 h-8 rounded-full flex items-center justify-center"
+            className="hidden md:absolute lg:block xl:block right-0 mr-4 bg-white shadow-md w-8 h-8 rounded-full flex items-center justify-center"
             onClick={handleScroll}
           >
             <Image

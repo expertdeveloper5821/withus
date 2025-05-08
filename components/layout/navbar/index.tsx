@@ -36,7 +36,7 @@ export async function Navbar() {
           <Link
             href="/"
             prefetch={true}
-            className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
+            className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-2"
           >
             <LogoSquare />
             {/* <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
@@ -68,7 +68,7 @@ export async function Navbar() {
           height={24}
           className="w-8 rounded-full"
         />
-        <span className="text-[12px] font-semibold text-gray-800 hidden md:block md:w-[89px]">Orders & Account</span>
+        <span className="text-[12px] font-semibold text-gray-800 hidden md:block md:w-[49px]">Orders & Account</span>
       </div>
 
       <div className="md:flex items-center space-x-2 hidden ">
