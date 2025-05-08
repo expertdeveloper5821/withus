@@ -55,6 +55,7 @@ export async function generateMetadata(props: {
 export default async function ProductPage(props: { params: Promise<{ handle: string }> }) {
   const params = await props.params;
   const product = await getProduct(params.handle);
+  console.log('product', product);
   if (!product) return notFound();
 
   const productJsonLd = {
@@ -122,19 +123,23 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
                 }))}
               />
             </Suspense>
-           
+            <div className='hidden md:block '>
+            <ReviewList reviews={reviews} />
+            <ProductDetails images={images} />
+            </div>
           </div>
 
           {/* Product Details */}
-          <div className="w-full lg:w-1/2 p-4 md:p-2 lg:p-0">
+          <div className=" w-full lg:w-1/2 p-4 md:p-2 lg:p-0">
             <Suspense fallback={null}>
               <ProductDescription product={product} />
             </Suspense>
+            
           </div>
         </div>
         </div>
-      <div className='w-[100%] md:w-[90%] lg:w-[40%] mt-[26px] md:mt-[26px] lg:mt-[-226px] mx-0 md:mx-6'>
-
+        <div className='block md:hidden lg:hidden'>
+      {/* <div className='w-[100%] md:w-[90%] lg:w-[40%] mt-[26px] md:mt-[26px] lg:mt-[-226px] mx-0 md:mx-6'> */}
       <ReviewList reviews={reviews} />
       <ProductDetails images={images} />
       </div>

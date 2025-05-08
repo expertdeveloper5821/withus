@@ -27,7 +27,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
   return (
     <div className="p-1 md:p-4 rounded-md w-full mt-2">
       <div className="flex items-center gap-2 text-green-600 font-semibold text-sm mb-2">
-        <div className="flex text-[22px] font-medium">
+        <div className="flex text-[20px] md:text-[22px] font-medium">
           {title}
           {showArrow && (
             <Image

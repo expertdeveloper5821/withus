@@ -48,7 +48,7 @@ function SubmitButton({
       className={clsx(buttonClasses, {
         'hover:opacity-90': true
       })}
-      style={{ backgroundColor: '#D91E37' }}
+      style={{ backgroundColor: '#D91E37', width: '90%' }}
     >
       <div className="absolute left-0 ml-4 bg-[#D91E37]" >
         <PlusIcon className="h-5" />
