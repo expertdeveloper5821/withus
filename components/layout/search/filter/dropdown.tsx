@@ -37,12 +37,12 @@ export default function FilterItemDropdown({ list }: { list: ListItem[] }) {
   }, [pathname, list, searchParams]);
 
   return (
-    <div className="relative" ref={ref}>
+    <div className="text-black" ref={ref}>
       <div
         onClick={() => {
           setOpenSelect(!openSelect);
         }}
-        className="flex w-full items-center justify-between rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm text-[#00000099] shadow-sm cursor-pointer"
+        className="flex w-auto items-center justify-between rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm text-[#00000099] shadow-sm cursor-pointer"
       >
         <div>Sort by:{active}</div>
         <ChevronDownIcon className="h-4 text-[#00000099]" />

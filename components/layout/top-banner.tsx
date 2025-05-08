@@ -25,7 +25,7 @@ const TopBanner = () => {
 
   return (
     <>
-     <div className="hidden sm:flex bg-black text-white flex-row items-center px-4 py-3 text-sm justify-evenly gap-4">   
+     <div className="hidden md:hidden lg:flex bg-black text-white flex-row items-center px-4 py-3 text-sm justify-evenly gap-4">   
       {items.map((item, index) => (
         <div
           key={index}

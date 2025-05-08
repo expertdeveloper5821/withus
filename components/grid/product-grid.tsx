@@ -18,7 +18,7 @@ interface Product {
 export default function ProductGrid({ products}: { products: Product[] | any }) {
   
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 ">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-3 ">
       {products.map((product:any) => (
         <div
           key={product.id}

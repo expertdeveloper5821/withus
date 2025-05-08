@@ -133,11 +133,11 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
           </div>
         </div>
         </div>
-<div className='w-[100%] md:w-[50%]'>
+      <div className='w-[100%] md:w-[50%]'>
 
-<ReviewList reviews={reviews} />
-<ProductDetails images={images} />
-</div>
+      <ReviewList reviews={reviews} />
+      <ProductDetails images={images} />
+      </div>
         
         {/* Related Products Section */}
         <div className="p-4 md:p-8 lg:p-12">

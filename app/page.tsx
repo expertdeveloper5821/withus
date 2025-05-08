@@ -85,7 +85,7 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-        <div className="px-4 sm:px-6 md:px-[69px]">
+        <div className="px-4 sm:px-6 md:px-[20px] lg:px-[69px]">
           <GreenBanner
             title="Why choose BiBi Shop"
             items={[
@@ -124,10 +124,10 @@ export default async function HomePage() {
             EXPLORE YOUR INTERESTS
           </h2>
         </header>
-        <div className="pl-4 md:pl-[69px] ">
+        <div className="pl-4 md:pl-[20px] lg:pl-[69px] ">
           <div className="flex items-center pt-0 md:pt-3 pb-8 sm:pb-13">
 
-          <FeatureScroller  items={guarantees} showArrow={false} itemClassName="border border-[#00000080] rounded-[40px]  px-[15px] sm:px-[35px] py-[8px] sm:py-[14px] font-normal text-[18px] leading-[1.5]  whitespace-nowrap text-black"/>
+          <FeatureScroller  items={guarantees} showArrow={false} itemClassName="border border-[#00000080] rounded-[40px]  px-[15px] sm:px-[35px] py-[7px] sm:py-[14px] font-normal text-[18px] leading-[1.5]  whitespace-nowrap text-black"/>
 
             {/* <nav className="flex gap-5 overflow-x-auto scrollbar-hide pr-8">
               {[
@@ -161,7 +161,7 @@ export default async function HomePage() {
             </div> */}
           </div>
         </div>
-        <div className="px-4 sm:px-6 md:px-[69px]">
+        <div className="px-4 sm:px-6 md:px-[20px] lg:px-[69px] ">
           <ProductGrid products={formattedProducts} />
         </div>
       </div>

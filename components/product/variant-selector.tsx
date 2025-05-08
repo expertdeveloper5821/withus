@@ -35,6 +35,7 @@ export function VariantSelector({
       {}
     )
   }));
+  console.log('combinations', combinations);
 
   return options.map((option) => (
     <form key={option.id}>
@@ -79,17 +80,19 @@ export function VariantSelector({
                 disabled={!isAvailableForSale}
                 title={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
                 className={clsx(
-                  'flex flex-col items-center w-30 h-40 justify-between rounded-lg border border-gray-300 bg-white text-black shadow-sm',
+                  'flex flex-col items-center  justify-between rounded-lg border border-gray-300 bg-white text-black shadow-sm',
                   {
                     'ring-1 ring-red-600 border-red-600': isActive,
                     'ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-red-600 border-#00000033-600':
                       !isActive && isAvailableForSale,
                     'cursor-not-allowed bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300':
-                      !isAvailableForSale
+                      !isAvailableForSale,
+                      'w-20 h-12 ': optionNameLowerCase === 'size',
+                      'w-30 h-40': optionNameLowerCase === 'color',
                   }
                 )}
               >
-                {imageUrl && (
+                {optionNameLowerCase === 'color' && imageUrl && (
                   <img
                     src={imageUrl}
                     alt={value}

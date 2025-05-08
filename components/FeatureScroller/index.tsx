@@ -25,7 +25,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
   };
 
   return (
-    <div className="p-4 rounded-md w-full mt-2">
+    <div className="p-1 md:p-4 rounded-md w-full mt-2">
       <div className="flex items-center gap-2 text-green-600 font-semibold text-sm mb-2">
         <div className="flex text-[22px] font-medium">
           {title}
@@ -45,7 +45,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
       <div className="relative flex items-center">
         <div
           ref={scrollRef}
-          className="flex gap-2 overflow-x-hidden scrollbar-hide scroll-smooth pr-10"
+          className="flex gap-2 overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden scrollbar-hide scroll-smooth pr-10"
         >
           {items.map((item, idx) => (
             <span key={idx} className={itemClassName}>
@@ -55,7 +55,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
         </div>
        
           <button
-            className="absolute right-0 -mr-4 bg-white shadow-md w-8 h-8 rounded-full flex items-center justify-center"
+            className="hidden md:absolute right-0 -mr-4 bg-white shadow-md w-8 h-8 rounded-full flex items-center justify-center"
             onClick={handleScroll}
           >
             <Image
