@@ -37,7 +37,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
         aria-label="Open mobile menu"
         className="flex h-11 w-11 items-center text-black justify-center rounded-md  text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white"
       >
-        <Bars3Icon className="h-4 " style={{color:'red'}} />
+        <Bars3Icon className="h-6 " style={{color:'black'}} />
       </button>
       <Transition show={isOpen}>
         <Dialog onClose={closeMobileMenu} className="relative z-50">

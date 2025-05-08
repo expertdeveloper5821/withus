@@ -42,6 +42,10 @@ import profileIcon from '../assets/images/profileIcon.svg';
 import orderIcon from '../assets/images/orderIcon.svg';
 import greyLight from '../assets/images/greyLight.svg';
 import filterIcon from '../assets/images/filterIcon.svg';
+import deliveryBlackIcon from '../assets/images/deliveryBlackIcon.svg';
+import greenArrowIcon from '../assets/images/greenArrowIcon.svg';
+import whiteArrowIcon from '../assets/images/whiteArrowIcon.svg';
+import lightingRedIcon from '../assets/images/lightingRedIcon.svg';
 
 
 
@@ -91,4 +95,8 @@ export const allIconList = {
   ProfileIcon:profileIcon,
   GreyLight:greyLight,
   FilterIcon:filterIcon,
+  DeliveryBlackIcon:deliveryBlackIcon,
+  GreenArrowIcon:greenArrowIcon,
+  whiteArrowIcon:whiteArrowIcon,
+  LightingRedIcon:lightingRedIcon,
 };

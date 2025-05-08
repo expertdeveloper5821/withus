@@ -1,7 +1,7 @@
 'use client';
 import { allIconList } from 'config/security-config';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const TopBanner = () => {
   const items = [
@@ -25,7 +25,7 @@ const TopBanner = () => {
 
   return (
     <>
-     <div className="hidden sm:flex bg-black text-white flex-row items-center px-4 py-4 text-sm justify-evenly gap-4">   
+     <div className="hidden sm:flex bg-black text-white flex-row items-center px-4 py-3 text-sm justify-evenly gap-4">   
       {items.map((item, index) => (
         <div
           key={index}

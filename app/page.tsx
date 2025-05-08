@@ -1,3 +1,4 @@
+import { CheckIcon } from '@heroicons/react/20/solid';
 import FeatureScroller from 'components/FeatureScroller';
 import ProductGrid from 'components/grid/product-grid';
 import Footer from 'components/layout/footer';
@@ -41,11 +42,19 @@ export default async function HomePage() {
     ratings: 5,
     reviews: Math.floor(Math.random() * 200),
   }))
+
+  const homepageItemss = await getCollectionProducts({ collection: "Kitchen" });
+
+  const products = homepageItemss.slice(0, 7).map((item: any, index: number) => ({
+    id: index + 1,
+    price: parseFloat(item.priceRange.maxVariantPrice.amount),
+    image: item.featuredImage?.url || "",
+  }));
  
   return (
     <>
       <div
-        className="hero-banner h-[300px] sm:h-[249px] "
+        className="hero-banner h-[100px] sm:h-[224px] "
         style={{
           backgroundImage: "url('/bannerimg.png')",
           backgroundSize: "cover",
@@ -54,12 +63,13 @@ export default async function HomePage() {
       ></div>
 
       <div className=" bg-gray-50 pt-9 ">
-        <div className="block sm:hidden bg-red-100 rounded-lg  p-4 flex justify-between items-center max-w-xl mx-4 mb-4">
-          <div className="flex items-start space-x-2 w-1/2">
+        <div className="block sm:hidden bg-red-100 rounded-lg  px-4 py-2 flex justify-between items-center max-w-xl mx-4 mb-4">
+          <div className="flex items-start space-x-2 ">
             {/* <CheckCircleIcon className="w-5 h-5 text-green-600 mt-1" /> */}
+            <CheckIcon className="w-5 h-5 text-green-600 mt-1" />
             <div>
-              <div className="text-green-600 font-semibold">Free Shipping</div>
-              <div className="text-gray-500 text-sm">Limited Offer</div>
+              <div className="text-green-600 font-semibold text-[13.89px]">Free Shipping</div>
+              <div className="text-gray-500 text-[11.89px]">Limited Offer</div>
             </div>
           </div>
 
@@ -67,11 +77,11 @@ export default async function HomePage() {
           <div className="h-10 border-l border-gray-400 mx-4" />
 
           {/* Delivery Guarantee */}
-          <div className="flex items-start space-x-2 w-1/2">
-            {/* <TruckIcon className="w-5 h-5 text-black mt-1" /> */}
+          <div className="flex items-start space-x-2 ">
+            <Image src={allIconList.DeliveryBlackIcon} alt={'truck'}  />
             <div>
-              <div className="text-black font-semibold">Delivery guarantee</div>
-              <div className="text-gray-500 text-sm">Refund of any issue</div>
+              <div className="text-black font-semibold text-[13.89px]">Delivery guarantee</div>
+              <div className="text-gray-500 text-[11.89px]">Refund of any issue</div>
             </div>
           </div>
         </div>
@@ -86,11 +96,11 @@ export default async function HomePage() {
             reminder=" Please be wary of scam messages and links. BiBi Shop won't ask for extra fees via SMS or email."
             linkText="View All"
           />
-          <LightningDeals />
+          <LightningDeals products={products} />
         </div>
 
-        <header className="text-center py-4 ">
-          <h1 className="text-xl font-bold text-red-500   text-[24px]">
+        <header className="text-center py-1 md:py-4 ">
+          <h1 className="text-xl font-bold text-red-500  text-[15px] md:text-[24px]">
             <div className="flex justify-center items-center">
               <Image
                 src={allIconList.Star}
@@ -110,12 +120,12 @@ export default async function HomePage() {
             </div>
           </h1>
 
-          <h2 className=" text-black text-[28px] font-extrabold ">
+          <h2 className=" text-black text-[18px] md:text-[28px] mt-[-10px] md:mt-[0px] font-extrabold ">
             EXPLORE YOUR INTERESTS
           </h2>
         </header>
         <div className="pl-4 md:pl-[69px] ">
-          <div className="flex items-center pt-3 pt-6 pb-8 sm:pb-13">
+          <div className="flex items-center pt-0 md:pt-3 pb-8 sm:pb-13">
 
           <FeatureScroller  items={guarantees} showArrow={false} itemClassName="border border-[#00000080] rounded-[40px]  px-[15px] sm:px-[35px] py-[8px] sm:py-[14px] font-normal text-[18px] leading-[1.5]  whitespace-nowrap text-black"/>
 

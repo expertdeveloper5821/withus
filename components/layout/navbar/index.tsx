@@ -29,7 +29,7 @@ export async function Navbar() {
   
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-12 bg-white ">
+    <nav className="relative flex items-center justify-between p-3 lg:px-12 bg-white ">
       
       <div className="flex w-full gap-2 items-center justify-between ">
         <div className="flex  gap-2">
@@ -59,30 +59,30 @@ export async function Navbar() {
       </div>
           <div className="flex items-center space-x-6">
 
-    <div className="flex items-center space-x-6">
-      <div className="flex items-center space-x-1 md:space-x-2">
+    <div className="flex items-center space-x-2 md:space-x-6">
+      <div className="flex items-center space-x-1 md:space-x-2" >
         <Image
           src={allIconList.ManIcon}
           alt="User Icon"
           width={24}
           height={24}
-          className="rounded-full"
+          className="w-8 rounded-full"
         />
-        <span className="text-sm font-medium text-gray-800 hidden md:block">Orders & Account</span>
+        <span className="text-[12px] font-semibold text-gray-800 hidden md:block md:w-[89px]">Orders & Account</span>
       </div>
 
-      <div className="flex items-center space-x-2 hidden ">
+      <div className="md:flex items-center space-x-2 hidden ">
         <Image
           src={allIconList.Support}
           alt="Support Icon"
           width={24}
           height={24}
         />
-        <span className="text-sm font-medium text-gray-800">Support</span>
+        <span className="text-[12px] font-semibold text-gray-800">Support</span>
       </div>
 
       <div className="hidden md:flex items-center space-x-2">
-        <span className="text-sm font-medium text-gray-800">EN</span>
+        <span className="text-[12px] font-medium text-gray-800">EN</span>
       </div>
     </div>
   </div>

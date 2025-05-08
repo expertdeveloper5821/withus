@@ -9,6 +9,13 @@ export default function Search() {
 
   return (
     <form action="/search" className="relative w-full ">
+      <button
+        type="submit"
+        className="md:hidden absolute left-1.5 top-1/2 -translate-y-1/2 rounded-full  p-1"
+        aria-label="Search"
+      >
+        <MagnifyingGlassIcon className="h-4 w-4 text-black md:text-white" />
+      </button>
       <input
         key={searchParams?.get('q')}
         type="text"
@@ -16,11 +23,11 @@ export default function Search() {
         placeholder="Search Bibi Shop"
         autoComplete="off"
         defaultValue={searchParams?.get('q') || ''}
-        className="w-full rounded-full bg-gray-200 px-4 py-3 text-black placeholder:text-neutral-600 placeholder:text-[14px] placeholder:font-medium text-[12px] focus:outline-none"
+        className="w-full rounded-full bg-gray-200 md:px-4 px-8 py-2 text-black placeholder:text-neutral-600 placeholder:text-[14px] placeholder:font-medium text-[12px] focus:outline-none"
       />
       <button
         type="submit"
-        className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full bg-white md:bg-black p-2"
+        className="hidden md:block absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full bg-white md:bg-black p-1"
         aria-label="Search"
       >
         <MagnifyingGlassIcon className="h-4 w-4 text-black md:text-white" />

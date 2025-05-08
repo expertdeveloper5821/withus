@@ -1,26 +1,34 @@
+"use client";
+
 import { allIconList } from "config/security-config";
-import { getCollectionProducts } from "lib/shopify";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-export default async function LightningDeals() {
-  const homepageItems = await getCollectionProducts({
-    collection: "Kitchen",
-  });
+type Product = {
+  id: number;
+  price: number;
+  image: string;
+};
 
-  const litingProducts = homepageItems
-    .slice(0, 7)
-    .map((item: any, index: number) => ({
-      id: index + 1,
-      price: parseFloat(item.priceRange.maxVariantPrice.amount),
-      image: item.featuredImage?.url || "",
-    }));
+export default function LightningDealsClient({ products }: { products: Product[] }) {
+  const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const isSmallScreen = window.innerWidth < 640;
+    setVisibleProducts(isSmallScreen ? products.slice(0, 5) : products);
+
+    const handleResize = () => {
+      const isSmall = window.innerWidth < 640;
+      setVisibleProducts(isSmall ? products.slice(0, 5) : products);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [products]);
 
   return (
-    <div className=" text-white pb-4  pt-[39px]">
-      <div
-        className="flex items-center justify-between px-0 sm:px-3 py-2  bg-white sm:bg-[#D91E37] "
-      
-      >
+    <div className="text-white md:pb-4 pt-[18px] md:pt-[39px]">
+      <div className="flex items-center justify-between px-0 sm:px-3 py-2 sm:bg-[#D91E37]">
         <Image
           src={allIconList.Lightning}
           alt="Lightning Icon"
@@ -28,7 +36,7 @@ export default async function LightningDeals() {
           height={66}
           className="h-12 hidden sm:block"
         />
-        <div className="flex items-center ">
+        <div className="flex items-center">
           <Image
             src={allIconList.Light}
             alt="Lightning Icon"
@@ -36,11 +44,21 @@ export default async function LightningDeals() {
             height={36}
             className="h-6 hidden sm:block"
           />
-          <div className="flex gap-2 items-center">
-          <h2 className="text-[16px] sm:text-[24px]  font-medium sm:font-extrabold ml-4 text-[#D91E37] sm:text-white">
-            Lightning Deals
-          </h2>
-          <span className=" text-[18px]  font-normal ml-2 text-black sm:text-white">Limited time offer</span>
+            <Image
+            src={allIconList.LightingRedIcon}
+            alt="Lightning Icon"
+            width={30}
+            height={30}
+            className="h-4 block md:hidden"
+          />
+          
+          <div className="flex gap-16 md:gap-2 items-center ">
+            <h2 className="text-[16px] sm:text-[24px] font-medium sm:font-extrabold ml-0 md:ml-4 text-[#D91E37] sm:text-white">
+              Lightning Deals
+            </h2>
+            <span className="text-[16px] md:text-[18px] font-normal ml-1 text-[#00000099] sm:text-white">
+              Limited time offer
+            </span>
           </div>
         </div>
         <Image
@@ -51,21 +69,21 @@ export default async function LightningDeals() {
           className="h-12 hidden sm:block"
         />
       </div>
-      <div className="flex gap-2 sm:gap-10 overflow-x-auto scrollbar-hide  pb-8 pt-5 sm:pt-10">
-        {litingProducts.map((product) => (
+      <div className="flex gap-2 sm:gap-10 overflow-x-auto scrollbar-hide pb-2 md:pb-8 pt-5 sm:pt-10">
+        {visibleProducts.map((product) => (
           <div
             key={product.id}
-            className="min-w-[96px] sm:min-w-[120px] overflow-hidden hover:scale-105 transition-transform"
+            className="min-w-[62px] md:min-w-[96px] sm:min-w-[120px] overflow-hidden hover:scale-105 transition-transform"
           >
             <Image
               src={product.image}
               alt={`Product ${product.id}`}
               width={60}
               height={60}
-              className="w-24 h-24 sm:w-full sm:h-40 object-cover"
+              className="w-16 h-16  md:w-full sm:h-40 object-cover"
             />
             <div className="pt-1">
-              <div className="text-center line-clamp-1 text-red-500 text-lg text-[25px] font-bold leading-[150%] li">
+              <div className="text-center line-clamp-1 text-red-500 text-[14px] md:text-[25px] font-bold leading-[150%]">
                 {product.price} Uzs
               </div>
             </div>

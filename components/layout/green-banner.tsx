@@ -1,5 +1,4 @@
 import { allIconList } from 'config/security-config';
-import React from 'react';
 import Image from 'next/image';
 
 interface GreenBannerProps {
@@ -17,7 +16,7 @@ export default function GreenBanner({
 }: GreenBannerProps) {
   return (
     <div className="  text-white rounded-lg  border rounded-[20px] " style={{  borderColor: '#0A8800 '}}>
-      <div className="flex items-center justify-between py-3 px-8 rounded-t-[7px]" style={{ backgroundColor:'#0A8800'}}>
+      <div className="flex items-center justify-between py-2 px-2 md:py-3 md:px-8 rounded-[6px] md:rounded-t-[7px]" style={{ backgroundColor:'#0A8800'}}>
         <h3 className=" flex items-center text-[14px]">
         <Image
                  src={allIconList.Sheild}
@@ -48,7 +47,10 @@ export default function GreenBanner({
       {index < items.length - 1 && (
         <span className="hidden sm:inline mx-2">|</span>
       )}
+    
     </div>
+    
+   
   ))}
           {/* {items.map((item:any, index) => (
             <div key={index} className="flex items-center gap-2 ">
@@ -57,6 +59,13 @@ export default function GreenBanner({
               {index < items.length - 1 && <span className="mx-2">|</span>}
             </div>
           ))} */}
+             <Image
+                   src={allIconList.whiteArrowIcon}
+                    alt="Icon"
+                    width={20}
+                    height={20}
+                    className="h-4 mr-1"
+                  />
         </div>
       </div>
       <div className="hidden sm:flex items-center justify-between bg-white text-green-700 p-3 px-4 border-b rounded-b-[12px]">
@@ -70,9 +79,18 @@ export default function GreenBanner({
                   />
           <p className='font-medium'>Security reminder:<span style={{fontWeight:'400'}}>{reminder}</span></p>
         </div>
+        <div className='flex items-center'>
         <a href="#" className="text-green  text-right text-[14px]  ml-4">
           {linkText}
         </a>
+        <Image
+                   src={allIconList.GreenArrowIcon}
+                    alt="Lightning Icon"
+                    width={18}
+                    height={18}
+                    className="h-3 mr-2"
+                  />
+                  </div>
       </div>
     </div>
   );
