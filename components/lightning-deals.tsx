@@ -73,7 +73,7 @@ export default function LightningDealsClient({ products }: { products: Product[]
         {visibleProducts.map((product) => (
           <div
             key={product.id}
-            className="min-w-[62px] md:min-w-[96px] lg:min-w-[162px] sm:min-w-[120px] overflow-hidden hover:scale-105 transition-transform"
+            className="min-w-[62px] md:min-w-[96px] lg:min-w-[124px] xl:min-w-[162px] sm:min-w-[120px] overflow-hidden hover:scale-105 transition-transform"
           >
             <Image
               src={product.image}

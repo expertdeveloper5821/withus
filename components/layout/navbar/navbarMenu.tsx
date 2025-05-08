@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 export default function NavbarMenu({ menu }: { menu: Menu[] }) {
   return (
-    <ul className="hidden gap-6 text-sm md:flex md:items-center text-black">
+    <ul className="hidden gap-4 text-sm md:flex md:items-center text-black">
       {menu.map((item: Menu) => (
         <DropdownMenuItem key={item.title} item={item} />
       ))}
