@@ -54,7 +54,7 @@ export default async function HomePage() {
   return (
     <>
       <div
-        className="hero-banner h-[100px] sm:h-[224px] "
+        className="hero-banner h-[100px] sm:h-[224px] md:h-[148px] lg:h-[224px] xl:h-[284px] "
         style={{
           backgroundImage: "url('/bannerimg.png')",
           backgroundSize: "cover",
