@@ -14,11 +14,11 @@ export default function LightningDealsClient({ products }: { products: Product[]
   const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    const isSmallScreen = window.innerWidth < 640;
+    const isSmallScreen = window.innerWidth < 840;
     setVisibleProducts(isSmallScreen ? products.slice(0, 5) : products);
 
     const handleResize = () => {
-      const isSmall = window.innerWidth < 640;
+      const isSmall = window.innerWidth < 840;
       setVisibleProducts(isSmall ? products.slice(0, 5) : products);
     };
 
@@ -69,7 +69,7 @@ export default function LightningDealsClient({ products }: { products: Product[]
           className="h-12 hidden sm:block"
         />
       </div>
-      <div className="flex gap-2 sm:gap-10 overflow-x-auto scrollbar-hide pb-2 md:pb-8 pt-5 sm:pt-10">
+      <div className="flex  gap-2 md:gap-2 lg:gap-10 overflow-x-auto scrollbar-hide pb-2 md:pb-8 pt-5 sm:pt-10">
         {visibleProducts.map((product) => (
           <div
             key={product.id}
@@ -80,7 +80,7 @@ export default function LightningDealsClient({ products }: { products: Product[]
               alt={`Product ${product.id}`}
               width={60}
               height={60}
-              className="w-16 h-16  md:w-full sm:h-40 object-cover"
+              className="w-16 h-16  md:w-full sm:h-26 object-cover"
             />
             <div className="pt-1">
               <div className="text-center line-clamp-1 text-red-500 text-[14px] md:text-[25px] font-bold leading-[150%]">
