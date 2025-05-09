@@ -181,7 +181,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
     <div className="pt-4 text-center">
       <button
         onClick={toggleShow}
-        className="px-4 py-2 text-[20px] font-normal border border-gray-300 rounded-full hover:bg-gray-100 transition text-black"
+        className="px-4 py-2 text-[20px] font-normal border border-black rounded-full hover:bg-gray-100 transition text-black"
       >
         {showAll ? "Show less" : "See all reviews"}
       </button>

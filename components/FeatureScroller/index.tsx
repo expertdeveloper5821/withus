@@ -25,17 +25,23 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
   };
 
   return (
-    <div className="p-1 md:p-4 rounded-md w-full mt-2">
-      <div className="flex items-center gap-2 text-green-600 font-semibold text-sm mb-2">
-        <div className="flex text-[20px] md:text-[22px] font-medium">
+    <div className=" rounded-md w-full mt-2">
+      <div className="flex items-center gap-2 text-green-600 font-semibold text-sm mb-2">       
+        <div className="flex text-[20px] md:text-[22px] gap-2 font-medium">
+        {showArrow && ( <Image
+            src={allIconList.OrderGreenIcon}
+            alt="Delivery Icon"
+            width={24}
+            height={24}
+            className="h-6 w-6" />)}
           {title}
           {showArrow && (
             <Image
               src={allIconList.GreenArrow}
               alt="Arrow Icon"
-              width={8}
-              height={8}
-              className="mt-1 ml-1"
+              width={6}
+              height={6}
+              className="mt-1 ml-2"
             />
           )}
         </div>
@@ -45,7 +51,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
       <div className="relative flex items-center">
         <div
           ref={scrollRef}
-          className="flex gap-2 overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden scrollbar-hide scroll-smooth pr-10"
+          className="flex gap-2 overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden scrollbar-hide scroll-smooth mt-2 ml-6 pr-10"
         >
           {items.map((item, idx) => (
             <span key={idx} className={itemClassName}>

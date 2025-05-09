@@ -125,7 +125,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
             </Suspense>
             <div className='hidden md:block '>
             <ReviewList reviews={reviews} />
-            <ProductDetails images={images} />
+            <ProductDetails images={images}  />
             </div>
           </div>
 
@@ -141,6 +141,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
         <div className='block md:hidden lg:hidden'>
       {/* <div className='w-[100%] md:w-[90%] lg:w-[40%] mt-[26px] md:mt-[26px] lg:mt-[-226px] mx-0 md:mx-6'> */}
       <ReviewList reviews={reviews} />
+      {/* <ProductDetails images={images} /> */}
       <ProductDetails images={images} />
       </div>
         
