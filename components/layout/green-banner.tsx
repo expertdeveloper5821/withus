@@ -16,7 +16,7 @@ export default function GreenBanner({
 }: GreenBannerProps) {
   return (
     <div className="  text-white rounded-lg  border rounded-[20px] " style={{  borderColor: '#0A8800 '}}>
-      <div className="flex items-center justify-between py-2 px-2 md:py-3 md:px-8 rounded-[6px] md:rounded-t-[7px]" style={{ backgroundColor:'#0A8800'}}>
+      <div className="flex items-center justify-between py-2 px-2 md:py-3 md:px-8 rounded-[6px] md:rounded-none md:rounded-t-[7px]" style={{ backgroundColor:'#0A8800'}}>
         <h3 className=" flex items-center text-[14px]">
         <Image
                  src={allIconList.Sheild}

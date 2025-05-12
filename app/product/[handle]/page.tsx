@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 
 
+
 export async function generateMetadata(props: {
   params: Promise<{ handle: string }>;
 }): Promise<Metadata> {
@@ -75,6 +76,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
     },
   };
 
+  
   const homepage = await getCollectionProducts({
     collection: 'best-sellers',
   });

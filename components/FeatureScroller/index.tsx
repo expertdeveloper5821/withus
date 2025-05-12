@@ -61,7 +61,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
         </div>
        
           <button
-            className="hidden md:absolute lg:block xl:block right-0 mr-4 bg-white shadow-md w-8 h-8 rounded-full flex items-center justify-center"
+            className="hidden md:relative lg:block xl:block right-0 mr-4 bg-white shadow-md w-13 h-13 rounded-full flex items-center  justify-center"
             onClick={handleScroll}
           >
             <Image
@@ -69,7 +69,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
               alt="Filter Icon"
               width={24}
               height={24}
-              className="h-6 w-6"
+              className="h-8 w-8 ml-2"
             />
           </button>
       

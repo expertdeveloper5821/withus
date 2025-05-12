@@ -27,7 +27,7 @@ export default function LightningDealsClient({ products }: { products: Product[]
   }, [products]);
 
   return (
-    <div className="text-white md:pb-4 pt-[18px] md:pt-[39px]">
+    <div className="text-white md:pb-4 pt-[18px] md:pt-[36px]">
       <div className="flex items-center justify-between px-0 sm:px-3 py-2 sm:bg-[#D91E37]">
         <Image
           src={allIconList.Lightning}
