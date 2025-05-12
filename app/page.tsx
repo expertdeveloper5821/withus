@@ -62,7 +62,7 @@ export default async function HomePage() {
         }}
       ></div>
 
-      <div className=" bg-gray-50 pt-9 ">
+      <div className=" bg-gray-50 pt-4 md:pt-9 ">
         <div className="block sm:hidden bg-red-100 rounded-lg  px-4 py-2 flex justify-between items-center max-w-xl mx-4 mb-4">
           <div className="flex items-start space-x-2 ">
             {/* <CheckCircleIcon className="w-5 h-5 text-green-600 mt-1" /> */}

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { allIconList } from "config/security-config";
 import Image from "next/image";
@@ -69,7 +69,7 @@ export default function LightningDealsClient({ products }: { products: Product[]
           className="h-12 hidden sm:block"
         />
       </div>
-      <div className="flex  gap-2 md:gap-2 lg:gap-10 overflow-x-auto scrollbar-hide pb-2 md:pb-8 pt-5 sm:pt-10">
+      <div className="flex  gap-2 md:gap-2 lg:gap-10 overflow-x-auto scrollbar-hide pb-2 md:pb-8 pt-1 md:pt-5 sm:pt-10">
         {visibleProducts.map((product) => (
           <div
             key={product.id}

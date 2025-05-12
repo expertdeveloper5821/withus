@@ -12,18 +12,6 @@ export default async function CartPage() {
 
   });
  
-  // const formattedProducts = homepageItems.map((item: any, index: number) => ({
-  //   id: index + 1,
-  //   title: item.title,
-  //   handle: item.handle,
-  //   discountPrice: parseFloat(item.priceRange.minVariantPrice.amount),
-  //   price: parseFloat(item.priceRange.maxVariantPrice.amount),
-  //   image: item.featuredImage?.url || '',
-  //   tag: item.tags.includes("Mother's Day") ? "Mother's Day" : undefined,
-  //   badge: item.tags.includes("Local") ? "Local" : undefined,
-  //   ratings: 5,
-  //   reviews: Math.floor(Math.random() * 200),
-  // }))
   const formattedProducts = homepageItems.map((item: any, index: number) => ({
     id: index + 1,
     title: item.title,

@@ -5,6 +5,7 @@ import { redirectToCheckout } from 'components/cart/actions';
 import LoadingDots from 'components/loading-dots';
 import Price from 'components/price';
 import { allIconList } from 'config/security-config';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useFormStatus } from 'react-dom';
 import InfoCard from './InfoCard';
@@ -85,12 +86,39 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ cart  }) => {
           <p className="text-sm text-gray-500">
             Taxes and delivery fees are calculated on the next page.
           </p>
-      <button onClick={() => handleCheckout()}>
-      Go to Checkout
-    </button>
+    
     <form action={redirectToCheckout} className="mt-6">
         <CheckoutButton  />
       </form>
+      <div className="space-y-6 text-sm text-gray-800">
+      <div className="flex items-start space-x-3">
+        <Image  src={allIconList.CreditIcon} alt="Check Icon" className="w-5 h-5 mt-1" />
+        <p className="text-[#00000099]">
+      Item availability and pricing are not guaranteed until payment is final.
+      </p>
+      </div>
+      {/* Message with icon */}
+      <div className="flex items-start space-x-3">
+        <Image  src={allIconList.CreditIcon} alt="Check Icon" className="w-5 h-5 mt-1" />
+        <p className="text-green-600">
+          You will not be charged until you review this order on the next page
+        </p>
+      </div>
+
+      {/* Safe Payment Options Block */}
+      <div className="flex items-start space-x-3">
+      <Image  src={allIconList.CreditIcon} alt="Check Icon" className="w-5 h-5 mt-1" />
+        <div>
+          <h3 className="font-semibold text-black">Safe Payment Options</h3>
+          <p>
+            <span className="text-green-600 font-medium">
+              Bibi Shop is committed to protecting your payment information.
+            </span>{" "}
+            We follow PCI DSS standards, use strong encryption, and perform regular reviews of its system to protect your privacy.
+          </p>
+        </div>
+      </div>
+    </div>
 
       <div className="space-y-6 text-sm">
       <InfoCard
