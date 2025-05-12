@@ -22,7 +22,7 @@ interface ProductGridProps {
 const ProductGrid: React.FC<ProductGridProps> = ({ title = "Items you may want to add", products }) => {
   return (
     <div className="mt-6">
-      <h2 className="text-xl font-bold text-gray-800 mb-4">{title}</h2>
+      {/* <h2 className="text-xl font-bold text-gray-800 mb-4">{title}</h2> */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:lg:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
           <div key={product.id} className="bg-white rounded-lg shadow-sm overflow-hidden">

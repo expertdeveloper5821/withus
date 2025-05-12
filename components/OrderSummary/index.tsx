@@ -1,21 +1,20 @@
 'use client';
 
-import { useEffect } from 'react';
+import { createCartAndSetCookie } from 'components/cart/actions';
 import { useCart } from 'components/cart/cart-context';
-import { createCartAndSetCookie, redirectToCheckout } from 'components/cart/actions';
-import { EditItemQuantityButton } from 'components/cart/edit-item-quantity-button';
-import { DeleteItemButton } from 'components/cart/delete-item-button';
 import { createUrl } from 'lib/utils';
-import Link from 'next/link';
 import Image from 'next/image';
-import Price from 'components/price';
+import Link from 'next/link';
+import { useEffect } from 'react';
 
-import LoadingDots from 'components/loading-dots';
+import { DeleteItemButton } from 'components/cart/delete-item-button';
+import { EditItemQuantityDropdown } from 'components/cart/QuantitySelect';
+import Price from 'components/price';
 import { DEFAULT_OPTION } from 'lib/constants';
-import { useFormStatus } from 'react-dom';
 
 export default function ClientCart() {
   const { cart, updateCartItem } = useCart();
+  console.log('cart', updateCartItem, cart);
 
   useEffect(() => {
     if (!cart) {
@@ -44,81 +43,99 @@ export default function ClientCart() {
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
-      <h1 className="text-xl font-bold text-gray-800 mb-4">Shopping Cart</h1>
-      <ul className="divide-y divide-gray-200">
-        {cart.lines
-          .sort((a, b) =>
-            a.merchandise.product.title.localeCompare(b.merchandise.product.title)
-          )
-          .map((item, i) => {
-            const merchandiseSearchParams: Record<string, string> = {};
-            item.merchandise.selectedOptions.forEach(({ name, value }) => {
-              if (value !== DEFAULT_OPTION) {
-                merchandiseSearchParams[name.toLowerCase()] = value;
-              }
-            });
+  
+    <div className="bg-white p-6 rounded-xl shadow-md">
+  <div className="flex justify-between items-center border-b pb-4 mb-4">
+    <div className="flex items-center gap-2">
+      <input type="checkbox" className="w-5 h-5 text-red-500 accent-red-500" />
+      <span className="font-semibold text-lg text-gray-800">Select All ({cart.lines.length})</span>
+    </div>
+    <button className="text-gray-600 hover:text-black">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
 
-            const merchandiseUrl = createUrl(
-              `/product/${item.merchandise.product.handle}`,
-              new URLSearchParams(merchandiseSearchParams)
-            );
+  <ul className="space-y-4">
+    {cart.lines.map((item, i) => {
+      const quantity = item.quantity;
+      const unitAmount = parseFloat(item.cost.totalAmount.amount);
+      const currencyCode = item.cost.totalAmount.currencyCode;
+      const totalAmount = (unitAmount * quantity).toFixed(2);
 
-            return (
-              <li key={i} className="py-6 flex">
-                <div className="relative flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
-                  <Image
-                    className="w-full h-full object-cover"
-                    width={96}
-                    height={96}
-                    alt={
-                      item.merchandise.product.featuredImage?.altText ||
-                      item.merchandise.product.title
-                    }
-                    src={item.merchandise.product.featuredImage?.url}
-                  />
-                </div>
-                <div className="ml-4 flex-1 flex flex-col">
-                  <div>
-                    <div className="flex justify-between">
-                      <Link
-                        href={merchandiseUrl}
-                        className="text-sm font-medium text-gray-900 hover:text-blue-600"
-                      >
-                        {item.merchandise.product.title}
-                      </Link>
-                      <Price
-                        className="text-sm font-medium text-gray-900"
+      const merchandiseSearchParams: Record<string, string> = {};
+      item.merchandise.selectedOptions.forEach(({ name, value }) => {
+        if (value !== DEFAULT_OPTION) {
+          merchandiseSearchParams[name.toLowerCase()] = value;
+        }
+      });
+
+      const merchandiseUrl = createUrl(
+        `/product/${item.merchandise.product.handle}`,
+        new URLSearchParams(merchandiseSearchParams)
+      );
+
+      return (
+        <li key={i} className="flex items-center gap-4 border border-gray-200 rounded-lg p-4">
+        
+        <input
+  type="checkbox"
+  className="appearance-none w-5 h-5 rounded-full bg-white border border-red-500 checked:bg-red-600 checked:border-red-600 checked:text-white checked:content-['✓'] flex items-center justify-center text-sm text-white"
+/>
+
+         
+          <div className="w-20 h-20 flex-shrink-0 rounded-md overflow-hidden border">
+            <Image
+              className="w-full h-full object-cover"
+              width={80}
+              height={80}
+              alt={item.merchandise.product.featuredImage?.altText || item.merchandise.product.title}
+              src={item.merchandise.product.featuredImage?.url}
+            />
+          </div>
+
+       
+          <div className="flex-1 min-w-0">
+            <Link
+              href={merchandiseUrl}
+              className="text-sm font-medium text-gray-900 hover:underline line-clamp-2 block"
+            >
+              {item.merchandise.product.title}
+            </Link>
+            <p className="text-xs text-gray-500 mt-1">
+              Color: White / Size: Large <span className="inline-block ml-1">›</span>
+            </p>
+            <div className="flex items-center gap-2 mt-1 text-sm">
+            
+              <Price
+                        className="text-sm font-semibold text-red-600 "
                         amount={item.cost.totalAmount.amount}
                         currencyCode={item.cost.totalAmount.currencyCode}
                       />
-                    </div>
-                    {item.merchandise.title !== DEFAULT_OPTION && (
-                      <p className="mt-1 text-sm text-gray-500">
-                        {item.merchandise.title}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex-1 flex items-end justify-between">
-                    <div className="flex">
-                      <div className="inline-flex border border-gray-200 rounded">
-                        <EditItemQuantityButton item={item} type="minus" optimisticUpdate={updateCartItem} />
-                        <span className="w-10 text-center flex items-center justify-center text-sm">
-                          {item.quantity}
-                        </span>
-                        <EditItemQuantityButton item={item} type="plus" optimisticUpdate={updateCartItem} />
-                      </div>
-                    </div>
-                    <DeleteItemButton item={item} optimisticUpdate={updateCartItem} />
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-      </ul>
+               
+              <span className="line-through text-gray-400 text-xs">{(unitAmount * 1.5).toFixed(0)}</span>
+              <span className="bg-red-100 text-red-600 text-xs px-2 py-0.5 rounded font-semibold">-67%</span>
+            </div>
+          </div>
 
-      
-    </div>
+
+          <div className="flex flex-col items-end gap-2">
+          <DeleteItemButton item={item} optimisticUpdate={updateCartItem} />
+            <div className="flex items-center space-x-1">
+             
+              <EditItemQuantityDropdown item={item} optimisticUpdate={updateCartItem} />
+             
+            </div>
+           
+           
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+</div>
+
   );
 }
 

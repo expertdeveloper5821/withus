@@ -8,6 +8,7 @@ import bibishop from '../assets/images/bibishop.svg';
 import blankIcon2 from '../assets/images/blankIcon2.svg';
 import caoffIcon from '../assets/images/caoffIcon.svg';
 import cart from '../assets/images/cart.svg';
+import deleteIcon from '../assets/images/deleteIcon.svg';
 import deliveryBlackIcon from '../assets/images/deliveryBlackIcon.svg';
 import deliveryIcon from '../assets/images/deliveryIcon.svg';
 import exclusiveIcon from '../assets/images/exclusiveIcon.svg';
@@ -44,12 +45,15 @@ import security7 from '../assets/images/security-7.svg';
 import sheild from '../assets/images/sheild.svg';
 import star from '../assets/images/star.svg';
 import starIcon from '../assets/images/starIcon.svg';
+import starSellerImg from '../assets/images/starSellerImg.svg';
 import support from '../assets/images/support.svg';
 import trackIcon from '../assets/images/trackIcon.svg';
+import user from '../assets/images/user.svg';
 import whiteArrowIcon from '../assets/images/whiteArrowIcon.svg';
 import youtube from '../assets/images/youtube.svg';
-import starSellerImg from '../assets/images/starSellerImg.svg';
-import user from '../assets/images/user.svg';
+import cartGreenIcon from '../assets/images/cartGreenIcon.svg';
+import creditIcon from '../assets/images/creditIcon.svg';
+
 
 
 
@@ -106,5 +110,9 @@ export const allIconList = {
   GreenDeliveryIcon:greenDeliveryIcon,
   OrderGreenIcon:orderGreenIcon,
   StarSellerImg:starSellerImg,
-  User:user
+  User:user,
+  DeleteIcon:deleteIcon,
+  CartGreenIcon:cartGreenIcon,
+  CreditIcon:creditIcon,
+
 };

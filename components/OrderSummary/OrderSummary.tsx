@@ -1,12 +1,13 @@
 'use client'
-import React, { Children } from 'react';
+import React from 'react';
 
-import Price from 'components/price';
-import InfoCard from 'components/InfoCard';
-import { useFormStatus } from 'react-dom';
-import LoadingDots from 'components/loading-dots';
 import { redirectToCheckout } from 'components/cart/actions';
+import LoadingDots from 'components/loading-dots';
+import Price from 'components/price';
+import { allIconList } from 'config/security-config';
 import { useRouter } from 'next/navigation';
+import { useFormStatus } from 'react-dom';
+import InfoCard from './InfoCard';
 
 
 
@@ -91,9 +92,38 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ cart  }) => {
         <CheckoutButton  />
       </form>
 
-   
+      <div className="space-y-6 text-sm">
+      <InfoCard
+        iconUrl={allIconList.CreditIcon}
+        title="Your Data is Safe"
+        description="We use top-tier encryption and privacy practices to ensure your personal information stays protected at all times."
+        linkText="Read Privacy Policy"
+        linkHref="/"
+      />
 
+      <InfoCard
+       iconUrl={allIconList.CartGreenIcon}
+        title="Buyer Assurance"
+        description="Enjoy peace of mind when shopping with us. We've got you covered in case anything goes wrong with your order."
+        linkText="See Protection Details"
+        linkHref="/"
+      />
 
+      <InfoCard
+        iconUrl={allIconList.GreenDeliveryIcon}
+        title="Guaranteed Delivery"
+        description="We ensure timely delivery, or you get compensation."
+        listItems={[
+          "Compensation for delivery delays",
+          "Full refund if item is not received",
+          "Returns accepted if item is damaged",
+        ]}
+        linkText="Shipping & Refunds"
+        linkHref="/"
+      />
+    </div>
+
+{/* 
           <div className="mt-4 space-y-4">
             <InfoCard title="You will not be charged until you review this order on the next page"  icon={<CheckIcon/>}/>
             <InfoCard
@@ -129,7 +159,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ cart  }) => {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
