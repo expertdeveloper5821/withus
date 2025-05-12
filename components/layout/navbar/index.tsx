@@ -1,6 +1,5 @@
 import CartModal from 'components/cart/modal';
 import LogoSquare from 'components/logo-square';
-import SearchBar from 'components/searchbar';
 import { allIconList } from 'config/security-config';
 import { getMenu } from 'lib/shopify';
 import Image from 'next/image';
@@ -49,9 +48,7 @@ export async function Navbar() {
           ) : null}
         </div>
         <div className=" justify-center md:flex md:w-1/3">
-        <SearchBar />
-          <Suspense fallback={<SearchSkeleton />}>
-          
+          <Suspense fallback={<SearchSkeleton />}>   
             <Search />
           </Suspense>
         </div>
