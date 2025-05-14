@@ -5,7 +5,7 @@ import { useCart } from 'components/cart/cart-context';
 import { createUrl } from 'lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { DeleteItemButton } from 'components/cart/delete-item-button';
 import { EditItemQuantityDropdown } from 'components/cart/QuantitySelect';
@@ -44,7 +44,7 @@ export default function ClientCart() {
 
   return (
   
-    <div className="bg-white p-6 rounded-xl shadow-md">
+    <div className="bg-white p-0 md:p-6 rounded-xl shadow-md">
   <div className="flex justify-between items-center border-b pb-4 mb-4">
     <div className="flex items-center gap-2">
       <input type="checkbox" className="w-5 h-5 text-red-500 accent-red-500" />

@@ -1,14 +1,16 @@
 
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
-import ProductGrid from 'components/card/ProductGrid';
+import { CartItem } from 'components/cart/mobile-cart';
+import ProductGrids from 'components/grid/product-grid';
 import ClientCart from 'components/OrderSummary';
 import OrderSummary from 'components/OrderSummary/OrderSummary';
+import { allIconList } from 'config/security-config';
 import { getCollectionProducts } from 'lib/shopify';
 
 
 export default async function CartPage() {
   const homepageItems = await getCollectionProducts({
-    collection: '5stars',
+    collection: 'Automobiles',
 
   });
  
@@ -55,9 +57,10 @@ export default async function CartPage() {
       <span className="text-green-700 text-sm">Limited-time offer</span>
     </div>
           <ClientCart/>
+          <CartItem title={'dsjgfsdhfhd'} color={'red'} size={'12'} price={0} originalPrice={0} image={allIconList.DeliveryIcon} quantity={0}/>
             <div className="p-6">
               <div className="text-lg text-black font-medium mb-2">Explore your interests</div>
-              <ProductGrid products={formattedProducts} />
+              <ProductGrids products={formattedProducts} gridClassName="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3  gap-3"/>
             </div>
           </div>
          <OrderSummary />

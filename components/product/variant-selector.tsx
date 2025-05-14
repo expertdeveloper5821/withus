@@ -35,12 +35,12 @@ export function VariantSelector({
       {}
     )
   }));
-  console.log('combinations', combinations);
+ 
 
   return options.map((option) => (
     <form key={option.id}>
       <dl className="mb-8">
-        <dt className="mb-4 text-sm uppercase tracking-wide text-black">{option.name}:<span className="font-medium normal-case">{state[option.name.toLowerCase()]}</span></dt>
+        <dt className="mb-4 text-[18px] md:text-[20px] tracking-wide text-black">{option.name}:<span className="font-normal ml-2 normal-case">{state[option.name.toLowerCase()]}</span></dt>
         <dd className="flex flex-wrap gap-3">
           {option.values.map((value) => {
             const optionNameLowerCase = option.name.toLowerCase();
@@ -96,10 +96,10 @@ export function VariantSelector({
                   <img
                     src={imageUrl}
                     alt={value}
-                    className="h-138 w-full object-cover rounded-t-md"
+                    className=" w-full object-cover rounded-t-md"
                   />
                 )}
-                <span className="text-sm font-medium text-center my-3">{value}</span>
+                <span className="text-sm font-medium text-center ">{value}</span>
               </button>
             );
           })}

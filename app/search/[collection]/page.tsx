@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 
 import Grid from 'components/grid';
 import ProductGrid from 'components/grid/product-grid';
-import ProductGridItems from 'components/layout/product-grid-items';
+
 import { defaultSort, sorting } from 'lib/constants';
 
 export async function generateMetadata(props: {

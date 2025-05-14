@@ -94,17 +94,17 @@ export default function ProductDetailsSection({ images }: ExpandableGalleryProps
           alt="Seller"
           width={60}
           height={60}
-          className="rounded-full object-cover"
+          className="w-18 h-18 rounded-full object-cover md:mb-[26px]"
         />
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-[30px] font-semibold text-black">MOOCOM</h2>
+            <h2 className="text-[20px] md:text-[40px] font-semibold text-black">MOOCOM</h2>
            <Image
             src={allIconList.StarSellerImg} 
             alt="Star Seller"
-            width={24}
-            height={24}  
-            className='h-8 w-8' 
+            width={80}
+            height={80}  
+            className='w-14 h-14 md:h-18 md:w-18 mr-2' 
               />
           </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-700 mt-1 mb-4">

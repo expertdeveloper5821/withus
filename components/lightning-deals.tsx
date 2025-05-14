@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { allIconList } from "config/security-config";
 import Image from "next/image";
@@ -10,7 +10,11 @@ type Product = {
   image: string;
 };
 
-export default function LightningDealsClient({ products }: { products: Product[] }) {
+export default function LightningDealsClient({
+  products,
+}: {
+  products: Product[];
+}) {
   const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -44,15 +48,10 @@ export default function LightningDealsClient({ products }: { products: Product[]
             height={36}
             className="h-6 hidden sm:block"
           />
-            <Image
-            src={allIconList.LightingRedIcon}
-            alt="Lightning Icon"
-            width={30}
-            height={30}
-            className="h-4 block md:hidden"
-          />
-          
-          <div className="flex gap-16 md:gap-2 items-center ">
+
+        
+
+          <div className="hidden md:flex gap-16 md:gap-2 items-center ">
             <h2 className="text-[16px] sm:text-[24px] font-medium sm:font-extrabold ml-0 md:ml-4 text-[#D91E37] sm:text-white">
               Lightning Deals
             </h2>
@@ -69,7 +68,24 @@ export default function LightningDealsClient({ products }: { products: Product[]
           className="h-12 hidden sm:block"
         />
       </div>
-      <div className="flex  gap-2 md:gap-2 lg:gap-10 overflow-x-auto scrollbar-hide pb-2 md:pb-8 pt-1 md:pt-5 sm:pt-10">
+      <div className="md:hidden flex items-center w-full justify-between ">
+            <div className=" flex ">
+              <Image
+                src={allIconList.LightingRedIcon}
+                alt="Lightning Icon"
+                width={30}
+                height={30}
+                className="h-4 block md:hidden"
+              />
+              <div className="text-[16px] sm:text-[24px] font-medium sm:font-extrabold ml-0 md:ml-4 text-[#D91E37] sm:text-white">
+                Lightning Deals
+              </div>
+            </div>
+            <div className="text-[16px] md:text-[18px] font-normal text-[#00000099] sm:text-white">
+              Limited time offer
+            </div>
+          </div>
+      <div className="flex  gap-2 md:gap-2 lg:gap-10 overflow-x-auto scrollbar-hide  pb-8 pt-1 md:pt-5 sm:pt-10">
         {visibleProducts.map((product) => (
           <div
             key={product.id}

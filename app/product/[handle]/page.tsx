@@ -132,7 +132,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
           </div>
 
           {/* Product Details */}
-          <div className=" w-full lg:w-1/2 p-4 md:p-2 lg:p-0">
+          <div className=" w-full lg:w-[48%] p-4 md:p-2 lg:p-0">
             <Suspense fallback={null}>
               <ProductDescription product={product} />
             </Suspense>
@@ -149,6 +149,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
         
         {/* Related Products Section */}
         <div className="p-4 md:p-8 lg:p-12">
+        <p className='text-[22px] font-bold text-black mb-4'>Explore your interests</p>
           <ProductGrid products={formattedProducts} />
         </div>
       </div>

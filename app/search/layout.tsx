@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { Suspense } from 'react';
 import ChildrenWrapper from './children-wrapper';
 
+
 export default function SearchLayout({
   children
 }: {
@@ -48,7 +49,6 @@ export default function SearchLayout({
 
   <ChevronRightIcon className="w-4 h-4 text-green-700" />
 </div>
-
         {/* <div className="order-first w-full flex-none md:max-w-[125px]">
           <Collections />
         </div> */}

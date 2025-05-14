@@ -7,13 +7,15 @@ interface GuaranteeScrollerProps {
   title?: string;
   items: string[];
   itemClassName?: string;
+  mainScollClassName?: string;
   showArrow?: boolean; // Add a prop to control the visibility of the image
 }
 
 const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
   title,
   items = [],
-  itemClassName = "bg-green-600 text-white text-sm px-4 py-2 rounded-md whitespace-nowrap", // Default styles
+  itemClassName = "bg-[#0A8800] text-white text-[15px] md:text-[18px] font-medium  px-4 py-2 rounded-md whitespace-nowrap", 
+  mainScollClassName = "flex gap-2 overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden scrollbar-hide scroll-smooth mt-2  md:ml-6 pr-10 md:w-[90%]",
   showArrow = true, 
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -26,7 +28,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
 
   return (
     <div className=" rounded-md w-full mt-2">
-      <div className="flex items-center gap-2 text-green-600 font-semibold text-sm mb-2">       
+      <div className="flex items-center gap-2 text-[#0A8800] font-semibold text-sm mb-2">       
         <div className="flex text-[20px] md:text-[22px] gap-2 font-medium">
         {showArrow && ( <Image
             src={allIconList.OrderGreenIcon}
@@ -51,7 +53,7 @@ const FeatureScroller: React.FC<GuaranteeScrollerProps> = ({
       <div className="relative flex items-center">
         <div
           ref={scrollRef}
-          className="flex gap-2 overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden scrollbar-hide scroll-smooth mt-2 ml-6 pr-10"
+          className={mainScollClassName}
         >
           {items.map((item, idx) => (
             <span key={idx} className={itemClassName}>
