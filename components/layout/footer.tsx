@@ -57,7 +57,7 @@ export default function Footer() {
   {/* Apple Store Button */}
   <a
     href="#"
-   className="flex items-center space-x-3 bg-black text-white px-[8px] md:px-[26px] py-[8px] md:py-[12px] rounded-[40px] border border-[0.5px] border-white shadow-lg hover:bg-gray-800"
+   className="flex items-center space-x-3 bg-black text-white px-[8px] md:px-[23px] py-[8px] md:py-[12px] rounded-[40px] border border-[0.5px] border-white shadow-lg hover:bg-gray-800"
   >
     <Image
       src={allIconList.apple}  
