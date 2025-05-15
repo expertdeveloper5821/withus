@@ -35,7 +35,7 @@ const TopBanner = () => {
         >
           <span className="text-lg"> <Image src={item.icon} alt={''} width={50} height={50} className='w-8 h-8' /></span>
           <div className="flex flex-col">
-            <p className="font-bold  text-[15.88px] flex items-center gap-1">
+            <p className="font-semibold  text-[15.88px] flex items-center gap-1">
               {item.text}  {index === 0 && <span className="text-white  text-[18px] font-semibold">›</span>}
             </p>
             {item.subtext && <p className="text-white font-normal  text-[13.89px] ">{item.subtext}</p>}

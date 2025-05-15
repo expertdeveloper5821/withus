@@ -40,7 +40,18 @@ export function VariantSelector({
   return options.map((option) => (
     <form key={option.id}>
       <dl className="mb-8">
-        <dt className="mb-4 text-[18px] md:text-[20px] tracking-wide text-black">{option.name}:<span className="font-normal ml-2 normal-case">{state[option.name.toLowerCase()]}</span></dt>
+        
+        <dt className="mb-4 text-[18px] md:text-[20px] tracking-wide text-black">{option.name}:<span className="font-normal ml-2 normal-case">{state[option.name.toLowerCase()]}</span>
+        {option.name.toLowerCase() === 'size' && option.values.length > 0 && (
+    <button
+      type="button"
+      className="flex items-center gap-2 rounded-full bg-gray-200 px-3 py-1 text-sm font-medium text-black"
+    >
+     
+      Size guide
+    </button>
+  )}
+        </dt>
          <dd className="hidden md:flex flex-wrap gap-3" >
           {option.values.map((value) => {
             const optionNameLowerCase = option.name.toLowerCase();
