@@ -13,5 +13,6 @@ export default {
         pathname: '/s/files/**'
       }
     ]
-  }
+  },
+  unstable_runtimeJS: false,
 };

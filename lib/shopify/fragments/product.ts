@@ -33,10 +33,14 @@ const productFragment = /* GraphQL */ `
           selectedOptions {
             name
             value
+          
           }
           price {
             amount
             currencyCode
+          }
+            image {
+            ...image
           }
         }
       }

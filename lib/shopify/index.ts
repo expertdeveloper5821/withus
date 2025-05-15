@@ -6,9 +6,9 @@ import {
 import { isShopifyError } from 'lib/type-guards';
 import { ensureStartsWith } from 'lib/utils';
 import {
-  revalidateTag,
+  unstable_cacheLife as cacheLife,
   unstable_cacheTag as cacheTag,
-  unstable_cacheLife as cacheLife
+  revalidateTag
 } from 'next/cache';
 import { cookies, headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
@@ -363,28 +363,44 @@ export async function getCollections(): Promise<Collection[]> {
   return collections;
 }
 
+
 export async function getMenu(handle: string): Promise<Menu[]> {
   'use cache';
   cacheTag(TAGS.collections);
   cacheLife('days');
 
-  const res = await shopifyFetch<ShopifyMenuOperation>({
-    query: getMenuQuery,
-    variables: {
-      handle
-    }
-  });
+  try {
+    const res = await shopifyFetch<ShopifyMenuOperation>({
+      query: getMenuQuery,
+      variables: { handle },
+    });
 
-  return (
-    res.body?.data?.menu?.items.map((item: { title: string; url: string }) => ({
-      title: item.title,
-      path: item.url
-        .replace(domain, '')
-        .replace('/collections', '/search')
-        .replace('/pages', '')
-    })) || []
-  );
+    if (!res?.body?.data?.menu?.items) {
+      console.error(`No menu data found for handle "${handle}".`, res?.body);
+      return [];
+    }
+
+    function transformMenuItems(
+      items: { title: string; url: string; items?: any[] }[]
+    ): Menu[] {
+      return items.map((item) => ({
+        title: item.title,
+        path: item.url
+          .replace(domain, '') // remove domain
+          .replace(/^\/collections/, '/search') // convert /collections to /search
+          .replace(/^\/pages/, ''), // remove /pages
+        children: item.items ? transformMenuItems(item.items) : [],
+      }));
+    }
+
+    return transformMenuItems(res.body.data.menu.items);
+
+  } catch (error) {
+    console.error(`Error fetching menu with handle "${handle}":`, error);
+    return [];
+  }
 }
+
 
 export async function getPage(handle: string): Promise<Page> {
   const res = await shopifyFetch<ShopifyPageOperation>({
@@ -499,3 +515,5 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
 
   return NextResponse.json({ status: 200, revalidated: true, now: Date.now() });
 }
+
+

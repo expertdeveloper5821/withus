@@ -1,6 +1,7 @@
-import { Carousel } from 'components/carousel';
-import { ThreeItemGrid } from 'components/grid/three-items';
+
+import HomePageSection from 'components/homepage-section';
 import Footer from 'components/layout/footer';
+
 
 export const metadata = {
   description:
@@ -10,12 +11,17 @@ export const metadata = {
   }
 };
 
-export default function HomePage() {
+
+export default async function HomePage() {
   return (
     <>
-      <ThreeItemGrid />
-      <Carousel />
+      <div
+        className="hero-banner bg-banner-responsive h-[100px] sm:h-[224px] md:h-[148px] lg:h-[224px] xl:h-[224px] "
+       
+      ></div>
+      <HomePageSection/>
       <Footer />
     </>
   );
 }
+

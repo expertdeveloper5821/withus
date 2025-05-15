@@ -48,6 +48,7 @@ export type Image = {
 };
 
 export type Menu = {
+  [x: string]: any;
   title: string;
   path: string;
 };
@@ -78,6 +79,12 @@ export type ProductOption = {
   name: string;
   values: string[];
 };
+export type ProductImage = {
+  url: string;
+  altText?: string | null;
+  width?: number;
+  height?: number;
+};
 
 export type ProductVariant = {
   id: string;
@@ -86,8 +93,10 @@ export type ProductVariant = {
   selectedOptions: {
     name: string;
     value: string;
+
   }[];
   price: Money;
+  image?: ProductImage | null;
 };
 
 export type SEO = {

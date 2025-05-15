@@ -26,6 +26,98 @@ export const TAGS = {
   cart: 'cart'
 };
 
+
+export const products = [
+  {
+    id: 1,
+    title: 'Dual Cameras E99 Pro Drone',
+    price: 31.23,
+    originalPrice: 140.81,
+    image: '/drone-placeholder.jpg',
+    tag: "Mother's Day",
+    rating: 4.8,
+    reviews: 235,
+    category: 'Drones & Flying Toys'
+  },
+  {
+    id: 2,
+    title: "Stylish Quartz Men's Watch",
+    price: 16.41,
+    originalPrice: 54.59,
+    image: '/watch-placeholder.jpg',
+    rating: 4.9,
+    reviews: 260,
+    category: "Men's Watches"
+  },
+  {
+    id: 3,
+    title: 'Seven-piece Capybara Pencil Case',
+    price: 5.87,
+    originalPrice: 19.99,
+    image: '/pencilcase-placeholder.jpg',
+    tag: "Mother's Day",
+    rating: 4.9,
+    reviews: 141,
+    category: 'Storage & Organization'
+  },
+  {
+    id: 4,
+    title: 'Android 13 Smartphone',
+    price: 115.23,
+    originalPrice: 191.89,
+    image: '/phone-placeholder.jpg',
+    tag: "Mother's Day",
+    badge: "Local",
+    rating: 0,
+    reviews: 0,
+    category: 'Smartphones'
+  }
+];
+
+
+export const reviews = [
+  {
+    id: 1,
+    user: "alexd",
+    date: "Apr 10, 2023",
+    rating: 5,
+    comment: "The material is great. If you’re planning to order, consider going a size up.",
+    // avatar: "/images/avatar1.png"
+  },
+  {
+    id: 2,
+    user: "jaredt",
+    date: "Mar 26, 2023",
+    rating: 5,
+    comment: "Fits perfectly and super soft. Highly recommend!",
+   
+  },
+  {
+    id: 3,
+    user: "natalie",
+    date: "Feb 15, 2023",
+    rating: 4,
+    comment: "Color is nice, but slightly tighter than expected. Still comfy.",
+   
+  },
+  {
+    id: 4,
+    user: "mikep",
+    date: "Jan 30, 2023",
+    rating: 5,
+    comment: "Love this shirt! Fabric feels premium and delivery was fast.",
+  
+  },
+  {
+    id: 5,
+    user: "lisaw",
+    date: "Jan 10, 2023",
+    rating: 4,
+    comment: "Good quality overall. Fit is true to size for me.",
+    
+  }
+];
+
 export const HIDDEN_PRODUCT_TAG = 'nextjs-frontend-hidden';
 export const DEFAULT_OPTION = 'Default Title';
 export const SHOPIFY_GRAPHQL_API_ENDPOINT = '/api/2023-01/graphql.json';

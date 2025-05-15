@@ -3,7 +3,7 @@ import { getCollectionProducts } from 'lib/shopify';
 import type { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 
-function ThreeItemGridItem({
+export default function ThreeItemGridItem({
   item,
   size,
   priority
