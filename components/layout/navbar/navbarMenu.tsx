@@ -4,10 +4,10 @@ import { allIconList } from 'config/security-config';
 import { Menu } from 'lib/shopify/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-export default function NavbarMenu({ menu }: { menu: Menu[] }) {
-  return (
+export default function NavbarMenu({ menu }: { menu: Menu[] }) {  return (
     <ul className="hidden gap-4 text-sm md:flex md:items-center text-black">
       {menu.map((item: Menu) => (
         <DropdownMenuItem key={item.title} item={item} />
@@ -19,18 +19,32 @@ export default function NavbarMenu({ menu }: { menu: Menu[] }) {
 function DropdownMenuItem({ item }: { item: Menu }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const pathname = usePathname() || '';
+  const currentLang = pathname.split('/')[1] || 'en';
+  
+  // Helper function to ensure paths have the correct language prefix
+  const getLocalizedPath = (path: string) => {
+    if (path === '#' || path === '/') return path;
+    
+    // If path already starts with a language code, replace it
+    if (/^\/[a-z]{2}\//.test(path)) {
+      return path.replace(/^\/[a-z]{2}\//, `/${currentLang}/`);
+    }
+    
+    // Otherwise, add the language prefix if not already present
+    return path.startsWith('/') ? `/${currentLang}${path}` : `/${currentLang}/${path}`;
+  };
   
   const hasChildren = item.children && item.children.length > 0;
   
   const activeChild = item.children?.find((child: { title: string | null; }) => child.title === activeCategory);
   
   return (
-    <li className="relative">      <div 
+    <li className="relative">      
+    <div 
         className="flex items-center cursor-pointer text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
         onMouseEnter={() => hasChildren && setIsOpen(true)}
-      >
-              
-              {item.path === '#' ? (
+      >              {item.path === '#' ? (
                 <span
                   className="flex items-center text-black opacity-70"
                   style={{
@@ -46,7 +60,7 @@ function DropdownMenuItem({ item }: { item: Menu }) {
                 </span>
               ) : (
                 <Link
-                  href={item.path}
+                  href={getLocalizedPath(item.path)}
                   prefetch={true}
                   className="flex items-center text-black"
                   style={{
@@ -101,8 +115,7 @@ function DropdownMenuItem({ item }: { item: Menu }) {
                         isActive ? 'bg-gray-50' : ''
                       }`}
                       onMouseEnter={() => setActiveCategory(child.title)}
-                    >
-                      <Link href={child.path} prefetch={true} className="block text-sm">
+                    >                      <Link href={getLocalizedPath(child.path)} prefetch={true} className="block text-sm">
                         {child.title} 
                       </Link>
                       
@@ -131,10 +144,9 @@ function DropdownMenuItem({ item }: { item: Menu }) {
             {activeChild && activeChild.children && activeChild.children.length > 0 && (
               <div className="flex-1 p-6 bg-white text-black">
                 <div className="grid grid-cols-5 gap-6">
-                  {activeChild.children.map((subItem: Menu) => (
-                    <Link 
+                  {activeChild.children.map((subItem: Menu) => (                    <Link 
                       key={subItem.title}
-                      href={subItem.path} 
+                      href={getLocalizedPath(subItem.path)} 
                       prefetch={true}
                       className="flex flex-col items-center text-center group"
                     >

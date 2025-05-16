@@ -80,6 +80,7 @@
 import { allIconList } from 'config/security-config';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import StarRating from './StarRating';
 
@@ -97,6 +98,13 @@ interface Product {
 }
 
 export default function ProductGrid({ products, gridClassName = "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3", }: { products: Product[] | any ,  gridClassName?: string }) {
+  const pathname = usePathname() || '';
+  const currentLang = pathname.split('/')[1] || 'en';
+  
+  // Helper function to create language-aware product links
+  const getLocalizedProductLink = (handle: string) => {
+    return `/${currentLang}/product/${handle}`;
+  };
   const [visibleProductsCount, setVisibleProductsCount] = useState(24); 
 
   const handleViewMore = () => {
@@ -108,8 +116,7 @@ export default function ProductGrid({ products, gridClassName = "grid grid-cols-
       <div className={gridClassName}>
         {products.slice(0, visibleProductsCount).map((product: any) => (
           <div key={product.id} className="">
-            <div className="relative">
-              <Link href={`/product/${product.handle}`} prefetch={true}>
+            <div className="relative">              <Link href={getLocalizedProductLink(product.handle)} prefetch={true}>
                 <img
                   src={product.image}
                   alt={product.title}

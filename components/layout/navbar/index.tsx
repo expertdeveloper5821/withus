@@ -6,14 +6,15 @@ import { getMenu } from 'lib/shopify';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import LanguageSwitcherWrapper from './language';
 import MobileMenu from './mobile-menu';
 import NavbarMenu from './navbarMenu';
 import Search, { SearchSkeleton } from './search';
 
 const { SITE_NAME } = process.env;
 
-export async function Navbar() {
-  const menu = await getMenu('main-menu-header');
+export async function Navbar({lan}: { lan: string }) {
+  const menu = await getMenu('main-menu-header', lan);
   
   // Apply menu mappings from config file
   const updatedMenu = menu.map(item => {
@@ -24,15 +25,17 @@ export async function Navbar() {
     return item;
   });
 
+
+
   const cleanedMenu = updatedMenu.map(item => ({
     ...item,
-    path: item.path.replace(/^pages\//, '/'),
+    path: item.path.replace(/^hi\/pages\//, '/').replace(/^pages\//, '/'), 
     children: item?.children?.map((child: any) => ({
       ...child,
-      path: child.path.replace(/^pages\//, '/'),
+      path: child.path.replace(/^hi\/pages\//, '/').replace(/^pages\//, '/'), 
       children: child?.children?.map((subChild: any) => ({
         ...subChild,
-        path: subChild.path.replace(/^pages\//, '/')
+        path: subChild.path.replace(/^hi\/pages\//, '/').replace(/^pages\//, '/') 
       }))
     }))
   }));
@@ -99,6 +102,7 @@ export async function Navbar() {
    
         <div className="flex justify-end space-x-4">
           <CartModal />
+          <LanguageSwitcherWrapper />
         </div>
       </div>
     </nav>

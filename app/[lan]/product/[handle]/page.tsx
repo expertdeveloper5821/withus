@@ -22,6 +22,7 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const params = await props.params;
   const product = await getProduct(params.handle);
+  const { SITE_NAME } = process.env;
 
   if (!product) return notFound();
 
@@ -53,10 +54,11 @@ export async function generateMetadata(props: {
       : null
   };
 }
-export default async function ProductPage(props: { params: Promise<{ handle: string }> }) {
+
+export default async function ProductPage(props: { params: Promise<{ handle: string,lan: string }> }) {
   const params = await props.params;
-  const product = await getProduct(params.handle);
-  console.log('product', product);
+  const product = await getProduct(params.handle, params.lan);
+  console.log('product', params);
   if (!product) return notFound();
 
   const productJsonLd = {
@@ -152,14 +154,15 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
         <p className='text-[22px] font-bold text-black mb-4'>Explore your interests</p>
           <ProductGrid products={formattedProducts} />
         </div>
+        <RelatedProducts id={product.id} lan={params.lan} />
       </div>
       <Footer />
     </ProductProvider>
   );
 }
 
-async function RelatedProducts({ id }: { id: string }) {
-  const relatedProducts = await getProductRecommendations(id);
+async function RelatedProducts({ id, lan }: { id: string, lan: string }) {
+  const relatedProducts = await getProductRecommendations(id, lan);
 
   if (!relatedProducts.length) return null;
 

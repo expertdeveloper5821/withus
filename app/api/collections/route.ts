@@ -1,9 +1,12 @@
 import { getCollections } from 'lib/shopify';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
-  try {
-    const collections = await getCollections();
+export async function GET(request: NextRequest) {
+  try {    const { searchParams } = new URL(request.url);
+    const lan = searchParams.get('language') || 'en';
+    
+    // Pass the language parameter to getCollections
+    const collections = await getCollections(lan);
     return NextResponse.json(collections);
   } catch (error) {
     console.error('Error in collections API route:', error);

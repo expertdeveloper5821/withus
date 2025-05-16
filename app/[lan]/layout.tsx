@@ -3,11 +3,12 @@ import { Navbar } from 'components/layout/navbar';
 import TopBanner from 'components/layout/top-banner';
 import { WelcomeToast } from 'components/welcome-toast';
 import { GeistSans } from 'geist/font/sans';
+import { dir } from 'i18next';
 import { getCart } from 'lib/shopify';
 import { baseUrl } from 'lib/utils';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
-import './globals.css';
+import '../globals.css';
 
 const { SITE_NAME } = process.env;
 
@@ -23,27 +24,43 @@ export const metadata = {
   }
 };
 
+export async function generateStaticParams() {
+    return [
+      { lan: 'en' },
+      { lan: 'ru' },
+      { lan: 'uz' },
+      { lan: 'kz' },
+    ];
+}
+
 export default async function RootLayout({
-  children
+  children,
+  params
 }: {
   children: ReactNode;
-}) {
-  // Don't await the fetch, pass the Promise to the context provider
-  const cart = getCart();
+  params: { lan: string};
 
+}) {
+  const { lan } = params;
+  
+  // Don't await the fetch, pass the Promise to the context provider
+  const cart = getCart(lan);
+  
   return (
-    <html lang="en" className={GeistSans.variable}>
+    <html lang={lan} dir={dir(lan)}  className={GeistSans.variable}>
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         <CartProvider cartPromise={cart}>
         <TopBanner />
-          <Navbar />
-          <main className='bg-white'>
-            {children}
-            <Toaster closeButton />
-            <WelcomeToast />
-          </main>
+          
+            <Navbar lan={lan} />
+            <main>
+              {children}
+              <Toaster closeButton />
+              <WelcomeToast />
+            </main>
         </CartProvider>
       </body>
     </html>
   );
 }
+

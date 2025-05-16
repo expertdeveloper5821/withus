@@ -12,6 +12,7 @@ const Label = ({
   currencyCode: string;
   position?: 'bottom' | 'center';
 }) => {
+  
   return (
     <div
       className={clsx('absolute bottom-0 left-0 flex w-full px-4 pb-4 @container/label', {

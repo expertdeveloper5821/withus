@@ -8,7 +8,8 @@ import { allIconList } from 'config/security-config';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-const HomePageSection = () => {
+const HomePageSection = ({lan}:{lan:string}) => {
+  console.log('lan', lan);
   const [productCollections, setProductCollections] = useState<any>([]);
   const [homepageItems, setHomepageItems] = useState<any>([]);
   const [collectionHandle, setCollectionHandle] = useState<any>("best-sellers");
@@ -16,11 +17,10 @@ const HomePageSection = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isGridLoading, setIsGridLoading] = useState<boolean>(false);
-
   const fetchCollectionProducts = async (handle: string) => {
     try {
       setIsGridLoading(true);
-      const response = await fetch(`/api/collections/products?collection=${handle}`);
+      const response = await fetch(`/api/collections/products?collection=${handle}&language=${lan || 'en'}`);
       if (!response.ok) throw new Error(`Failed to fetch collection: ${handle}`);
       const products = await response.json();
       setHomepageItems(products);
@@ -31,12 +31,11 @@ const HomePageSection = () => {
       setIsGridLoading(false);
     }
   };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch collections
-        const collectionsResponse = await fetch('/api/collections');
+        const collectionsResponse = await fetch(`/api/collections?language=${lan || 'en'}`);
         if (!collectionsResponse.ok) throw new Error('Failed to fetch collections');
         const collections = await collectionsResponse.json();
         setProductCollections(collections);
@@ -45,7 +44,7 @@ const HomePageSection = () => {
         await fetchCollectionProducts(collectionHandle);
 
         // Fetch kitchen products
-        const kitchenResponse = await fetch('/api/collections/products?collection=Kitchen');
+        const kitchenResponse = await fetch(`/api/collections/products?collection=Kitchen&language=${lan || 'en'}`);
         if (!kitchenResponse.ok) throw new Error('Failed to fetch kitchen products');
         const kitchenProducts = await kitchenResponse.json();
         setItems(kitchenProducts);
@@ -59,13 +58,12 @@ const HomePageSection = () => {
     };
 
     fetchData();
-  }, []);
-
+  }, [lan]);
   useEffect(() => {
     if (productCollections.length > 0) {
       fetchCollectionProducts(collectionHandle);
     }
-  }, [collectionHandle, productCollections.length]);
+  }, [collectionHandle, productCollections.length, lan]);
 
   const formattedProducts = homepageItems.map((item: any, index: number) => ({
     id: index + 1,

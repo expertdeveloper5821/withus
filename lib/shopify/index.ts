@@ -63,60 +63,62 @@ const domain = process.env.SHOPIFY_STORE_DOMAIN
   : '';
 const endpoint = `${domain}${SHOPIFY_GRAPHQL_API_ENDPOINT}`;
 const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!;
-
 type ExtractVariables<T> = T extends { variables: object }
   ? T['variables']
   : never;
 
-export async function shopifyFetch<T>({
-  headers,
-  query,
-  variables
-}: {
-  headers?: HeadersInit;
-  query: string;
-  variables?: ExtractVariables<T>;
-}): Promise<{ status: number; body: T } | never> {
-  try {
-    const result = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': key,
-        ...headers
-      },
-      body: JSON.stringify({
-        ...(query && { query }),
-        ...(variables && { variables })
-      })
-    });
+  export async function shopifyFetch<T>({
+    headers,
+    query,
+    variables,
+    lan,
+  }: {
+    headers?: HeadersInit;
+    query: string;
+    variables?: ExtractVariables<T>;
+    lan?: string;
+  }): Promise<{ status: number; body: T } | never> {
+    try {
+      const result = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': key,
+          // 'Accept-Language': lan ||'hi',
+          ...headers
+        },
+        body: JSON.stringify({
+          ...(query && { query }),
+          ...(variables && { variables })
+        })
+      });
 
-    const body = await result.json();
+      const body = await result.json();
 
-    if (body.errors) {
-      throw body.errors[0];
-    }
+      if (body.errors) {
+        throw body.errors[0];
+      }
 
-    return {
-      status: result.status,
-      body
-    };
-  } catch (e) {
-    if (isShopifyError(e)) {
+      return {
+        status: result.status,
+        body
+      };
+    } catch (e) {
+      if (isShopifyError(e)) {
+        throw {
+          cause: e.cause?.toString() || 'unknown',
+          status: e.status || 500,
+          message: e.message,
+          query
+        };
+      }
+
       throw {
-        cause: e.cause?.toString() || 'unknown',
-        status: e.status || 500,
-        message: e.message,
+        error: e,
         query
       };
     }
-
-    throw {
-      error: e,
-      query
-    };
   }
-}
 
 const removeEdgesAndNodes = <T>(array: Connection<T>): T[] => {
   return array.edges.map((edge) => edge?.node);
@@ -263,7 +265,7 @@ export async function updateCart(
   return reshapeCart(res.body.data.cartLinesUpdate.cart);
 }
 
-export async function getCart(): Promise<Cart | undefined> {
+export async function getCart(lan?: string): Promise<Cart | undefined> {
   const cartId = (await cookies()).get('cartId')?.value;
 
   if (!cartId) {
@@ -272,7 +274,10 @@ export async function getCart(): Promise<Cart | undefined> {
 
   const res = await shopifyFetch<ShopifyCartOperation>({
     query: getCartQuery,
-    variables: { cartId }
+    variables: { cartId },
+    headers: {
+      'Accept-Language': lan||'hi' 
+    }
   });
 
   // Old carts becomes `null` when you checkout.
@@ -303,11 +308,13 @@ export async function getCollection(
 export async function getCollectionProducts({
   collection,
   reverse,
-  sortKey
+  sortKey,
+  lan
 }: {
   collection: string;
   reverse?: boolean;
   sortKey?: string;
+  lan?: string;
 }): Promise<Product[]> {
   // 'use cache';
   // cacheTag(TAGS.collections, TAGS.products);
@@ -319,6 +326,9 @@ export async function getCollectionProducts({
       handle: collection,
       reverse,
       sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey
+    },
+    headers: {
+      'Accept-Language': lan ||'hi' 
     }
   });
 
@@ -362,7 +372,7 @@ export async function getCollectionProducts({
 
 //   return collections;
 // }
-export async function getCollections(): Promise<Collection[]> {
+export async function getCollections( lan?: string): Promise<Collection[]> {
   // 'use cache';
   // cacheTag(TAGS.collections);
   // cacheLife('days');
@@ -390,6 +400,7 @@ export async function getCollections(): Promise<Collection[]> {
       ...reshapeCollections(shopifyCollections).filter(
         (collection) => !collection.handle.startsWith('hidden')
       ),
+      
     ];
 
     return collections;
@@ -399,8 +410,7 @@ export async function getCollections(): Promise<Collection[]> {
   }
 }
 
-
-export async function getMenu(handle: string): Promise<Menu[]> {
+export async function getMenu(handle: string, lan?: string): Promise<Menu[]> {
   'use cache';
   cacheTag(TAGS.collections);
   cacheLife('days');
@@ -409,6 +419,9 @@ export async function getMenu(handle: string): Promise<Menu[]> {
     const res = await shopifyFetch<ShopifyMenuOperation>({
       query: getMenuQuery,
       variables: { handle },
+       headers: {
+      'Accept-Language': lan || 'hi' 
+    }
     });
 
     if (!res?.body?.data?.menu?.items) {
@@ -446,10 +459,13 @@ export async function getMenu(handle: string): Promise<Menu[]> {
 }
 
 
-export async function getPage(handle: string): Promise<Page> {
+export async function getPage(handle: string, lan?: string): Promise<Page> {
   const res = await shopifyFetch<ShopifyPageOperation>({
     query: getPageQuery,
-    variables: { handle }
+    variables: { handle },
+    headers: {
+      'Accept-Language': lan || 'hi' 
+    }
   });
 
   return res.body.data.pageByHandle;
@@ -463,7 +479,7 @@ export async function getPages(): Promise<Page[]> {
   return removeEdgesAndNodes(res.body.data.pages);
 }
 
-export async function getProduct(handle: string): Promise<Product | undefined> {
+export async function getProduct(handle: string, lan?: string): Promise<Product | undefined> {
   'use cache';
   cacheTag(TAGS.products);
   cacheLife('days');
@@ -472,14 +488,19 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
     query: getProductQuery,
     variables: {
       handle
+    },
+    headers: {
+      'Accept-Language': lan || 'hi' 
     }
+
   });
 
   return reshapeProduct(res.body.data.product, false);
 }
 
 export async function getProductRecommendations(
-  productId: string
+  productId: string,
+  lan?: string
 ): Promise<Product[]> {
   'use cache';
   cacheTag(TAGS.products);
@@ -489,6 +510,9 @@ export async function getProductRecommendations(
     query: getProductRecommendationsQuery,
     variables: {
       productId
+    },
+    headers: {
+      'Accept-Language': lan || 'hi' 
     }
   });
 
