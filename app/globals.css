@@ -12,7 +12,20 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
+@layer utilities {
+  .bg-banner-responsive {
+    background-image: url('/bannerimg.png');
+    background-size: cover;
+    background-position: center;
+  }
 
+  @media (max-width: 640px) {
+    .bg-banner-responsive {
+      background-image: url('/smallBanner.png');
+      height: 163px;
+    }
+  }
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

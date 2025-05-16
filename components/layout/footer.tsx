@@ -6,9 +6,9 @@ import SocialMediaIcon from './search/socialMediaIcon';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#2A2A2A] text-white pt-16 px-4 sm:px-8 md:px-12 lg:px-18">
+    <footer className="bg-[#2A2A2A] text-white pt-16 px-4 sm:px-8 md:px-12 ">
       <div className='lg:flex sm:block md:block'>
-      <div className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-1 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-4">
         
         <FooterSection
           title="Company Info"
@@ -44,7 +44,7 @@ export default function Footer() {
         />
 </div>
 
-        <div className=' sm:w-[100%] md:w-[100%] lg:w-[50%] px-6'>
+        <div className=' sm:w-[100%] md:w-[100%] lg:w-[50%] '>
           <h3 className="font-bold mb-8 text-[20px] font-medium leading-[100%]">Company Info</h3>
           <div className="grid grid-cols-1  md:grid-cols-2 gap-6 text-sm">
             <InfoItem icon={allIconList.exclusiveIcon} text="Exclusive offers" />
@@ -57,7 +57,7 @@ export default function Footer() {
   {/* Apple Store Button */}
   <a
     href="#"
-   className="flex items-center space-x-3 bg-black text-white px-[8px] md:px-[30px] py-[8px] md:py-[12px] rounded-[40px] border border-[0.5px] border-white shadow-lg hover:bg-gray-800"
+   className="flex items-center space-x-3 bg-black text-white px-[8px] md:px-[23px] py-[8px] md:py-[12px] rounded-[40px] border border-[0.5px] border-white shadow-lg hover:bg-gray-800"
   >
     <Image
       src={allIconList.apple}  

@@ -45,14 +45,14 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
         alt="Model"
         width={60}
         height={60}
-        className="rounded-full object-cover"
+        className="w-12 h-12 md:w-18 md:h-18 rounded-full object-cover"
       />
       <div className="text-sm text-gray-700 space-y-1">
-        <p>
-          <span className="font-medium">Model is wearing:</span> UZ L &nbsp;|&nbsp;
-          <span className="font-medium">Model is wearing:</span> UZ L
+        <p className="text-[12px] md:text-[20px] ">
+          <span className="font-medium ">Model is wearing:</span> UZ L &nbsp;|&nbsp;
+          <span className="font-medium ">Model is wearing:</span> UZ L
         </p>
-        <p className="text-gray-500">
+        <p className="text-gray-500  mt-2 text-[10px] md:text-[20px]">
           Height: 178 cm &nbsp; Bust: 96 cm &nbsp; Waist: 80 cm &nbsp; Hips: 101 cm
         </p>
       </div>
@@ -60,8 +60,9 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
 
     {/* Rating & Reviews */}
     <div>
-      <div className="flex items-center space-x-2 p-4">
+      <div className="flex items-center space-x-2 md:space-x-4  gap-16 py-4  md:px-4">
         <p className="font-semibold text-lg">3,346 reviews</p>
+        <div className="flex">
         <div className="flex items-center text-yellow-500">
           {[...Array(5)].map((_, i) => (
              <StarIcon key={i} className="w-4 h-4" />
@@ -69,7 +70,8 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
         </div>
         <span className="text-sm text-gray-600">4.5/5</span>
       </div>
-      <p className="mt-2 text-sm bg-[#09800D4D] text-black px-6 py-2 rounded-full inline-block mb-4">
+      </div>
+      <p className="mt-2 text-[18px] md:text-[20px] bg-[#09800D4D] text-black px-6 py-2 rounded-[10px]  inline-block mb-4">
         All reviews are from verified purchases
       </p>
     </div>
@@ -146,16 +148,16 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
     </div> */}
     <div className="space-y-6 mt-6 p-4">
   {visibleReviews.map((review) => (
-    <div key={review.id} className="flex items-start space-x-4 border-b pb-4">
+    <div key={review.id} className="block md:flex items-start space-x-4 border-b pb-4">
       <Image
         src={allIconList.ProfileIcon}
         alt={review.user}
-        width={40}
-        height={40}
+        width={50}
+        height={50}
         className="rounded-full"
       />
       <div className="flex-1">
-        <p className="font-medium text-sm text-black">
+        <p className="font-medium text-[20px] text-black">
           {review.user} <span className="text-gray-500">on {review.date}</span>
         </p>
         <div className="flex items-center mt-1 text-yellow-500">
@@ -172,7 +174,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
             );
           })}
         </div>
-        <p className="text-sm text-gray-700 mt-2">{review.comment}</p>
+        <p className="text-[16px] md:text-[20px] text-gray-700 mt-2">{review.comment}</p>
       </div>
     </div>
   ))}
@@ -181,7 +183,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
     <div className="pt-4 text-center">
       <button
         onClick={toggleShow}
-        className="px-4 py-2 text-[20px] font-normal border border-black rounded-full hover:bg-gray-100 transition text-black"
+        className="px-4 py-2 text-[14px] md:text-[20px] font-normal border border-black rounded-full hover:bg-gray-100 transition text-black"
       >
         {showAll ? "Show less" : "See all reviews"}
       </button>

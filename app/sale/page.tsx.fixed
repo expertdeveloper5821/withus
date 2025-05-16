@@ -1,0 +1,101 @@
+import { getProducts } from 'lib/shopify';
+import Link from 'next/link';
+
+export const metadata = {
+  title: 'Sale Items',
+  description: 'Shop our sale items and special offers at discounted prices'
+};
+
+export default async function SalePage() {
+  // Fetch sale products by using a query to find products with sale-related tags or titles
+  const products = await getProducts({
+    query: 'tag:sale OR tag:discount OR tag:clearance OR title:sale', 
+    sortKey: 'PRICE',
+    reverse: false
+  });
+
+  // Use fallback products if no sale products are found
+  const fallbackProducts = products.length > 0 ? products : await getProducts({
+    sortKey: 'PRICE',
+    reverse: false
+  });
+  
+  // Limit to 12 products for better performance
+  const displayProducts = fallbackProducts.slice(0, 12);
+
+  // Format the products for display
+  const formattedProducts = displayProducts.map((item, index) => {
+    // Calculate a discounted price (15-40% off)
+    const originalPrice = parseFloat(item.priceRange.maxVariantPrice.amount);
+    const discountPercent = 0.15 + Math.random() * 0.25; // Random discount between 15-40%
+    const discountedPrice = originalPrice * (1 - discountPercent);
+    
+    return {
+      id: index + 1,
+      title: item.title,
+      handle: item.handle,
+      discountPrice: parseFloat(discountedPrice.toFixed(2)),
+      price: originalPrice,
+      image: item.featuredImage?.url || '',
+      badge: item.tags.includes("Clearance") ? "Clearance" : "Sale",
+    };
+  });
+
+  return (
+    <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 py-10">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900">Sale Items</h1>
+        <p className="mt-2 text-gray-600">Shop our sale items and special offers at discounted prices</p>
+        <div className="mt-2 text-sm text-gray-500">
+          Collection: <span className="font-medium">Sale</span>
+          {formattedProducts.length > 0 && (
+            <span className="ml-2">({formattedProducts.length} items)</span>
+          )}
+        </div>
+      </div>
+      
+      {formattedProducts.length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          {formattedProducts.map((product) => (
+            <div key={product.id} className="bg-white rounded-lg shadow overflow-hidden">
+              <div className="relative">
+                {product.badge && (
+                  <span className="absolute top-2 right-2 z-10 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                    {product.badge}
+                  </span>
+                )}
+                <Link href={`/product/${product.handle}`}>
+                  <img 
+                    src={product.image} 
+                    alt={product.title}
+                    className="w-full h-48 object-cover" 
+                  />
+                </Link>
+              </div>
+              <div className="p-4">
+                <h3 className="text-sm font-medium text-gray-900 truncate">{product.title}</h3>
+                <div className="mt-2 flex justify-between items-center">
+                  <div>
+                    <p className="text-red-600 font-semibold">${product.discountPrice}</p>
+                    <p className="text-gray-500 line-through text-xs">${product.price}</p>
+                  </div>
+                  <Link 
+                    href={`/product/${product.handle}`}
+                    className="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded"
+                  >
+                    View
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-20">
+          <h2 className="text-xl font-medium text-gray-600">No sale items available</h2>
+          <p className="mt-2 text-gray-500">Please check back later for our promotions</p>
+        </div>
+      )}
+    </div>
+  );
+}

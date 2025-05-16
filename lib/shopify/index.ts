@@ -6,9 +6,9 @@ import {
 import { isShopifyError } from 'lib/type-guards';
 import { ensureStartsWith } from 'lib/utils';
 import {
-  revalidateTag,
+  unstable_cacheLife as cacheLife,
   unstable_cacheTag as cacheTag,
-  unstable_cacheLife as cacheLife
+  revalidateTag
 } from 'next/cache';
 import { cookies, headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
@@ -286,9 +286,9 @@ export async function getCart(): Promise<Cart | undefined> {
 export async function getCollection(
   handle: string
 ): Promise<Collection | undefined> {
-  'use cache';
-  cacheTag(TAGS.collections);
-  cacheLife('days');
+  // 'use cache';
+  // cacheTag(TAGS.collections);
+  // cacheLife('days');
 
   const res = await shopifyFetch<ShopifyCollectionOperation>({
     query: getCollectionQuery,
@@ -309,9 +309,9 @@ export async function getCollectionProducts({
   reverse?: boolean;
   sortKey?: string;
 }): Promise<Product[]> {
-  'use cache';
-  cacheTag(TAGS.collections, TAGS.products);
-  cacheLife('days');
+  // 'use cache';
+  // cacheTag(TAGS.collections, TAGS.products);
+  // cacheLife('days');
 
   const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
     query: getCollectionProductsQuery,
@@ -332,63 +332,117 @@ export async function getCollectionProducts({
   );
 }
 
+// export async function getCollections(): Promise<Collection[]> {
+//   'use cache';
+//   cacheTag(TAGS.collections);
+//   cacheLife('days');
+
+//   const res = await shopifyFetch<ShopifyCollectionsOperation>({
+//     query: getCollectionsQuery
+//   });
+//   const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
+//   const collections = [
+//     {
+//       handle: '',
+//       title: 'All',
+//       description: 'All products',
+//       seo: {
+//         title: 'All',
+//         description: 'All products'
+//       },
+//       path: '/search',
+//       updatedAt: new Date().toISOString()
+//     },
+//     // Filter out the `hidden` collections.
+//     // Collections that start with `hidden-*` need to be hidden on the search page.
+//     ...reshapeCollections(shopifyCollections).filter(
+//       (collection) => !collection.handle.startsWith('hidden')
+//     )
+//   ];
+
+//   return collections;
+// }
 export async function getCollections(): Promise<Collection[]> {
-  'use cache';
-  cacheTag(TAGS.collections);
-  cacheLife('days');
+  // 'use cache';
+  // cacheTag(TAGS.collections);
+  // cacheLife('days');
 
-  const res = await shopifyFetch<ShopifyCollectionsOperation>({
-    query: getCollectionsQuery
-  });
-  const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
-  const collections = [
-    {
-      handle: '',
-      title: 'All',
-      description: 'All products',
-      seo: {
+  try {
+    const res = await shopifyFetch<ShopifyCollectionsOperation>({
+      query: getCollectionsQuery,
+    });
+
+    const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
+
+    const collections = [
+      {
+        handle: '',
         title: 'All',
-        description: 'All products'
+        description: 'All products',
+        seo: {
+          title: 'All',
+          description: 'All products',
+        },
+        path: '/search',
+        updatedAt: new Date().toISOString(),
       },
-      path: '/search',
-      updatedAt: new Date().toISOString()
-    },
-    // Filter out the `hidden` collections.
-    // Collections that start with `hidden-*` need to be hidden on the search page.
-    ...reshapeCollections(shopifyCollections).filter(
-      (collection) => !collection.handle.startsWith('hidden')
-    )
-  ];
+      // Filter out the `hidden` collections.
+      ...reshapeCollections(shopifyCollections).filter(
+        (collection) => !collection.handle.startsWith('hidden')
+      ),
+    ];
 
-  return collections;
+    return collections;
+  } catch (error) {
+    console.error('Error fetching collections:', error);
+    return []; // Return an empty array as fallback
+  }
 }
+
 
 export async function getMenu(handle: string): Promise<Menu[]> {
   'use cache';
   cacheTag(TAGS.collections);
   cacheLife('days');
 
-  const res = await shopifyFetch<ShopifyMenuOperation>({
-    query: getMenuQuery,
-    variables: { handle }
-  });
+  try {
+    const res = await shopifyFetch<ShopifyMenuOperation>({
+      query: getMenuQuery,
+      variables: { handle },
+    });
 
-  function transformMenuItems(
-    items: { title: string; url: string; items?: any[] }[]
-  ): Menu[] {
-    return items.map((item) => ({
-      title: item.title,
-      path: item.url
-        .replace(domain, '')            // remove domain
-        .replace(/^\/collections/, '/search') // convert collections to /search
-        .replace(/^\/pages/, ''),       // remove /pages
-      children: item.items ? transformMenuItems(item.items) : []
-    }));
+    if (!res?.body?.data?.menu?.items) {
+      console.error(`No menu data found for handle "${handle}".`, res?.body);
+      return [];
+    }    function transformMenuItems(
+      items: { title: string; url: string; items?: any[] }[]
+    ): Menu[] {
+      return items.map((item) => {
+        // Check if this is a data-sale-opt-out item
+        const isOptOutItem = item.url.includes('data-sale-opt-out') || 
+                             item.title === 'data-sale-opt-out' ||
+                             item.title.includes('data-sale-opt-out');
+        
+        return {
+          title: item.title,
+          // If it's a data-sale-opt-out item, set path to "#" to make it non-clickable
+          path: isOptOutItem 
+            ? '#'
+            : item.url
+                .replace(domain, '') // remove domain
+                .replace(/^\/collections/, '/search') // convert /collections to /search
+                .replace(/^\/pages/, ''), // remove /pages
+          children: item.items ? transformMenuItems(item.items) : [],
+        };
+      });
+    }
+
+    return transformMenuItems(res.body.data.menu.items);
+
+  } catch (error) {
+    console.error(`Error fetching menu with handle "${handle}":`, error);
+    return [];
   }
-
-  return res.body?.data?.menu?.items
-    ? transformMenuItems(res.body.data.menu.items)
-    : [];
 }
 
 
@@ -450,9 +504,9 @@ export async function getProducts({
   reverse?: boolean;
   sortKey?: string;
 }): Promise<Product[]> {
-  'use cache';
-  cacheTag(TAGS.products);
-  cacheLife('days');
+  // 'use cache';
+  // cacheTag(TAGS.products);
+  // cacheLife('days');
 
   const res = await shopifyFetch<ShopifyProductsOperation>({
     query: getProductsQuery,
@@ -505,5 +559,6 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
 
   return NextResponse.json({ status: 200, revalidated: true, now: Date.now() });
 }
+
 
 

@@ -53,6 +53,8 @@ import whiteArrowIcon from '../assets/images/whiteArrowIcon.svg';
 import youtube from '../assets/images/youtube.svg';
 import cartGreenIcon from '../assets/images/cartGreenIcon.svg';
 import creditIcon from '../assets/images/creditIcon.svg';
+import shareIcon from '../assets/images/shareIcon.svg';
+import leftArrowIcon from '../assets/images/leftArrowIcon.svg';
 
 
 
@@ -114,5 +116,6 @@ export const allIconList = {
   DeleteIcon:deleteIcon,
   CartGreenIcon:cartGreenIcon,
   CreditIcon:creditIcon,
-
+  ShareIcon:shareIcon,
+  LeftArrowIcon:leftArrowIcon
 };

@@ -1,6 +1,7 @@
 import CartModal from 'components/cart/modal';
 import LogoSquare from 'components/logo-square';
 import { allIconList } from 'config/security-config';
+import { menuMappings, getMappedPathForMenuTitle } from 'config/menu-mappings';
 import { getMenu } from 'lib/shopify';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,8 +14,17 @@ const { SITE_NAME } = process.env;
 
 export async function Navbar() {
   const menu = await getMenu('main-menu-header');
+  
+  // Apply menu mappings from config file
+  const updatedMenu = menu.map(item => {
+    const mappedPath = getMappedPathForMenuTitle(item.title);
+    if (mappedPath) {
+      return { ...item, path: mappedPath };
+    }
+    return item;
+  });
 
-  const cleanedMenu = menu.map(item => ({
+  const cleanedMenu = updatedMenu.map(item => ({
     ...item,
     path: item.path.replace(/^pages\//, '/'),
     children: item?.children?.map((child: any) => ({

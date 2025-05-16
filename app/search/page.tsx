@@ -17,7 +17,6 @@ export default async function SearchPage(props: {
 
   const products = await getProducts({ sortKey, reverse, query: searchValue });
   const resultsText = products.length > 1 ? 'results' : 'result';
-  console.log(' products', products);
    
   const formattedProducts = products.map((item: any, index: number) => ({
     id: index + 1,
@@ -31,8 +30,7 @@ export default async function SearchPage(props: {
     ratings: 5,
     reviews: Math.floor(Math.random() * 200),
   }))
-  console.log('formattedProducts', formattedProducts);
-
+ 
   return (
     <>
       {searchValue ? (

@@ -22,9 +22,11 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
 
   const getInitialState = () => {
     const params: ProductState = {};
+    if (searchParams) {
     for (const [key, value] of searchParams.entries()) {
       params[key] = value;
     }
+  }
     return params;
   };
 

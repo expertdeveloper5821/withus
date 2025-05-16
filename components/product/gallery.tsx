@@ -1,8 +1,9 @@
 'use client';
 
-import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import CheckIcon from '@heroicons/react/20/solid/CheckIcon';
 import { GridTileImage } from 'components/grid/tile';
 import { useProduct, useUpdateURL } from 'components/product/product-context';
+import { allIconList } from 'config/security-config';
 import Image from 'next/image';
 
 export function Gallery({ images }: { images: { src: string; altText: string }[] }) {
@@ -20,7 +21,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
   return (
     <form>
   
-      <div className="flex w-full items-center justify-center gap-8 overflow-auto py-1 lg:mb-0">
+      <div className="flex w-full items-center justify-center gap-8 overflow-auto py-0 lg:mb-0">
       {images.length > 1 ? (
         <ul className="hidden lg:block items-center  py-1 lg:mb-0">
           {images.map((image, index) => {
@@ -60,6 +61,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
             priority={true}
           />
         )}
+        
 {images.length > 1 && (
   <>
     <div className="absolute top-4 left-4 z-10 block md:hidden lg:hidden">
@@ -69,14 +71,24 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
           updateURL(newState);
         }}
         aria-label="Previous product image"
-        className="rounded-full p-2 bg-white/80 dark:bg-black/60 border border-gray-300 dark:border-gray-700 backdrop-blur-md"
+        className=""
       >
-        <ArrowLeftIcon className="h-5 w-5 text-black dark:text-white" />
+      
+        <Image
+          src={allIconList.LeftArrowIcon}
+          alt="Previous"
+          width={12}
+          height={12} />
       </button>
     </div>
 
 
     <div className="absolute top-4 right-4 z-10 block md:hidden lg:hidden">
+      <Image
+        src={allIconList.ShareIcon}
+        alt="Next"
+        width={20}
+        height={20}/>
       {/* <button
         formAction={() => {
           const newState = updateImage(nextImageIndex.toString());
@@ -133,6 +145,17 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
 
 
       </div>
+      <div className="flex md:hidden items-center justify-evenly bg-[#FCDEDB] py-3 px-4 text-[12px] text-black font-medium gap-2">
+      <div className="flex items-center gap-2">
+        <CheckIcon className="h-4 w-4 text-[#0A8800]" />
+        <span>Free shipping on all orders</span>
+      </div>
+      <div className="h-4 border-l border-gray-300" />
+      <div className="flex items-center gap-2">
+      <CheckIcon className="h-4 w-4 text-[#0A8800]" />
+        <span>12 000 UZS Credit for delay</span>
+      </div>
+    </div>
     </form>
   );
 }

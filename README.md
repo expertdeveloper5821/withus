@@ -73,3 +73,37 @@ Your app should now be running on [localhost:3000](http://localhost:3000/).
 ## Vercel, Next.js Commerce, and Shopify Integration Guide
 
 You can use this comprehensive [integration guide](https://vercel.com/docs/integrations/ecommerce/shopify) with step-by-step instructions on how to configure Shopify as a headless CMS using Next.js Commerce as your headless Shopify storefront on Vercel.
+
+## Menu Mapping System
+
+This application includes a dynamic menu mapping system that connects Shopify menu items to static pages in the Next.js application. This feature allows you to:
+
+1. Create dedicated static pages for special collections (Best Sellers, New Arrivals, etc.)
+2. Automatically link your Shopify menu items to these static pages
+3. Maintain a clean, organized navigation structure
+
+### Included Static Pages
+
+The following static pages are included out of the box:
+
+- **Best-Selling Items**: `/best-selling` - Showcases your store's best-selling products
+- **5-Star Rated Products**: `/five-star-rated` - Displays products with the highest customer ratings
+- **New Arrivals**: `/new-arrivals` - Shows the latest products added to your store
+- **Sale Items**: `/sale` - Features products currently on sale or clearance
+- **Summer Collection**: `/summer-collection` - Example seasonal collection
+
+### How to Add New Static Pages
+
+To add a new static page with a dynamic menu link:
+
+1. Create your page in the `/app` directory (e.g., `/app/your-page/page.tsx`)
+2. Add the mapping in `config/menu-mappings.ts`:
+   ```typescript
+   {
+     title: 'Exact Menu Title from Shopify',
+     path: '/your-page',
+   }
+   ```
+3. Create the corresponding menu item in your Shopify admin panel
+
+For more detailed instructions, see the [Menu Mapping Documentation](./docs/menu-mapping.md) and [Collection Pages Documentation](./docs/collection-pages.md).

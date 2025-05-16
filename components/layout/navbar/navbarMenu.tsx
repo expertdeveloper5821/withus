@@ -25,27 +25,42 @@ function DropdownMenuItem({ item }: { item: Menu }) {
   const activeChild = item.children?.find((child: { title: string | null; }) => child.title === activeCategory);
   
   return (
-    <li className="relative">
-      <div 
+    <li className="relative">      <div 
         className="flex items-center cursor-pointer text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
         onMouseEnter={() => hasChildren && setIsOpen(true)}
       >
               
-              <Link
-        href={item.path}
-        prefetch={true}
-        className="flex items-center text-black"
-        style={{
-          fontWeight: 400,
-          fontSize: '13.81px',
-          lineHeight: '1.5',
-        }}
-      >
-        {(item.title === 'Best-Selling Item' || item.title === '5-Star Rated') && (
-          <Image src={item.title === 'Best-Selling Item' ? allIconList.BestIcon : allIconList.StarIcon} alt={item.title} className="h-4 w-4 mr-2" />
-        )}
-        {item.title}
-      </Link>
+              {item.path === '#' ? (
+                <span
+                  className="flex items-center text-black opacity-70"
+                  style={{
+                    fontWeight: 400,
+                    fontSize: '13.81px',
+                    lineHeight: '1.5',
+                  }}
+                >
+                  {(item.title === 'Best-Selling Item' || item.title === '5-Star Rated') && (
+                    <Image src={item.title === 'Best-Selling Item' ? allIconList.BestIcon : allIconList.StarIcon} alt={item.title} className="h-4 w-4 mr-2" />
+                  )}
+                  {item.title}
+                </span>
+              ) : (
+                <Link
+                  href={item.path}
+                  prefetch={true}
+                  className="flex items-center text-black"
+                  style={{
+                    fontWeight: 400,
+                    fontSize: '13.81px',
+                    lineHeight: '1.5',
+                  }}
+                >
+                  {(item.title === 'Best-Selling Item' || item.title === '5-Star Rated') && (
+                    <Image src={item.title === 'Best-Selling Item' ? allIconList.BestIcon : allIconList.StarIcon} alt={item.title} className="h-4 w-4 mr-2" />
+                  )}
+                  {item.title}
+                </Link>
+              )}
         {hasChildren && (
           <svg 
             xmlns="http://www.w3.org/2000/svg" 

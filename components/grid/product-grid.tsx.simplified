@@ -1,0 +1,108 @@
+'use client';
+
+import Link from 'next/link';
+import { useState } from 'react';
+import StarRating from './StarRating';
+
+interface Product {
+  id: string | number;
+  image: string;
+  title: string;
+  discountPrice?: number;
+  price?: number | string;
+  handle: string;
+  ratings?: number;
+  reviews?: number;
+  tag?: string;
+  badge?: string;
+}
+
+export default function ProductGrid({ 
+  products, 
+  gridClassName = "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3", 
+}: { 
+  products: Product[], 
+  gridClassName?: string 
+}) {
+  const [visibleProductsCount, setVisibleProductsCount] = useState(15); 
+
+  const handleViewMore = () => {
+    setVisibleProductsCount(visibleProductsCount + 15); 
+  };
+
+  return (
+    <div>
+      <div className={gridClassName}>
+        {products.slice(0, visibleProductsCount).map((product) => (
+          <div key={product.id} className="relative overflow-hidden bg-white rounded-lg shadow-sm transition-all duration-200 hover:shadow-md">
+            <div className="relative">
+              {product.badge && (
+                <span className="absolute top-2 right-2 z-10 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                  {product.badge}
+                </span>
+              )}
+              <Link href={`/product/${product.handle}`} prefetch={true}>
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="w-full h-48 object-cover object-center"
+                />
+              </Link>
+            </div>
+            <div className="p-3">
+              <h3 className="text-sm font-medium text-gray-800 line-clamp-2 min-h-[2.5rem]">
+                {product.title}
+              </h3>
+              
+              <div className="flex justify-between items-center mt-2">
+                <div>
+                  <div className="text-red-600 font-semibold">
+                    ${product.discountPrice?.toFixed(2)}
+                  </div>
+                  {product.price && product.price !== product.discountPrice && (
+                    <div className="text-gray-400 line-through text-xs">
+                      ${typeof product.price === 'number' ? product.price.toFixed(2) : product.price}
+                    </div>
+                  )}
+                </div>
+                
+                {product.tag && (
+                  <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">
+                    {product.tag}
+                  </span>
+                )}
+              </div>
+              
+              {product.ratings && (
+                <div className="flex items-center text-gray-600 mt-2">
+                  <StarRating rating={product.ratings} />
+                  {product.reviews && (
+                    <span className="ml-2 text-xs">{product.reviews.toLocaleString()} reviews</span>
+                  )}
+                </div>
+              )}
+              
+              <Link 
+                href={`/product/${product.handle}`} 
+                className="mt-3 block w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 rounded text-sm transition-colors duration-200"
+              >
+                View Product
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {visibleProductsCount < products.length && (
+        <div className="text-center mt-6">
+          <button
+            onClick={handleViewMore}
+            className="px-6 py-2 text-gray-700 border border-gray-300 rounded hover:bg-gray-100 transition-colors duration-200"
+          >
+            View More
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}

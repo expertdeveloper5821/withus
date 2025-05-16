@@ -1,0 +1,28 @@
+import { ImageResponse } from 'next/og';
+import LogoIcon from 'components/icons/logo';
+
+export const runtime = 'edge';
+export const alt = 'Summer Collection';
+export const contentType = 'image/png';
+export const size = {
+  width: 1200,
+  height: 630
+};
+
+export default async function Image() {
+  // Use system fonts instead of trying to load custom fonts
+  return new ImageResponse(
+    (
+      <div tw="flex h-full w-full flex-col items-center justify-center bg-black">
+        <div tw="flex flex-none items-center justify-center border border-neutral-700 h-[160px] w-[160px] rounded-3xl">
+          <LogoIcon width="64" height="58" fill="white" />
+        </div>
+        <p tw="mt-12 text-6xl font-bold text-white">Summer Collection</p>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630
+    }
+  );
+}

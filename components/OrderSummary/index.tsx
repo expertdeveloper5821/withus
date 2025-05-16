@@ -14,13 +14,13 @@ import { DEFAULT_OPTION } from 'lib/constants';
 
 export default function ClientCart() {
   const { cart, updateCartItem } = useCart();
-  console.log('cart', updateCartItem, cart);
 
   useEffect(() => {
     if (!cart) {
       createCartAndSetCookie();
     }
   }, [cart]);
+
 
   if (!cart || cart.lines.length === 0) {
     return (
@@ -44,7 +44,7 @@ export default function ClientCart() {
 
   return (
   
-    <div className="bg-white p-6 rounded-xl shadow-md">
+    <div className="bg-white p-0 md:p-6 rounded-xl shadow-md">
   <div className="flex justify-between items-center border-b pb-4 mb-4">
     <div className="flex items-center gap-2">
       <input type="checkbox" className="w-5 h-5 text-red-500 accent-red-500" />
@@ -79,12 +79,13 @@ export default function ClientCart() {
       return (
         <li key={i} className="flex items-center gap-4 border border-gray-200 rounded-lg p-4">
         
-        <input
-  type="checkbox"
-  className="appearance-none w-5 h-5 rounded-full bg-white border border-red-500 checked:bg-red-600 checked:border-red-600 checked:text-white checked:content-['✓'] flex items-center justify-center text-sm text-white"
-/>
 
-         
+
+<input 
+  type="checkbox" 
+  className="w-5 h-5 "
+ 
+/>
           <div className="w-20 h-20 flex-shrink-0 rounded-md overflow-hidden border">
             <Image
               className="w-full h-full object-cover"

@@ -1,40 +1,31 @@
 
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
-import ProductGrid from 'components/card/ProductGrid';
+import { CartItem } from 'components/cart/mobile-cart';
+import ProductGrids from 'components/grid/product-grid';
 import ClientCart from 'components/OrderSummary';
 import OrderSummary from 'components/OrderSummary/OrderSummary';
+import { allIconList } from 'config/security-config';
 import { getCollectionProducts } from 'lib/shopify';
 
 
 export default async function CartPage() {
   const homepageItems = await getCollectionProducts({
-    collection: '5stars',
+    collection: 'Automobiles',
 
   });
- 
-  // const formattedProducts = homepageItems.map((item: any, index: number) => ({
-  //   id: index + 1,
-  //   title: item.title,
-  //   handle: item.handle,
-  //   discountPrice: parseFloat(item.priceRange.minVariantPrice.amount),
-  //   price: parseFloat(item.priceRange.maxVariantPrice.amount),
-  //   image: item.featuredImage?.url || '',
-  //   tag: item.tags.includes("Mother's Day") ? "Mother's Day" : undefined,
-  //   badge: item.tags.includes("Local") ? "Local" : undefined,
-  //   ratings: 5,
-  //   reviews: Math.floor(Math.random() * 200),
-  // }))
-  const formattedProducts = homepageItems.map((item: any, index: number) => ({
+   const formattedProducts = homepageItems.map((item: any, index: number) => ({
     id: index + 1,
     title: item.title,
+    handle: item.handle, // Add the required handle property
     price: parseFloat(item.priceRange.minVariantPrice.amount),
     originalPrice: parseFloat(item.priceRange.maxVariantPrice.amount),
+    discountPrice: parseFloat(item.priceRange.minVariantPrice.amount), // Add discountPrice to match the Product interface
     image: item.featuredImage?.url || '',
   
     tag: item.tags.includes("Mother's Day") ? "Mother's Day" : undefined,
     badge: item.tags.includes("Local") ? "Local" : undefined,
   
-    rating: 4.5, 
+    ratings: 4.5,  // Renamed from rating to ratings to match the interface
     reviews: Math.floor(Math.random() * 200), 
     category: item.tags[0] || 'Uncategorized'
   }))
@@ -67,9 +58,10 @@ export default async function CartPage() {
       <span className="text-green-700 text-sm">Limited-time offer</span>
     </div>
           <ClientCart/>
+          <CartItem title={'dsjgfsdhfhd'} color={'red'} size={'12'} price={0} originalPrice={0} image={allIconList.DeliveryIcon} quantity={0}/>
             <div className="p-6">
               <div className="text-lg text-black font-medium mb-2">Explore your interests</div>
-              <ProductGrid products={formattedProducts} />
+              <ProductGrids products={formattedProducts} gridClassName="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3  gap-3"/>
             </div>
           </div>
          <OrderSummary />

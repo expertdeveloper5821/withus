@@ -12,14 +12,6 @@ export const getMenuQuery = /* GraphQL */ `
             url
           }
         }
-        items {
-          title
-          url
-          items {
-            title
-            url
-          }
-        }
       }
     }
   }
