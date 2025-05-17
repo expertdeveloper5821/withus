@@ -128,12 +128,12 @@ const HomePageSection = ({lan ,  translations}:{lan:string,   translations: Reco
         <GreenBanner
           title= {translations.common.cart?.WhyBiBiShop || "Why choose BiBi Shop"}
           items={[
-            { icon: allIconList.LockIcon, text: "Secure privacy" },
-            { icon: allIconList.Safe, text: "Safe payments" },
-            { icon: allIconList.DeliveryIcon, text: "Delivery guarantee" },
+            { icon: allIconList.LockIcon, text:translations.common.security?.securePrivacy || "Secure privacy" },
+            { icon: allIconList.Safe, text: translations.common.security?.safePayments || "Safe payments" },
+            { icon: allIconList.DeliveryIcon, text:  translations.common.security?.deliveryGuarantee || "Delivery guarantee" },
           ]}
-          reminder=" Please be wary of scam messages and links. BiBi Shop won't ask for extra fees via SMS or email."
-          linkText="View All"
+          reminder={translations.common?.reminder ||" Please be wary of scam messages and links. BiBi Shop won't ask for extra fees via SMS or email."}
+          linkText={translations.common?.viewAll || "View All"}
         />
         <LightningDeals products={products} />
       </div>
@@ -147,8 +147,8 @@ const HomePageSection = ({lan ,  translations}:{lan:string,   translations: Reco
               width={26}
               height={26}
               className="h-12 mr-2"
-            />
-            MEGA HOLIDAY SALE
+            />{translations.common?.holidaySale || 'MEGA HOLIDAY SALE'}
+            
             <Image
               src={allIconList.Star}
               alt="Lightning Icon"
@@ -160,7 +160,7 @@ const HomePageSection = ({lan ,  translations}:{lan:string,   translations: Reco
         </h1>
 
         <h2 className=" text-black text-[18px] md:text-[28px] mt-[-10px] md:mt-[0px] font-extrabold ">
-          EXPLORE YOUR INTERESTS
+         {translations.common?.exploreInterests || `EXPLORE YOUR INTERESTS`}
         </h2>
       </header>
       <div className="pl-4 md:pl-[20px] lg:pl-[69px] ">
