@@ -1,6 +1,7 @@
-const { i18n } = require('./next-i18next.config');
+// Next.js configuration for multi-language support
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   experimental: {
     ppr: true,
     inlineCss: true,
@@ -20,5 +21,8 @@ module.exports = {
   
   unstable_runtimeJS: false,
   
-  i18n
+  // We don't use the i18n config from next-i18next.config.js in App Router
+  // The App Router handles i18n through the [lan] folder structure
 };
+
+module.exports = nextConfig;

@@ -66,7 +66,6 @@ const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!;
 type ExtractVariables<T> = T extends { variables: object }
   ? T['variables']
   : never;
-
   export async function shopifyFetch<T>({
     headers,
     query,
@@ -84,7 +83,7 @@ type ExtractVariables<T> = T extends { variables: object }
         headers: {
           'Content-Type': 'application/json',
           'X-Shopify-Storefront-Access-Token': key,
-          // 'Accept-Language': lan ||'hi',
+          'Accept-Language': lan || 'en',
           ...headers
         },
         body: JSON.stringify({
@@ -319,7 +318,6 @@ export async function getCollectionProducts({
   // 'use cache';
   // cacheTag(TAGS.collections, TAGS.products);
   // cacheLife('days');
-
   const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
     query: getCollectionProductsQuery,
     variables: {
@@ -327,9 +325,7 @@ export async function getCollectionProducts({
       reverse,
       sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey
     },
-    headers: {
-      'Accept-Language': lan ||'hi' 
-    }
+    lan
   });
 
   if (!res.body.data.collection) {
@@ -377,9 +373,9 @@ export async function getCollections( lan?: string): Promise<Collection[]> {
   // cacheTag(TAGS.collections);
   // cacheLife('days');
 
-  try {
-    const res = await shopifyFetch<ShopifyCollectionsOperation>({
+  try {    const res = await shopifyFetch<ShopifyCollectionsOperation>({
       query: getCollectionsQuery,
+      lan
     });
 
     const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);

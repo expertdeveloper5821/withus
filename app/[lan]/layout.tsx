@@ -1,9 +1,11 @@
 import { CartProvider } from 'components/cart/cart-context';
+import LanguageSwitcher from 'components/LanguageSwitcher';
 import { Navbar } from 'components/layout/navbar';
 import TopBanner from 'components/layout/top-banner';
 import { WelcomeToast } from 'components/welcome-toast';
 import { GeistSans } from 'geist/font/sans';
 import { dir } from 'i18next';
+import { getTranslations } from 'lib/i18n';
 import { getCart } from 'lib/shopify';
 import { baseUrl } from 'lib/utils';
 import { ReactNode } from 'react';
@@ -35,16 +37,17 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({
   children,
-  params
+  params: { lan }
 }: {
   children: ReactNode;
-  params: { lan: string};
+  params: { lan: string };
 
 }) {
-  const { lan } = params;
-  
-  // Don't await the fetch, pass the Promise to the context provider
+    // Don't await the fetch, pass the Promise to the context provider
   const cart = getCart(lan);
+  
+  // Load translations for server components
+  const translations = await getTranslations(lan);
   
   return (
     <html lang={lan} dir={dir(lan)}  className={GeistSans.variable}>

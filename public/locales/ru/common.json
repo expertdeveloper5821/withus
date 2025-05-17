@@ -1,0 +1,56 @@
+{
+  "navbar": {
+    "home": "Главная",
+    "products": "Товары",
+    "cart": "Корзина",
+    "search": "Поиск",
+    "account": "Аккаунт"
+  },
+  "cart": {
+    "title": "Корзина покупок",
+    "empty": "Ваша корзина пуста",
+    "checkout": "Оформить заказ",
+    "total": "Итого",
+    "subtotal": "Промежуточный итог",
+    "shipping": "Доставка",
+    "tax": "Налог",
+    "recommendedItems": "Рекомендуемые товары",
+    "freeShipping": "Бесплатная доставка для всех заказов",
+    "limitedTimeOffer": "Предложение ограничено по времени",
+     "WhyBiBiShop": "Почему BiBiShop?"
+  },
+  "product": {
+    "addToCart": "Добавить в корзину",
+    "outOfStock": "Нет в наличии",
+    "viewDetails": "Посмотреть детали",
+    "description": "Описание",
+    "reviews": "Отзывы",
+    "specifications": "Характеристики"
+  },
+  "common": {
+    "back": "Назад",
+    "next": "Далее",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "apply": "Применить",
+    "reset": "Сбросить",
+    "filter": "Фильтр",
+    "sort": "Сортировка"
+  },
+  "banners": {
+    "freeShipping": "Бесплатная доставка",
+    "limitedOffer": "Ограниченное предложение",
+    "deliveryGuarantee": "Гарантия доставки",
+    "refundPolicy": "Возврат при проблемах"
+  },
+  "security": {
+    "securePrivacy": "Конфиденциальность",
+    "safePayments": "Безопасные платежи",
+    "deliveryGuarantee": "Гарантия доставки"
+  },
+  "reminder": "Остерегайтесь мошеннических сообщений и ссылок. BiBi Shop никогда не просит доплату через SMS или email.",
+  "viewAll": "Смотреть все",
+  "holidaySale": "МЕГА РАСПРОДАЖА",
+  "exploreInterests": "ИССЛЕДУЙТЕ СВОИ ИНТЕРЕСЫ"
+}

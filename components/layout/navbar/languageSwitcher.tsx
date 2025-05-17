@@ -1,3 +1,4 @@
+'use client';
 import { languages } from 'components/i18n/settings';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';

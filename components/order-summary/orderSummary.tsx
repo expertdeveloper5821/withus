@@ -1,11 +1,12 @@
 'use client'
-import React, { Children } from 'react';
+import React from 'react';
  
 import Price from 'components/price';
-import InfoCard from 'components/infoCard';
-import { useFormStatus } from 'react-dom';
-import LoadingDots from 'components/loading-dots';
+
 import { redirectToCheckout } from 'components/cart/actions';
+import InfoCard from 'components/InfoCard';
+import LoadingDots from 'components/loading-dots';
+import { useFormStatus } from 'react-dom';
  
  
 interface Cart {

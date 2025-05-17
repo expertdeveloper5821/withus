@@ -5,11 +5,11 @@ import ProductGrid from 'components/grid/product-grid';
 import GreenBanner from 'components/layout/green-banner';
 import LightningDeals from 'components/lightning-deals';
 import { allIconList } from 'config/security-config';
+
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-const HomePageSection = ({lan}:{lan:string}) => {
-  console.log('lan', lan);
+const HomePageSection = ({lan ,  translations}:{lan:string,   translations: Record<string, any>}) => {
   const [productCollections, setProductCollections] = useState<any>([]);
   const [homepageItems, setHomepageItems] = useState<any>([]);
   const [collectionHandle, setCollectionHandle] = useState<any>("best-sellers");
@@ -17,7 +17,10 @@ const HomePageSection = ({lan}:{lan:string}) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isGridLoading, setIsGridLoading] = useState<boolean>(false);
+      
+
   const fetchCollectionProducts = async (handle: string) => {
+ 
     try {
       setIsGridLoading(true);
       const response = await fetch(`/api/collections/products?collection=${handle}&language=${lan || 'en'}`);
@@ -31,6 +34,7 @@ const HomePageSection = ({lan}:{lan:string}) => {
       setIsGridLoading(false);
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,7 +48,7 @@ const HomePageSection = ({lan}:{lan:string}) => {
         await fetchCollectionProducts(collectionHandle);
 
         // Fetch kitchen products
-        const kitchenResponse = await fetch(`/api/collections/products?collection=Kitchen&language=${lan || 'en'}`);
+        const kitchenResponse = await fetch(`/api/collections/products?collection=Kitchen`);
         if (!kitchenResponse.ok) throw new Error('Failed to fetch kitchen products');
         const kitchenProducts = await kitchenResponse.json();
         setItems(kitchenProducts);
@@ -103,8 +107,8 @@ const HomePageSection = ({lan}:{lan:string}) => {
         <div className="flex items-start space-x-2 ">
           <CheckIcon className="w-5 h-5 text-green-600 mt-1" />
           <div>
-            <div className="text-green-600 font-semibold text-[13.89px]">Free Shipping</div>
-            <div className="text-gray-500 text-[11.89px]">Limited Offer</div>
+            <div className="text-green-600 font-semibold text-[13.89px]">{translations.common.banners?.freeShipping || "Free Shipping"}</div>
+            <div className="text-gray-500 text-[11.89px]">{translations.common.banners?.limitedOffer || "Limited Offer"}</div>
           </div>
         </div>
 
@@ -115,14 +119,14 @@ const HomePageSection = ({lan}:{lan:string}) => {
         <div className="flex items-start space-x-2 ">
           <Image src={allIconList.DeliveryBlackIcon} alt={'truck'}  />
           <div>
-            <div className="text-black font-semibold text-[13.89px]">Delivery guarantee</div>
+            <div className="text-black font-semibold text-[13.89px]">{translations.common.banners?.deliveryGuarantee || "Delivery guarantee"}</div>
             <div className="text-gray-500 text-[11.89px]">Refund of any issue</div>
           </div>
         </div>
       </div>
       <div className="px-4 sm:px-6 md:px-[20px] lg:px-[69px]">
         <GreenBanner
-          title="Why choose BiBi Shop"
+          title= {translations.common.cart?.WhyBiBiShop || "Why choose BiBi Shop"}
           items={[
             { icon: allIconList.LockIcon, text: "Secure privacy" },
             { icon: allIconList.Safe, text: "Safe payments" },

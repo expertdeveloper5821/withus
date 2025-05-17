@@ -1,0 +1,56 @@
+{
+  "navbar": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "search": "Search",
+    "account": "Account"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "checkout": "Checkout",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "recommendedItems": "Recommended Items",
+    "freeShipping": "Free shipping on all orders",
+    "limitedTimeOffer": "Limited-time offer",
+    "WhyBiBiShop": "Why choose BiBi Shop?"
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "viewDetails": "View Details",
+    "description": "Description",
+    "reviews": "Reviews",
+    "specifications": "Specifications"
+  },
+  "common": {
+    "back": "Back",
+    "next": "Next",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "apply": "Apply",
+    "reset": "Reset",
+    "filter": "Filter",
+    "sort": "Sort"
+  },
+  "banners": {
+    "freeShipping": "Free Shipping",
+    "limitedOffer": "Limited Offer",
+    "deliveryGuarantee": "Delivery guarantee",
+    "refundPolicy": "Refund of any issue"
+  },
+  "security": {
+    "securePrivacy": "Secure privacy",
+    "safePayments": "Safe payments",
+    "deliveryGuarantee": "Delivery guarantee"
+  },
+  "reminder": "Please be wary of scam messages and links. BiBi Shop won't ask for extra fees via SMS or email.",
+  "viewAll": "View All",
+  "holidaySale": "MEGA HOLIDAY SALE",
+  "exploreInterests": "EXPLORE YOUR INTERESTS"
+}

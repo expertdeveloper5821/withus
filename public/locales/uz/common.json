@@ -1,0 +1,55 @@
+{
+  "navbar": {
+    "home": "Bosh sahifa",
+    "products": "Mahsulotlar",
+    "cart": "Savat",
+    "search": "Qidirish",
+    "account": "Profil"
+  },
+  "cart": {
+    "title": "Savat",
+    "empty": "Savatingiz bo'sh",
+    "checkout": "To'lash",
+    "total": "Jami",
+    "subtotal": "Oraliq jami",
+    "shipping": "Yetkazib berish",
+    "tax": "Soliq",
+    "recommendedItems": "Tavsiya etilgan mahsulotlar",
+    "freeShipping": "Barcha buyurtmalar uchun bepul yetkazib berish",
+    "limitedTimeOffer": "Cheklangan vaqt taklifi"
+  },
+  "product": {
+    "addToCart": "Savatga qo'shish",
+    "outOfStock": "Sotuvda yo'q",
+    "viewDetails": "Tafsilotlarni ko'rish",
+    "description": "Tavsif",
+    "reviews": "Sharhlar",
+    "specifications": "Xususiyatlari"
+  },
+  "common": {
+    "back": "Orqaga",
+    "next": "Keyingi",
+    "cancel": "Bekor qilish",
+    "save": "Saqlash",
+    "delete": "O'chirish",
+    "apply": "Qo'llash",
+    "reset": "Tiklash",
+    "filter": "Filter",
+    "sort": "Saralash"
+  },
+  "banners": {
+    "freeShipping": "Bepul yetkazib berish",
+    "limitedOffer": "Cheklangan taklif",
+    "deliveryGuarantee": "Yetkazib berish kafolati",
+    "refundPolicy": "Muammo bo‘lsa pulni qaytarish"
+  },
+  "security": {
+    "securePrivacy": "Maxfiylikni ta'minlash",
+    "safePayments": "Xavfsiz to‘lovlar",
+    "deliveryGuarantee": "Yetkazib berish kafolati"
+  },
+  "reminder": "Firibgarlik xabarlari va havolalaridan ehtiyot bo‘ling. BiBi Shop hech qachon qo‘shimcha to‘lovni SMS yoki email orqali so‘ramaydi.",
+  "viewAll": "Hammasini ko‘rish",
+  "holidaySale": "KATTA BAYRAM CHEGIRMALARI",
+  "exploreInterests": "QIZIQISHLARINGIZNI O‘RGANING"
+}

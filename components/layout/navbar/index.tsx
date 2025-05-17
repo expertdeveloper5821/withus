@@ -10,6 +10,7 @@ import LanguageSwitcherWrapper from './language';
 import MobileMenu from './mobile-menu';
 import NavbarMenu from './navbarMenu';
 import Search, { SearchSkeleton } from './search';
+import LanguageSwitcher from './languageSwitcher';
 
 const { SITE_NAME } = process.env;
 
@@ -103,6 +104,7 @@ export async function Navbar({lan}: { lan: string }) {
         <div className="flex justify-end space-x-4">
           <CartModal />
           <LanguageSwitcherWrapper />
+          {/* <LanguageSwitcher/> */}
         </div>
       </div>
     </nav>

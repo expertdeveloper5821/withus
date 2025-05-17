@@ -1,0 +1,55 @@
+{
+  "navbar": {
+    "home": "Басты бет",
+    "products": "Өнімдер",
+    "cart": "Себет",
+    "search": "Іздеу",
+    "account": "Аккаунт"
+  },
+  "cart": {
+    "title": "Сатып алу себеті",
+    "empty": "Сіздің себетіңіз бос",
+    "checkout": "Төлем жасау",
+    "total": "Барлығы",
+    "subtotal": "Аралық қосынды",
+    "shipping": "Жеткізу",
+    "tax": "Салық",
+    "recommendedItems": "Ұсынылатын тауарлар",
+    "freeShipping": "Барлық тапсырыстарға тегін жеткізу",
+    "limitedTimeOffer": "Шектеулі уақыт ұсынысы"
+  },
+  "product": {
+    "addToCart": "Себетке қосу",
+    "outOfStock": "Қоймада жоқ",
+    "viewDetails": "Толығырақ көру",
+    "description": "Сипаттама",
+    "reviews": "Пікірлер",
+    "specifications": "Сипаттамалар"
+  },
+  "common": {
+    "back": "Артқа",
+    "next": "Келесі",
+    "cancel": "Болдырмау",
+    "save": "Сақтау",
+    "delete": "Жою",
+    "apply": "Қолдану",
+    "reset": "Қалпына келтіру",
+    "filter": "Сүзгі",
+    "sort": "Сұрыптау"
+  },
+   "banners": {
+    "freeShipping": "Тегін жеткізу",
+    "limitedOffer": "Шектеулі ұсыныс",
+    "deliveryGuarantee": "Жеткізу кепілдігі",
+    "refundPolicy": "Мәселелер кезінде қайтару"
+  },
+  "security": {
+    "securePrivacy": "Құпиялықты сақтау",
+    "safePayments": "Қауіпсіз төлемдер",
+    "deliveryGuarantee": "Жеткізу кепілдігі"
+  },
+  "reminder": "Алаяқтық хабарламалар мен сілтемелерден сақ болыңыз. BiBi Shop ешқашан SMS немесе email арқылы қосымша төлем сұрамайды.",
+  "viewAll": "Барлығын көру",
+  "holidaySale": "ҮЛКЕН ЖЕҢІЛДІКТЕР",
+  "exploreInterests": "ҚЫЗЫҒУШЫЛЫҒЫҢЫЗДЫ ЗЕРТТЕҢІЗ"
+}

@@ -25,23 +25,28 @@ const TopBanner = () => {
 
   return (
     <>
-     <div className="hidden md:hidden lg:flex bg-black text-white flex-row items-center px-4 py-3 text-sm justify-evenly gap-4">   
-      {items.map((item, index) => (
-        <div
-          key={index}
-          className={`flex items-center gap-3  ${
-            isSmallScreen ? 'mb-4' : 'border-r border-gray-700 px-8 last:border-none'
-          } border-r border-gray-700 px-12 last:border-none`}
-        >
-          <span className="text-lg"> <Image src={item.icon} alt={''} width={50} height={50} className='w-8 h-8' /></span>
-          <div className="flex flex-col">
-            <p className="font-semibold  text-[15.88px] flex items-center gap-1">
-              {item.text}  {index === 0 && <span className="text-white  text-[18px] font-semibold">›</span>}
-            </p>
-            {item.subtext && <p className="text-white font-normal  text-[13.89px] ">{item.subtext}</p>}
+     <div className="hidden md:hidden lg:flex bg-black text-white flex-row items-center px-4 py-3 text-sm justify-between gap-4">   
+      <div className="flex flex-1 justify-evenly">
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className={`flex items-center gap-3  ${
+              isSmallScreen ? 'mb-4' : 'border-r border-gray-700 px-8 last:border-none'
+            } border-r border-gray-700 px-12 last:border-none`}
+          >
+            <span className="text-lg"> <Image src={item.icon} alt={''} width={50} height={50} className='w-8 h-8' /></span>
+            <div className="flex flex-col">
+              <p className="font-semibold text-[15.88px] flex items-center gap-1">
+                {item.text}  {index === 0 && <span className="text-white text-[18px] font-semibold">›</span>}
+              </p>
+              {item.subtext && <p className="text-white font-normal text-[13.89px]">{item.subtext}</p>}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      {/* <div className="px-4">
+        <LanguageSwitcher />
+      </div> */}
     </div>
     
     </>
