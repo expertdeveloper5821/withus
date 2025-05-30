@@ -1,14 +1,14 @@
 import React from 'react';
- 
+
 interface InfoCardProps {
   title: string;
   description?: string;
   linkText?: string;
   linkHref?: string;
   icon?: React.ReactNode;
-  className?: string;
+  className?: string; 
 }
- 
+
 const InfoCard: React.FC<InfoCardProps> = ({
   title,
   description,
@@ -33,5 +33,5 @@ const InfoCard: React.FC<InfoCardProps> = ({
     </div>
   );
 };
- 
+
 export default InfoCard;
